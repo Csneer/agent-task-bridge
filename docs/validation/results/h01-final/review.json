@@ -1,0 +1,55 @@
+{
+  "input_sha256": {
+    "proposal-v1.md": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+    "observations-v1.csv": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+    "acceptance-v1.md": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde"
+  },
+  "totals": {
+    "baseline": {
+      "attempts": 2000,
+      "http_2xx": 1955,
+      "http_409": 18,
+      "http_5xx": 17,
+      "client_timeouts": 10,
+      "error_basis_points": 85
+    },
+    "candidate": {
+      "attempts": 2300,
+      "http_2xx": 2170,
+      "http_409": 60,
+      "http_5xx": 46,
+      "client_timeouts": 24,
+      "error_basis_points": 200
+    }
+  },
+  "candidate_within_budget": false,
+  "recommendation": "hold",
+  "findings": [
+    {
+      "claim": "The candidate exceeds the strict less-than-1% upstream 5xx budget; the proposal numerical claim is false.",
+      "evidence": "candidate_1 and candidate_2 contain 22 + 24 = 46 HTTP 5xx across 1100 + 1200 = 2300 attempts: 2.00%, or 200 basis points. baseline_1 and baseline_2 contain 10 + 7 = 17 HTTP 5xx across 2000 attempts: 0.85%, or 85 basis points.",
+      "implication": "Hold rollout. The measured candidate rate is 115 basis points above baseline and twice the 1% boundary. These aggregates alone do not establish that retries caused the increase."
+    },
+    {
+      "claim": "Retrying failed charge requests without idempotency creates an unmeasured duplicate-charge risk; failure does not establish that no charge occurred.",
+      "evidence": "The proposal retries every failed upstream charge request once without adding an idempotency key and asserts that retries cannot cause double charging because the original request failed. candidate_1 and candidate_2 include 13 + 11 = 24 client timeouts, but no charge or idempotency records are provided.",
+      "implication": "A lost response or timeout can leave the payment outcome unknown. Verify upstream idempotency and reconciliation behavior before retrying ambiguous outcomes. No observed duplicate charges can be claimed from these inputs."
+    },
+    {
+      "claim": "HTTP 409 retryability is not established.",
+      "evidence": "The proposal explicitly includes HTTP 409 conflicts and calls 409 a transient error. candidate_1 and candidate_2 record 25 + 35 = 60 HTTP 409 responses, but no upstream status/error contract is supplied.",
+      "implication": "Obtain upstream documented conflict semantics and retry conditions; do not classify every 409 as retryable."
+    },
+    {
+      "claim": "Attempt totals cannot demonstrate improved order outcomes or customer-visible reliability.",
+      "evidence": "The proposal states the table describes actual upstream attempts, not distinct orders, and each row is a five-minute window. Baseline has 2000 attempts and 1955 HTTP 2xx; candidate has 2300 attempts and 2170 HTTP 2xx. There are no order identifiers, charge identifiers, or per-order final outcomes.",
+      "implication": "Additional attempts or 2xx responses may include retries and do not quantify successful distinct orders, duplicate charges, or customer-visible failure reduction. Collect correlated order and attempt outcomes."
+    }
+  ],
+  "next_validation": {
+    "scope": "Before rollout, review the upstream retry/idempotency contract and run one isolated sandbox experiment with no real payments: 100 synthetic orders, at most one retry each (at most 200 upstream attempts).",
+    "cases": "Allocate 20 orders each to normal success, documented retryable 5xx, HTTP 409 conflicts classified using the upstream contract, timeout before processing, and lost response after a simulated committed charge. Use a stable idempotency key per order where the upstream contract supports it; otherwise hold ambiguous-outcome retries pending a supported safety mechanism.",
+    "evidence": "Capture synthetic order ID, attempt ID, idempotency key, status, timing, simulated charge ID, and reconciled terminal order outcome. Count attempts separately from distinct orders and simulated charges; inspect every ambiguous outcome and every 409 classification.",
+    "decision": "Stop the experiment on any duplicate simulated charge or unresolved outcome. Require demonstrated deduplication and documented retry eligibility before considering a further controlled trial. The fault-injection run tests safety, not representative error rates; obtain a separate bounded representative observation of two five-minute windows with order-attempt correlation, recompute 5xx/attempts, and require strictly less than 1% before any rollout decision. Do not treat this small sample as proof of production safety."
+  }
+}

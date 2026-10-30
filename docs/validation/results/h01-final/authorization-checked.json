@@ -1,0 +1,7 @@
+{
+  "parent": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+  "child": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+  "parent_assignment": null,
+  "owner_create_without_lease": "pass",
+  "reader_only_agent_create": "FORBIDDEN"
+}

@@ -1,0 +1,23 @@
+{
+  "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+  "run_id": "run_565693766a442821922a9770d1ba88e1",
+  "work_directory": "public B task package",
+  "resource_reads": [
+    {
+      "uri": "http://127.0.0.1:18782/proposal-v1.md",
+      "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+      "bytes": 891
+    },
+    {
+      "uri": "http://127.0.0.1:18782/observations-v1.csv",
+      "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+      "bytes": 175
+    },
+    {
+      "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+      "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+      "bytes": 1313
+    }
+  ],
+  "client": "independent TypeScript client"
+}

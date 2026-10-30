@@ -1,0 +1,5258 @@
+[
+  {
+    "commit_id": "cmt_50dfac7363f68ef65720215a40529bd8",
+    "committed_at": "2026-10-30T13:18:47.308Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_O",
+      "agent_id": null,
+      "authorization_ids": [
+        "owner:principal_O"
+      ]
+    },
+    "audit": {
+      "action": "task.create",
+      "request_id": "2b3210f5-1203-4452-9dcf-c5c77464cc92",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_f2b37ae20eb24a2ab048d85c64d14066",
+        "type": "task.created",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 1,
+        "record_type": "Task",
+        "record": {
+          "content_version": null,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": null,
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": null,
+          "generation": 0,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 1,
+          "state": "draft",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:18:47.308Z"
+        }
+      },
+      {
+        "event_id": "evt_3fb2f9808b8d49242e2ff0164c77dd60",
+        "type": "grant.issued",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_1b133df8db7d7c2f6925b6d1d0012804",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_R",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_ce6a8937ba856884fd30b89f91b27502",
+        "type": "grant.issued",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.claim"
+          ],
+          "agent_id": "agent_A",
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_A",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_9ad423f8c60b988b0979a4009f85b804",
+        "type": "grant.issued",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "submission.decide"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_b3f3f06e89536f02f6bc197a17e8a320",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_X",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_bdc19d85384dfbe84291fbd06e368574",
+        "type": "grant.issued",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.publish",
+            "task.link"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_ee6f1d73a2f8cb0e8951a9c22825da11",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_A",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_5703aa1818c8487d1ac6a4e4e24fbfed",
+    "committed_at": "2026-10-30T13:18:47.404Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_O",
+      "agent_id": null,
+      "authorization_ids": [
+        "owner:principal_O"
+      ]
+    },
+    "audit": {
+      "action": "task.publish",
+      "request_id": "034447be-72c3-45fe-b713-9bb5c3d1e963",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_4dc07551dec64773b31162c5a09352a7",
+        "type": "task.published",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 2,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": null,
+          "generation": 0,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 2,
+          "state": "offered",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:18:47.404Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_8454e669c5bcaf61074a3028a91b25b4",
+    "committed_at": "2026-10-30T13:18:47.492Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "task.claim",
+      "request_id": "331cb379-eaef-4128-981f-b863bd6e83c9",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_b56bd9219e3c7fad89920f3326252f24",
+        "type": "assignment.claimed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 3,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:47.492Z",
+          "principal_id": "principal_A",
+          "state": "claimed",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_3be55f726cada06115ea9b29d91984b8",
+        "type": "task.claimed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 3,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 3,
+          "state": "claimed",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:18:47.492Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_068a80c5f1a466dfcad20f55a2093b5b",
+    "committed_at": "2026-10-30T13:18:47.592Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "run.start",
+      "request_id": "17023dfd-7e84-41a7-aebf-95fa335525a4",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_a778ce12a20b3e5d961d4833b5520307",
+        "type": "run.started",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 4,
+        "record_type": "Run",
+        "record": {
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "end_reason": null,
+          "ended_at": null,
+          "run_id": "run_1e955aafb8dd53f476e1bcea0c284cd7",
+          "started_at": "2026-10-30T13:18:47.592Z",
+          "state": "running",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_d5fbbbc4cfd0d6821251fcac7d8fddd9",
+        "type": "assignment.activated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 4,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:47.492Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_8cca0b86deba478c32f8494499e6513e",
+        "type": "task.activated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 4,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 4,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:18:47.592Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_df869a7557eb79d5a1ba4c8e5c6c2abb",
+    "committed_at": "2026-10-30T13:18:47.741Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "capability_A",
+        "grt_ee6f1d73a2f8cb0e8951a9c22825da11"
+      ]
+    },
+    "audit": {
+      "action": "task.createChild",
+      "request_id": "f9e9a5d8-8a39-491b-b9a5-b0e65fba4973",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_e3738b8c3ed5e70c647310090603abb4",
+        "type": "task.created",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 1,
+        "record_type": "Task",
+        "record": {
+          "content_version": null,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": null,
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": null,
+          "generation": 0,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 1,
+          "state": "draft",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:18:47.741Z"
+        }
+      },
+      {
+        "event_id": "evt_a0ab8ef47a9234495b78deccf0578c16",
+        "type": "relation.created",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 1,
+        "record_type": "Relation",
+        "record": {
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "kind": "parent_child",
+          "parent_task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "relation_id": "rel_d16fc295b2d9d7061124bc59f6d7d246",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_718b7d333218d4334bdc86f307aab05e",
+        "type": "grant.issued",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "submission.decide"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_2c0523459b0ad97e4092c35ccd213e08",
+          "issued_by_principal_id": "principal_A",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_X",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_2933e64a23f4fadabe943eee551ab101",
+        "type": "grant.issued",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.publish",
+            "task.link"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_8a8bb642c18e5b2ad947ac379a472ddd",
+          "issued_by_principal_id": "principal_A",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_A",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_4914759e744d4a6d973dde4e3f2d4608",
+        "type": "grant.issued",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.claim"
+          ],
+          "agent_id": "agent_B",
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "issued_by_principal_id": "principal_A",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_B",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_d9a64437bcc0e7818c24c4e369270441",
+        "type": "grant.issued",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_d78e40ee8acb574e8b27aa54c2ae663a",
+          "issued_by_principal_id": "principal_A",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_R",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_9be2c84ea0d5c44a11c212ee1f2e75c2",
+    "committed_at": "2026-10-30T13:18:48.111Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "grt_8a8bb642c18e5b2ad947ac379a472ddd"
+      ]
+    },
+    "audit": {
+      "action": "task.publish",
+      "request_id": "0156a79f-586f-4e57-a24a-f768f03f87d6",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_cee246d0e26b478e55ec6402ff891177",
+        "type": "task.published",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 2,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": null,
+          "generation": 0,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 2,
+          "state": "offered",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:18:48.111Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_700f52c9a9c701218d954cb645e13618",
+    "committed_at": "2026-10-30T13:18:48.596Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "4790e0d9-2914-42db-86e7-428695525a73",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_1b53bcad7bbae8b8a41ce053691e952c",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 5,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:48.596Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_15e377a354411e5475d7de859ddeea63",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 5,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 5,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:18:48.596Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_488e4138dd219bb42a5130716770fb55",
+    "committed_at": "2026-10-30T13:18:50.032Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_O",
+      "agent_id": null,
+      "authorization_ids": [
+        "owner:principal_O"
+      ]
+    },
+    "audit": {
+      "action": "task.create",
+      "request_id": "6fc77484-0475-4c38-a681-f189a0d42fc9",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_441651c0248a096697804b6f0e8f6927",
+        "type": "task.created",
+        "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+        "task_revision": 1,
+        "record_type": "Task",
+        "record": {
+          "content_version": null,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independent authorization fixture; parent has never been claimed",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": null,
+          "created_at": "2026-10-30T13:18:50.032Z",
+          "current_assignment_id": null,
+          "generation": 0,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 1,
+          "state": "draft",
+          "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+          "updated_at": "2026-10-30T13:18:50.032Z"
+        }
+      },
+      {
+        "event_id": "evt_f731ac1ede7bd248d6108fd40e6f2160",
+        "type": "grant.issued",
+        "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.publish",
+            "task.link"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_1ccd4e82e82fbbd390f76e0946b8da3f",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_A",
+          "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+        }
+      },
+      {
+        "event_id": "evt_1b7f74f1ce6ec1352aa5c473319fede2",
+        "type": "grant.issued",
+        "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.claim"
+          ],
+          "agent_id": "agent_B",
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_3f692946a2a09d74ec73826c40f6dd91",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_B",
+          "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+        }
+      },
+      {
+        "event_id": "evt_b9bf1266a33f29af5efb5392636aaed4",
+        "type": "grant.issued",
+        "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_97dcd3811b8b6d3c3608f78d409f5c45",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_R",
+          "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+        }
+      },
+      {
+        "event_id": "evt_0c59ab1e12a774b5c3e9dba9b3a488eb",
+        "type": "grant.issued",
+        "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "submission.decide"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_c65239ffd7586b577e8fddd114edb511",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_X",
+          "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_d3bdeda8b9f67ad19b6a987d39191e3b",
+    "committed_at": "2026-10-30T13:18:50.160Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_O",
+      "agent_id": null,
+      "authorization_ids": [
+        "owner:principal_O"
+      ]
+    },
+    "audit": {
+      "action": "task.createChild",
+      "request_id": "02a4dfbe-638a-4df5-bb14-c470b2f566b8",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_6eeef59c5ae0b92ba4f64fb2c7cce880",
+        "type": "task.created",
+        "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+        "task_revision": 1,
+        "record_type": "Task",
+        "record": {
+          "content_version": null,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Owner may create child without parent lease",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": null,
+          "created_at": "2026-10-30T13:18:50.160Z",
+          "current_assignment_id": null,
+          "generation": 0,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 1,
+          "state": "draft",
+          "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+          "updated_at": "2026-10-30T13:18:50.160Z"
+        }
+      },
+      {
+        "event_id": "evt_d5804ea4ac1c671c2f63f17a7055fb27",
+        "type": "relation.created",
+        "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+        "task_revision": 1,
+        "record_type": "Relation",
+        "record": {
+          "created_at": "2026-10-30T13:18:50.160Z",
+          "kind": "parent_child",
+          "parent_task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+          "relation_id": "rel_15fa6f50486e8d1f59bf4eac017b59ab",
+          "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+        }
+      },
+      {
+        "event_id": "evt_0478c6da64355389269da3c116f7705d",
+        "type": "grant.issued",
+        "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_42ab32b14959ab5c61d550dd0c230b61",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_R",
+          "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+        }
+      },
+      {
+        "event_id": "evt_ed5363538b9554917da851e0d2f0e2e3",
+        "type": "grant.issued",
+        "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "submission.decide"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_9d8d78d2a85835d03dcfa01fd07b1920",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_X",
+          "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+        }
+      },
+      {
+        "event_id": "evt_b4d84fcc2a868f45d11c0d2ac1ab2ccc",
+        "type": "grant.issued",
+        "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.claim"
+          ],
+          "agent_id": "agent_B",
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_b9950442f517c02a3ba7b91484683b3a",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_B",
+          "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+        }
+      },
+      {
+        "event_id": "evt_6362dd03f098c5d70f0c977e0bb8fd21",
+        "type": "grant.issued",
+        "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+        "task_revision": 1,
+        "record_type": "Grant",
+        "record": {
+          "actions": [
+            "task.read",
+            "task.publish",
+            "task.link"
+          ],
+          "agent_id": null,
+          "expires_at": "2026-10-31T13:18:26.792Z",
+          "grant_id": "grt_d6413b57ddcf8c16f77a120a287445c4",
+          "issued_by_principal_id": "principal_O",
+          "not_before": "2026-10-30T13:17:26.792Z",
+          "owner_principal_id": "principal_O",
+          "revoked_at": null,
+          "subject_principal_id": "principal_A",
+          "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_46ad5a68a54aeac6370e517dad8116d0",
+    "committed_at": "2026-10-30T13:18:51.122Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "task.claim",
+      "request_id": "6d42e1da-4a54-4a42-a1e0-db16673bdba1",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_49d6d8f9ec37f7082d8362bd05856c97",
+        "type": "assignment.claimed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 3,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:51.122Z",
+          "principal_id": "principal_B",
+          "state": "claimed",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_72199045d2c587857a098523b7c09657",
+        "type": "task.claimed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 3,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 3,
+          "state": "claimed",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:18:51.122Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_22dd8bd2f870ecf5a5b1b53ec07b5e69",
+    "committed_at": "2026-10-30T13:18:51.198Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "run.start",
+      "request_id": "2dc4d864-452e-415e-b374-6b7cd3b88fff",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_5a1cdb78749d0813ca50c63d536e211f",
+        "type": "run.started",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 4,
+        "record_type": "Run",
+        "record": {
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "end_reason": null,
+          "ended_at": null,
+          "run_id": "run_565693766a442821922a9770d1ba88e1",
+          "started_at": "2026-10-30T13:18:51.198Z",
+          "state": "running",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_e77fa01f5c09a2d32470914566004a3a",
+        "type": "assignment.activated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 4,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:51.122Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_2604384ada1a792c78cbd0c8e41bf385",
+        "type": "task.activated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 4,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 4,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:18:51.198Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_d88fc48709ef72afe0bd6a124d9f0cd2",
+    "committed_at": "2026-10-30T13:18:51.539Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "run.report",
+      "request_id": "f8e70af4-b65d-4684-8b42-ab400d36505a",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_520145a5562cb008155fa72c301623a5",
+        "type": "run.reported",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 5,
+        "record_type": "Report",
+        "record": {
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "evidence_refs": [
+            {
+              "kind": "immutable",
+              "media_type": "text/markdown",
+              "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+              "uri": "http://127.0.0.1:18782/proposal-v1.md",
+              "version": "1"
+            },
+            {
+              "kind": "immutable",
+              "media_type": "text/csv",
+              "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+              "uri": "http://127.0.0.1:18782/observations-v1.csv",
+              "version": "1"
+            },
+            {
+              "kind": "immutable",
+              "media_type": "text/markdown",
+              "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+              "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+              "version": "1"
+            }
+          ],
+          "extensions": {},
+          "message": "Fetched and verified all public immutable inputs; preparing independent review",
+          "report_id": "rpt_38fdc64fbaffbaffeba0324a1855ff53",
+          "reported_at": "2026-10-30T13:18:51.539Z",
+          "run_id": "run_565693766a442821922a9770d1ba88e1",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_ee50d30bd219f2259c1c4319f27fe7c8",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 5,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 5,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:18:51.539Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_5af01bbfaebf4b190e43e62f3a0d2b51",
+    "committed_at": "2026-10-30T13:18:58.768Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "194070bf-522f-415e-9c73-dadd50740e9d",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_172bf4624bd2403eb53a5d5a156546a5",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 6,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:58.768Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_e495a9350586e23087a3dc01f6b88854",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 6,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 6,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:18:58.768Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_106a6941b82559950c68e47b294382ee",
+    "committed_at": "2026-10-30T13:18:59.151Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "8c24a887-7b98-40d4-b88c-79a10bff11d6",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_1c97988105eacf0faeddca6ff0659cf7",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 6,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:23:59.151Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_5017f3c4d8610efe3c167d3eb14e2efc",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 6,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 6,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:18:59.151Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_ebd9dcd5f583232118162cede70b7325",
+    "committed_at": "2026-10-30T13:19:09.293Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "7d21e54d-3e7c-4db7-ab11-62b860e74193",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_07c930b83d4827ca9c6dbdc043fd423b",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 7,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:09.293Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_276aea1cc1b39daac7eb7a839b71bbef",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 7,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 7,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:19:09.293Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_5dfe9d803dc7b9809fffdd6d49f25194",
+    "committed_at": "2026-10-30T13:19:09.548Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "926e52b9-9d89-4a54-a294-37f0e85612b7",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_75cc0b982ec7b1d8e75c405b7924e917",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 7,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:09.548Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_438d64f2f17d2a1e78c03169e93d748d",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 7,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 7,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:19:09.548Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_c5e77638263049714f96dbbfacc47d67",
+    "committed_at": "2026-10-30T13:19:19.712Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "6e2669d6-8063-4608-814b-f22d69593542",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_63bc2c0cf3e8f9c65b02238f7a0a8766",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 8,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:19.712Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_32954a3331fd8f4bf5310c15499614ab",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 8,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 8,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:19:19.712Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_a48f25cc1eb5d62e0e63c4f0838bacc9",
+    "committed_at": "2026-10-30T13:19:20.010Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "28819ed8-6394-4c14-b1ac-7bcac23aeb05",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_0e842392bcec1cad4306227f9bfb89ec",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 8,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:20.010Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_ed884aba84fe347c370ae9d8ba6b4d93",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 8,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 8,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:19:20.010Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_148136cb0646cb224d30bb6765645bb0",
+    "committed_at": "2026-10-30T13:19:30.171Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "6cb73c92-998c-4dc7-b557-26692789ce83",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_10322e6d51ab69c60ade7ec10c70086e",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 9,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:30.171Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_0278d6ab81b7f0841f05f9c855ef23c1",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 9,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 9,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:19:30.171Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_10dc6baa0ad7c46072fc1bc730a1b904",
+    "committed_at": "2026-10-30T13:19:30.489Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "1f5a7025-1d39-49cf-96d5-2e64ced32a3c",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_a5cf8acfd6f278bd98c882091bdc5b1c",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 9,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:30.489Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_d19ab8b74071d1b99e8449ca30c3fafa",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 9,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 9,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:19:30.489Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_c128e6ff2359811ee8564374c591593d",
+    "committed_at": "2026-10-30T13:19:40.616Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "a45fd2f6-3d9c-4290-aba3-8b1e5c96439e",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_ed46c835bb601551ed19f5755e0039cc",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 10,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:40.616Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_cd83f44b1f1f1c480568d1d0284de259",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 10,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 10,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:19:40.616Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_eb038d10b5efcfded33605108fd0afeb",
+    "committed_at": "2026-10-30T13:19:40.836Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "5362c1bd-c061-491b-baf9-0632f14d4b7e",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_f1bd142407a90b642cfe49c65d3a1b17",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 10,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:40.836Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_f18d86e169056f3fe7635703210102a7",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 10,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 10,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:19:40.836Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_d138815a2c469da6d4b61fd4315f5f3b",
+    "committed_at": "2026-10-30T13:19:51.012Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "8814905e-b6bc-4835-9426-96e6a66da0cd",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_7b611078891eb71e42b5b7b8a6a726ac",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 11,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:51.012Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_6d96102aea6bf17ec11b0f9a2a7546c9",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 11,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 11,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:19:51.012Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_e4ada52a6ad7358a523e88ba4bb1b330",
+    "committed_at": "2026-10-30T13:19:51.252Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "f9bf0e08-ac6a-4c6c-a208-04ca3fa4ae26",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_016d0739bdf0839c570b48934cfe6c1a",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 11,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:24:51.252Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_9e2a0cc7accaa7e47a985480329c2668",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 11,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 11,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:19:51.252Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_e54e9593ed1d66c5d70875dbe7e56a04",
+    "committed_at": "2026-10-30T13:20:01.398Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "4316ae2c-e9cb-4004-85aa-6a1fac3fbfc2",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_43a951c458d33a9a0c94f23b29ca68f1",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 12,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:01.398Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_7d194aa589dd418d80d23468739a885c",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 12,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 12,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:20:01.398Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_31b1cb4b1ac8fcf8a9707d7e39f43efa",
+    "committed_at": "2026-10-30T13:20:01.683Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "cef15fc5-fec1-4266-8386-e55a7fd248eb",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_01f57b230fc433ba64870e2f991025dc",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 12,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:01.683Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_5a09bfaf0012af272c92f3b01b0d1ae0",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 12,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 12,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:20:01.683Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_599e0e42f9be6b83c9ec8f8605dda1ad",
+    "committed_at": "2026-10-30T13:20:11.896Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "0ad9b4c3-4910-4c00-a744-83bcce712c39",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_d653eeea288ccbbab556e3c73fb413ee",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 13,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:11.896Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_b892db531e3e5663b47ddc8903464bc2",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 13,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 13,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:20:11.896Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_8dbd29de83cd89df93021138554bc1ea",
+    "committed_at": "2026-10-30T13:20:12.091Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "ff3c26f4-7694-46ea-b1f9-17fc24b17b56",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_75a388b0331935b0eea37afcd2e6656b",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 13,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:12.091Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_e45c20b32ea93ca8d2d58ffc9aca56a9",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 13,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 13,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:20:12.091Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_43f7d7606f61d6ab23ab35e1cc8c035a",
+    "committed_at": "2026-10-30T13:20:22.218Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "77b0ebb5-b984-4c28-aa08-999a66a89763",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_03748a2918236ed2dd39e5348dff5861",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 14,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:22.218Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_855ccf3b482c8142769f775094cd90e8",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 14,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 14,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:20:22.218Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_3057364c45455c18f3472e6ac49560b7",
+    "committed_at": "2026-10-30T13:20:22.451Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "3eb50d0f-ce36-495a-9993-8085a57775ff",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_74b737dba876dbbc5d04f5a5ce4bf324",
+        "type": "assignment.renewed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 14,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:22.451Z",
+          "principal_id": "principal_B",
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_2473b9456cf8014ace6c90c13dc5cd0a",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 14,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 14,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:20:22.451Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_52c678e292f265c66cab92c56536d856",
+    "committed_at": "2026-10-30T13:20:29.927Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "run.report",
+      "request_id": "f00719e7-c9b0-470e-9e07-93b51ce406dd",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_99a031cb0bde534af3a4a95599cef399",
+        "type": "run.reported",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 15,
+        "record_type": "Report",
+        "record": {
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "evidence_refs": [],
+          "extensions": {},
+          "message": "Client recovered; checking current execution authority",
+          "report_id": "rpt_1239b9cf7b3936ceecea4370b4e563d3",
+          "reported_at": "2026-10-30T13:20:29.927Z",
+          "run_id": "run_565693766a442821922a9770d1ba88e1",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_85b1499fa5a9b5e7320d836573c2fd3e",
+        "type": "task.updated",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 15,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 15,
+          "state": "active",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:20:29.927Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_4c984271ad76f6ea80100338e40e9c93",
+    "committed_at": "2026-10-30T13:20:30.105Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_B",
+      "agent_id": "agent_B",
+      "authorization_ids": [
+        "binding_B",
+        "grt_a6c222d3dc8a0bf08182e3f190a2b06f"
+      ]
+    },
+    "audit": {
+      "action": "run.submit",
+      "request_id": "f78fc244-4701-43d2-bd53-87e8836bf71c",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_44a908f1dea05fe520d51b8d90405f1b",
+        "type": "submission.created",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 16,
+        "record_type": "Submission",
+        "record": {
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "media_type": "application/json",
+              "sha256": "94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff",
+              "uri": "http://127.0.0.1:18782/review-94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff.json",
+              "version": "1"
+            }
+          ],
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "content_version": 1,
+          "evidence_refs": [
+            {
+              "kind": "immutable",
+              "media_type": "text/markdown",
+              "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+              "uri": "http://127.0.0.1:18782/proposal-v1.md",
+              "version": "1"
+            },
+            {
+              "kind": "immutable",
+              "media_type": "text/csv",
+              "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+              "uri": "http://127.0.0.1:18782/observations-v1.csv",
+              "version": "1"
+            },
+            {
+              "kind": "immutable",
+              "media_type": "text/markdown",
+              "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+              "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+              "version": "1"
+            }
+          ],
+          "extensions": {},
+          "run_id": "run_565693766a442821922a9770d1ba88e1",
+          "submission_id": "sub_71c64b4afe386bb4ed123075139f9539",
+          "submitted_at": "2026-10-30T13:20:30.105Z",
+          "summary": "Independent evidence-backed checkout retry review",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_c9fd19a2ee6086ba191e36c828f9f826",
+        "type": "run.submitted",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 16,
+        "record_type": "Run",
+        "record": {
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "end_reason": "submitted",
+          "ended_at": "2026-10-30T13:20:30.105Z",
+          "run_id": "run_565693766a442821922a9770d1ba88e1",
+          "started_at": "2026-10-30T13:18:51.198Z",
+          "state": "submitted",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_86ddc6cd581caad3bad45c0cb614449e",
+        "type": "assignment.completed",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 16,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_B",
+          "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+          "binding_id": "binding_B",
+          "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+          "created_at": "2026-10-30T13:18:51.122Z",
+          "effective_at": null,
+          "end_reason": "submitted",
+          "ended_at": "2026-10-30T13:20:30.105Z",
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:22.451Z",
+          "principal_id": "principal_B",
+          "state": "completed",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_1e76e658c43a0caf687e58b7e20de6b1",
+        "type": "task.submitted",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 16,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": null,
+          "generation": 1,
+          "pending_submission_id": "sub_71c64b4afe386bb4ed123075139f9539",
+          "recovery_gate": "claimable",
+          "revision": 16,
+          "state": "submitted",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:20:30.105Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_23736d63b27f8df87ef2fcef678e0c23",
+    "committed_at": "2026-10-30T13:20:32.584Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "102037d1-b939-4ae7-aa1c-2302a0b655b7",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_9b4cd67121f1db389b390a2bea11da12",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 15,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:32.584Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_38999dede6f6d11ff1e79612f1725fe0",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 15,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 15,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:20:32.584Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_be85e4ed6d1a95cae762a57362b9d5a4",
+    "committed_at": "2026-10-30T13:20:42.910Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "4d634a3e-3123-46ee-a667-67358117ae5a",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_53934a7066dc8e7de3450b4f6dd239ec",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 16,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:42.910Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_b3a0f22983982cf6bb88a2971fe01ee0",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 16,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 16,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:20:42.910Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_042acd6b4411554542be1ef6bc7d749e",
+    "committed_at": "2026-10-30T13:20:53.185Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "33cd2f30-5a20-4bf4-b22f-373c9f6f1eb7",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_e04554457ac5d38ba148c1a8ba1811c3",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 17,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:25:53.185Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_c2b417c121d588b99043e8aea2be8048",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 17,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 17,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:20:53.185Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_cdef8ba77148db3c70efae9d7cd6257b",
+    "committed_at": "2026-10-30T13:21:03.451Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "f7633e8b-96a4-4467-b1cc-8ad38147dbc2",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_b3a1501739f3132f65619cf633aeeabb",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 18,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:26:03.451Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_8e63f07e80581970ddd44af3b984174c",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 18,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 18,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:21:03.451Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_143125f72e9a5de0c09fc4b86075a49b",
+    "committed_at": "2026-10-30T13:21:13.729Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "c5049450-922d-4c91-b0e6-1d15fa911f87",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_3eac2c7c1471ca6acdbe02c598550584",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 19,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:26:13.729Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_8237ed1bccc2a1d5e5b579e0647cbfce",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 19,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 19,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:21:13.729Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_f8bdc468957fb1e19c4d940fa230d877",
+    "committed_at": "2026-10-30T13:21:24.019Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "8490dc44-c6d6-4f26-a2fe-3bee1b6aada0",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_a094dfd39d64c0338431e0150b68eabf",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 20,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:26:24.019Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_aa8d0c9025d4269fbecb8e6b7aa34693",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 20,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 20,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:21:24.019Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_03f236870309c79f20c59d03d4024710",
+    "committed_at": "2026-10-30T13:21:34.274Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "2d45aa46-5692-4aaa-b941-b676bc144208",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_603a9113dd00c84f9cdd7f1e420cb139",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 21,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:26:34.274Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_6f96e9ff9f164024bfa2f441a51df360",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 21,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 21,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:21:34.274Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_2b9a96df5b2e0c683b616e28d68eaaa6",
+    "committed_at": "2026-10-30T13:21:44.512Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "2b5c5e97-3fbd-4dec-8b0b-28ac9900e98b",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_f6ed660f9974aca90c1876a31548d0cc",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 22,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:26:44.512Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_6fed0d01720ab447fc151ac6063288ef",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 22,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 22,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:21:44.512Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_212b60730ccc859b7116f772d3c7959e",
+    "committed_at": "2026-10-30T13:21:54.823Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "baf0960a-6721-4ba7-b41d-f91e275d850d",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_31e0acce62c010a21e748a748ade2d5f",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 23,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:26:54.823Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_c1fc22a0382dc4c40bae7abf23d6bf83",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 23,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 23,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:21:54.823Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_cd1e528c9ad3ad43b96485a6e12b1c20",
+    "committed_at": "2026-10-30T13:22:05.099Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_A",
+      "agent_id": "agent_A",
+      "authorization_ids": [
+        "binding_A",
+        "grt_5b8a522ddd6c9e2b67bbf24c9adc958e"
+      ]
+    },
+    "audit": {
+      "action": "assignment.renew",
+      "request_id": "2620d695-187a-4188-8d46-dd427f986899",
+      "reason": null
+    },
+    "events": [
+      {
+        "event_id": "evt_dda0c0742eeef9af82a93beb298e4604",
+        "type": "assignment.renewed",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 24,
+        "record_type": "Assignment",
+        "record": {
+          "agent_id": "agent_A",
+          "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "binding_id": "binding_A",
+          "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+          "created_at": "2026-10-30T13:18:47.492Z",
+          "effective_at": null,
+          "end_reason": null,
+          "ended_at": null,
+          "generation": 1,
+          "lease_expires_at": "2026-10-30T13:27:05.099Z",
+          "principal_id": "principal_A",
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+        }
+      },
+      {
+        "event_id": "evt_d7d8b3245a3cadfb8839eab3e42d5c3b",
+        "type": "task.updated",
+        "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+        "task_revision": 24,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_A"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "A",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+          "created_at": "2026-10-30T13:18:47.308Z",
+          "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 24,
+          "state": "active",
+          "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+          "updated_at": "2026-10-30T13:22:05.099Z"
+        }
+      }
+    ]
+  },
+  {
+    "commit_id": "cmt_cd984581f83918ca7256f11efaed135e",
+    "committed_at": "2026-10-30T13:22:10.023Z",
+    "actor": {
+      "kind": "principal",
+      "principal_id": "principal_X",
+      "agent_id": null,
+      "authorization_ids": [
+        "grt_2c0523459b0ad97e4092c35ccd213e08"
+      ]
+    },
+    "audit": {
+      "action": "task.accept",
+      "request_id": "32a32b89-0457-4de0-b47f-c1b37de00cca",
+      "reason": "独立读取 task、验收标准、原始 CSV、提案及 review.json，未以 inspection 结论代替核验。三份输入实算 SHA-256 与合同及 review 一致，review 文件实算 SHA-256 与指定产物一致。逐行汇总 baseline：attempts=2000、2xx=1955、409=18、5xx=17、timeouts=10；candidate：2300、2170、60、46、24；Decimal 按 .5 向上取整得 85 和 200 基点，candidate 46/2300=2% 不满足严格低于1%，false 与 hold 正确。四条 findings 均含 claim/evidence/implication 并引用公开数据或提案，覆盖数值预算、无幂等重试风险、409 语义未证实及 attempts 不等于 orders；没有把重复扣款风险当作已观测事实，也未声称重试导致错误率增加。后续验证限定100个合成订单、最多200次沙箱尝试，涵盖五类情形、关联证据、异常停止条件及两个五分钟代表性观察窗口，且明确故障注入不能证明生产错误率。本结论接受审查交付物质量；产品发布建议仍为 hold，不代表准许发布。仅凭这些公开文件不能追溯执行者全部历史副作用，未将其推断为已完成生产安全验证。"
+    },
+    "events": [
+      {
+        "event_id": "evt_dab42e02d14b411227d25123f108aa16",
+        "type": "decision.created",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 17,
+        "record_type": "Decision",
+        "record": {
+          "decided_at": "2026-10-30T13:22:10.023Z",
+          "decision_id": "dec_81bae08b30dd3c94812441337bbe9f76",
+          "evidence_refs": [
+            {
+              "kind": "immutable",
+              "media_type": "application/json",
+              "sha256": "94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff",
+              "uri": "http://127.0.0.1:18782/review-94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff.json",
+              "version": "1"
+            }
+          ],
+          "outcome": "accepted",
+          "principal_id": "principal_X",
+          "reason": "独立读取 task、验收标准、原始 CSV、提案及 review.json，未以 inspection 结论代替核验。三份输入实算 SHA-256 与合同及 review 一致，review 文件实算 SHA-256 与指定产物一致。逐行汇总 baseline：attempts=2000、2xx=1955、409=18、5xx=17、timeouts=10；candidate：2300、2170、60、46、24；Decimal 按 .5 向上取整得 85 和 200 基点，candidate 46/2300=2% 不满足严格低于1%，false 与 hold 正确。四条 findings 均含 claim/evidence/implication 并引用公开数据或提案，覆盖数值预算、无幂等重试风险、409 语义未证实及 attempts 不等于 orders；没有把重复扣款风险当作已观测事实，也未声称重试导致错误率增加。后续验证限定100个合成订单、最多200次沙箱尝试，涵盖五类情形、关联证据、异常停止条件及两个五分钟代表性观察窗口，且明确故障注入不能证明生产错误率。本结论接受审查交付物质量；产品发布建议仍为 hold，不代表准许发布。仅凭这些公开文件不能追溯执行者全部历史副作用，未将其推断为已完成生产安全验证。",
+          "submission_id": "sub_71c64b4afe386bb4ed123075139f9539",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+        }
+      },
+      {
+        "event_id": "evt_268ab1495a8871ddc028fb989da4609f",
+        "type": "task.accepted",
+        "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+        "task_revision": 17,
+        "record_type": "Task",
+        "record": {
+          "content_version": 1,
+          "contract": {
+            "acceptance_principal_id": "principal_X",
+            "acceptance_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+                "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+                "version": "1"
+              }
+            ],
+            "allow_rework": true,
+            "constraints": [
+              "Review only; no payment-system mutation",
+              "Use only public task and immutable input references"
+            ],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+            "extensions": {
+              "org.example.handoff": {
+                "role": "B",
+                "scenario": "H01"
+              }
+            },
+            "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "media_type": "text/markdown",
+                "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+                "uri": "http://127.0.0.1:18782/proposal-v1.md",
+                "version": "1"
+              },
+              {
+                "kind": "immutable",
+                "media_type": "text/csv",
+                "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+                "uri": "http://127.0.0.1:18782/observations-v1.csv",
+                "version": "1"
+              }
+            ],
+            "lease_policy": {
+              "max_seconds": 300,
+              "min_seconds": 5
+            },
+            "owner_principal_id": "principal_O",
+            "profile": "delivery-acceptance-v1",
+            "recovery_policy": "safe_reopen"
+          },
+          "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+          "created_at": "2026-10-30T13:18:47.741Z",
+          "current_assignment_id": null,
+          "generation": 1,
+          "pending_submission_id": null,
+          "recovery_gate": "claimable",
+          "revision": 17,
+          "state": "accepted",
+          "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+          "updated_at": "2026-10-30T13:22:10.023Z"
+        }
+      }
+    ]
+  }
+]

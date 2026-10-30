@@ -2,7 +2,7 @@
 
 面向不同 Agent 客户端的可移植任务桥接层：发布工作约定，pull 发现并领取唯一当前承接权，报告执行、提交产物、记录验收，并向上层提供可恢复的统一事实。
 
-当前已实现 **M1 Go 参考 daemon、独立 Go/TypeScript 客户端和只读消费者**，遵循冻结协议 `bridge-m1-1`。首轮真实双 Agent 交接已通过，正在执行最终审查与完整回归。实现使用 SQLite/WAL、HTTP/JSON-RPC，限定单 authority、单机/私网和预注册主体。
+当前已实现 **M1 Go 参考 daemon、独立 Go/TypeScript 客户端和只读消费者**，遵循冻结协议 `bridge-m1-1`。最终完整回归、真实双 Agent 交接和独立代码/架构审查均已通过，证据见[验收报告](docs/validation/results/README.md)。实现使用 SQLite/WAL、HTTP/JSON-RPC，限定单 authority、单机/私网和预注册主体。
 
 ## 从这里开始
 

@@ -1,0 +1,9 @@
+✔ real daemon: independent TS lifecycle, immutable HTTP input, reader snapshot race, retry and restart (1285.122318ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1414.075328

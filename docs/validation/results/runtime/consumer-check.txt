@@ -1,0 +1,3 @@
+
+> check
+> node --check src/wire.mjs && node --check src/consumer.mjs && node --check src/cli.mjs

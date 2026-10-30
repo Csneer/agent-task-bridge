@@ -1,0 +1,46 @@
+runtime/bin/bridge: go1.27.0
+	path	agent-task-bridge/cmd/bridge
+	mod	agent-task-bridge	v0.0.0-20261030131824-f537f936fafa+dirty
+	dep	github.com/dustin/go-humanize	v1.1.0	h1:dbKTrvD0klcbBV/h4AWJdMuZogJACoMlvWIWZ5b2xWg=
+	dep	github.com/google/uuid	v1.6.0	h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+	dep	github.com/remyoudompheng/bigfft	v0.0.0-20230129092748-24d4a6f8daec	h1:W09IVJc94icq4NjY3clb7Lk8O1qJ8BdBEF8z0ibU0rE=
+	dep	github.com/santhosh-tekuri/jsonschema/v6	v6.0.3	h1:1EYB5IzjZawrrnELUi78f9fPu57HuXjmddZPjrls/28=
+	dep	golang.org/x/sys	v0.49.0	h1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA=
+	dep	golang.org/x/text	v0.14.0	h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=
+	dep	modernc.org/libc	v1.79.0	h1:9Dvvv++bAMSkSuBzuOFAatbTV5OIoq6Y6FohmD3e7q8=
+	dep	modernc.org/mathutil	v1.7.1	h1:GCZVGXdaN8gTqB1Mf/usp1Y/hSqgI2vAGGP4jZMCxOU=
+	dep	modernc.org/memory	v1.12.1	h1:nFMiWrpStgZczNl6XI9GnIk/rWhYIyHGUaR04pGbp9g=
+	dep	modernc.org/sqlite	v1.61.0	h1:sQi63oLQ9uquAUA4CzOisH35Q3pEszkPBuHM0tFL8CY=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=f537f936fafa95fd74be63801fe4b5ac057ce1b4
+	build	vcs.time=2026-10-30T13:18:24Z
+	build	vcs.modified=true
+runtime/bin/bridge-client: go1.27.0
+	path	agent-task-bridge/clients/go/cmd/bridge-client
+	mod	agent-task-bridge	v0.0.0-20261030131824-f537f936fafa+dirty
+	dep	github.com/santhosh-tekuri/jsonschema/v6	v6.0.3	h1:1EYB5IzjZawrrnELUi78f9fPu57HuXjmddZPjrls/28=
+	dep	golang.org/x/text	v0.14.0	h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=f537f936fafa95fd74be63801fe4b5ac057ce1b4
+	build	vcs.time=2026-10-30T13:18:24Z
+	build	vcs.modified=true

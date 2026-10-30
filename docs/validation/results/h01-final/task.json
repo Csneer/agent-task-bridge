@@ -1,0 +1,65 @@
+{
+  "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+  "state": "offered",
+  "revision": 2,
+  "generation": 0,
+  "content_version": 1,
+  "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+  "contract": {
+    "profile": "delivery-acceptance-v1",
+    "owner_principal_id": "principal_O",
+    "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+    "constraints": [
+      "Review only; no payment-system mutation",
+      "Use only public task and immutable input references"
+    ],
+    "input_refs": [
+      {
+        "kind": "immutable",
+        "media_type": "text/markdown",
+        "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+        "uri": "http://127.0.0.1:18782/proposal-v1.md",
+        "version": "1"
+      },
+      {
+        "kind": "immutable",
+        "media_type": "text/csv",
+        "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+        "uri": "http://127.0.0.1:18782/observations-v1.csv",
+        "version": "1"
+      }
+    ],
+    "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+    "acceptance_refs": [
+      {
+        "kind": "immutable",
+        "media_type": "text/markdown",
+        "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+        "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+        "version": "1"
+      }
+    ],
+    "context_refs": [],
+    "eligible_agent_ids": [
+      "agent_B"
+    ],
+    "acceptance_principal_id": "principal_X",
+    "recovery_policy": "safe_reopen",
+    "allow_rework": true,
+    "lease_policy": {
+      "min_seconds": 5,
+      "max_seconds": 300
+    },
+    "extensions": {
+      "org.example.handoff": {
+        "role": "B",
+        "scenario": "H01"
+      }
+    }
+  },
+  "current_assignment_id": null,
+  "pending_submission_id": null,
+  "recovery_gate": "claimable",
+  "created_at": "2026-10-30T13:18:47.741Z",
+  "updated_at": "2026-10-30T13:18:48.111Z"
+}

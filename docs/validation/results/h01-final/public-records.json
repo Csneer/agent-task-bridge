@@ -1,0 +1,756 @@
+[
+  {
+    "record_type": "Assignment",
+    "record": {
+      "agent_id": "agent_A",
+      "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+      "binding_id": "binding_A",
+      "claim_grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+      "created_at": "2026-10-30T13:18:47.492Z",
+      "effective_at": null,
+      "end_reason": null,
+      "ended_at": null,
+      "generation": 1,
+      "lease_expires_at": "2026-10-30T13:27:05.099Z",
+      "principal_id": "principal_A",
+      "state": "active",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_1b133df8db7d7c2f6925b6d1d0012804",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_R",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.claim"
+      ],
+      "agent_id": "agent_A",
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_5b8a522ddd6c9e2b67bbf24c9adc958e",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_A",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "submission.decide"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_b3f3f06e89536f02f6bc197a17e8a320",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_X",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.publish",
+        "task.link"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_ee6f1d73a2f8cb0e8951a9c22825da11",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_A",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+    }
+  },
+  {
+    "record_type": "Run",
+    "record": {
+      "assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+      "end_reason": null,
+      "ended_at": null,
+      "run_id": "run_1e955aafb8dd53f476e1bcea0c284cd7",
+      "started_at": "2026-10-30T13:18:47.592Z",
+      "state": "running",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2"
+    }
+  },
+  {
+    "record_type": "Task",
+    "record": {
+      "content_version": 1,
+      "contract": {
+        "acceptance_principal_id": "principal_X",
+        "acceptance_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+            "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+            "version": "1"
+          }
+        ],
+        "allow_rework": true,
+        "constraints": [
+          "Review only; no payment-system mutation",
+          "Use only public task and immutable input references"
+        ],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_A"
+        ],
+        "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+        "extensions": {
+          "org.example.handoff": {
+            "role": "A",
+            "scenario": "H01"
+          }
+        },
+        "goal": "Prepare a release assessment of the checkout retry proposal; delegate an independent review.",
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+            "uri": "http://127.0.0.1:18782/proposal-v1.md",
+            "version": "1"
+          },
+          {
+            "kind": "immutable",
+            "media_type": "text/csv",
+            "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+            "uri": "http://127.0.0.1:18782/observations-v1.csv",
+            "version": "1"
+          }
+        ],
+        "lease_policy": {
+          "max_seconds": 300,
+          "min_seconds": 5
+        },
+        "owner_principal_id": "principal_O",
+        "profile": "delivery-acceptance-v1",
+        "recovery_policy": "safe_reopen"
+      },
+      "contract_digest": "43c4b4690293319dc13f42ff8dc6735815216e4314707596a89881f1d895af2a",
+      "created_at": "2026-10-30T13:18:47.308Z",
+      "current_assignment_id": "asg_314cb5b0df0b60492301e359491e5973",
+      "generation": 1,
+      "pending_submission_id": null,
+      "recovery_gate": "claimable",
+      "revision": 24,
+      "state": "active",
+      "task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+      "updated_at": "2026-10-30T13:22:05.099Z"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_42ab32b14959ab5c61d550dd0c230b61",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_R",
+      "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "submission.decide"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_9d8d78d2a85835d03dcfa01fd07b1920",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_X",
+      "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.claim"
+      ],
+      "agent_id": "agent_B",
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_b9950442f517c02a3ba7b91484683b3a",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_B",
+      "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.publish",
+        "task.link"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_d6413b57ddcf8c16f77a120a287445c4",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_A",
+      "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+    }
+  },
+  {
+    "record_type": "Relation",
+    "record": {
+      "created_at": "2026-10-30T13:18:50.160Z",
+      "kind": "parent_child",
+      "parent_task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+      "relation_id": "rel_15fa6f50486e8d1f59bf4eac017b59ab",
+      "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c"
+    }
+  },
+  {
+    "record_type": "Task",
+    "record": {
+      "content_version": null,
+      "contract": {
+        "acceptance_principal_id": "principal_X",
+        "acceptance_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+            "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+            "version": "1"
+          }
+        ],
+        "allow_rework": true,
+        "constraints": [
+          "Review only; no payment-system mutation",
+          "Use only public task and immutable input references"
+        ],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+        "extensions": {
+          "org.example.handoff": {
+            "role": "B",
+            "scenario": "H01"
+          }
+        },
+        "goal": "Owner may create child without parent lease",
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+            "uri": "http://127.0.0.1:18782/proposal-v1.md",
+            "version": "1"
+          },
+          {
+            "kind": "immutable",
+            "media_type": "text/csv",
+            "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+            "uri": "http://127.0.0.1:18782/observations-v1.csv",
+            "version": "1"
+          }
+        ],
+        "lease_policy": {
+          "max_seconds": 300,
+          "min_seconds": 5
+        },
+        "owner_principal_id": "principal_O",
+        "profile": "delivery-acceptance-v1",
+        "recovery_policy": "safe_reopen"
+      },
+      "contract_digest": null,
+      "created_at": "2026-10-30T13:18:50.160Z",
+      "current_assignment_id": null,
+      "generation": 0,
+      "pending_submission_id": null,
+      "recovery_gate": "claimable",
+      "revision": 1,
+      "state": "draft",
+      "task_id": "tsk_8e3b8a29a36fc6d165605ffe0123289c",
+      "updated_at": "2026-10-30T13:18:50.160Z"
+    }
+  },
+  {
+    "record_type": "Assignment",
+    "record": {
+      "agent_id": "agent_B",
+      "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+      "binding_id": "binding_B",
+      "claim_grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+      "created_at": "2026-10-30T13:18:51.122Z",
+      "effective_at": null,
+      "end_reason": "submitted",
+      "ended_at": "2026-10-30T13:20:30.105Z",
+      "generation": 1,
+      "lease_expires_at": "2026-10-30T13:25:22.451Z",
+      "principal_id": "principal_B",
+      "state": "completed",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "submission.decide"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_2c0523459b0ad97e4092c35ccd213e08",
+      "issued_by_principal_id": "principal_A",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_X",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.publish",
+        "task.link"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_8a8bb642c18e5b2ad947ac379a472ddd",
+      "issued_by_principal_id": "principal_A",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_A",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.claim"
+      ],
+      "agent_id": "agent_B",
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_a6c222d3dc8a0bf08182e3f190a2b06f",
+      "issued_by_principal_id": "principal_A",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_B",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_d78e40ee8acb574e8b27aa54c2ae663a",
+      "issued_by_principal_id": "principal_A",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_R",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Relation",
+    "record": {
+      "created_at": "2026-10-30T13:18:47.741Z",
+      "kind": "parent_child",
+      "parent_task_id": "tsk_51007fb604132213a5750bd0c41e0aa2",
+      "relation_id": "rel_d16fc295b2d9d7061124bc59f6d7d246",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Report",
+    "record": {
+      "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+      "evidence_refs": [
+        {
+          "kind": "immutable",
+          "media_type": "text/markdown",
+          "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+          "uri": "http://127.0.0.1:18782/proposal-v1.md",
+          "version": "1"
+        },
+        {
+          "kind": "immutable",
+          "media_type": "text/csv",
+          "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+          "uri": "http://127.0.0.1:18782/observations-v1.csv",
+          "version": "1"
+        },
+        {
+          "kind": "immutable",
+          "media_type": "text/markdown",
+          "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+          "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+          "version": "1"
+        }
+      ],
+      "extensions": {},
+      "message": "Fetched and verified all public immutable inputs; preparing independent review",
+      "report_id": "rpt_38fdc64fbaffbaffeba0324a1855ff53",
+      "reported_at": "2026-10-30T13:18:51.539Z",
+      "run_id": "run_565693766a442821922a9770d1ba88e1",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Run",
+    "record": {
+      "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+      "end_reason": "submitted",
+      "ended_at": "2026-10-30T13:20:30.105Z",
+      "run_id": "run_565693766a442821922a9770d1ba88e1",
+      "started_at": "2026-10-30T13:18:51.198Z",
+      "state": "submitted",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Task",
+    "record": {
+      "content_version": 1,
+      "contract": {
+        "acceptance_principal_id": "principal_X",
+        "acceptance_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+            "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+            "version": "1"
+          }
+        ],
+        "allow_rework": true,
+        "constraints": [
+          "Review only; no payment-system mutation",
+          "Use only public task and immutable input references"
+        ],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+        "extensions": {
+          "org.example.handoff": {
+            "role": "B",
+            "scenario": "H01"
+          }
+        },
+        "goal": "Independently review candidate v1 of the checkout retry policy against observations and acceptance criteria.",
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+            "uri": "http://127.0.0.1:18782/proposal-v1.md",
+            "version": "1"
+          },
+          {
+            "kind": "immutable",
+            "media_type": "text/csv",
+            "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+            "uri": "http://127.0.0.1:18782/observations-v1.csv",
+            "version": "1"
+          }
+        ],
+        "lease_policy": {
+          "max_seconds": 300,
+          "min_seconds": 5
+        },
+        "owner_principal_id": "principal_O",
+        "profile": "delivery-acceptance-v1",
+        "recovery_policy": "safe_reopen"
+      },
+      "contract_digest": "5ebac85be29f0adc67cce7b33d8b315f71f839c47dc41731514cb12b6a08cfb0",
+      "created_at": "2026-10-30T13:18:47.741Z",
+      "current_assignment_id": null,
+      "generation": 1,
+      "pending_submission_id": null,
+      "recovery_gate": "claimable",
+      "revision": 17,
+      "state": "accepted",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066",
+      "updated_at": "2026-10-30T13:22:10.023Z"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.publish",
+        "task.link"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_1ccd4e82e82fbbd390f76e0946b8da3f",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_A",
+      "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "task.claim"
+      ],
+      "agent_id": "agent_B",
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_3f692946a2a09d74ec73826c40f6dd91",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_B",
+      "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_97dcd3811b8b6d3c3608f78d409f5c45",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_R",
+      "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+    }
+  },
+  {
+    "record_type": "Grant",
+    "record": {
+      "actions": [
+        "task.read",
+        "submission.decide"
+      ],
+      "agent_id": null,
+      "expires_at": "2026-10-31T13:18:26.792Z",
+      "grant_id": "grt_c65239ffd7586b577e8fddd114edb511",
+      "issued_by_principal_id": "principal_O",
+      "not_before": "2026-10-30T13:17:26.792Z",
+      "owner_principal_id": "principal_O",
+      "revoked_at": null,
+      "subject_principal_id": "principal_X",
+      "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58"
+    }
+  },
+  {
+    "record_type": "Task",
+    "record": {
+      "content_version": null,
+      "contract": {
+        "acceptance_principal_id": "principal_X",
+        "acceptance_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+            "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+            "version": "1"
+          }
+        ],
+        "allow_rework": true,
+        "constraints": [
+          "Review only; no payment-system mutation",
+          "Use only public task and immutable input references"
+        ],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "expected_output": "Evidence-backed JSON review complying with acceptance-v1.md",
+        "extensions": {
+          "org.example.handoff": {
+            "role": "B",
+            "scenario": "H01"
+          }
+        },
+        "goal": "Independent authorization fixture; parent has never been claimed",
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "media_type": "text/markdown",
+            "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+            "uri": "http://127.0.0.1:18782/proposal-v1.md",
+            "version": "1"
+          },
+          {
+            "kind": "immutable",
+            "media_type": "text/csv",
+            "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+            "uri": "http://127.0.0.1:18782/observations-v1.csv",
+            "version": "1"
+          }
+        ],
+        "lease_policy": {
+          "max_seconds": 300,
+          "min_seconds": 5
+        },
+        "owner_principal_id": "principal_O",
+        "profile": "delivery-acceptance-v1",
+        "recovery_policy": "safe_reopen"
+      },
+      "contract_digest": null,
+      "created_at": "2026-10-30T13:18:50.032Z",
+      "current_assignment_id": null,
+      "generation": 0,
+      "pending_submission_id": null,
+      "recovery_gate": "claimable",
+      "revision": 1,
+      "state": "draft",
+      "task_id": "tsk_e4fcf85d3d12020e98f189f6ce1f9b58",
+      "updated_at": "2026-10-30T13:18:50.032Z"
+    }
+  },
+  {
+    "record_type": "Report",
+    "record": {
+      "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+      "evidence_refs": [],
+      "extensions": {},
+      "message": "Client recovered; checking current execution authority",
+      "report_id": "rpt_1239b9cf7b3936ceecea4370b4e563d3",
+      "reported_at": "2026-10-30T13:20:29.927Z",
+      "run_id": "run_565693766a442821922a9770d1ba88e1",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Submission",
+    "record": {
+      "artifact_refs": [
+        {
+          "kind": "immutable",
+          "media_type": "application/json",
+          "sha256": "94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff",
+          "uri": "http://127.0.0.1:18782/review-94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff.json",
+          "version": "1"
+        }
+      ],
+      "assignment_id": "asg_d7d33bf26de0afd1268c57ebe2484d47",
+      "content_version": 1,
+      "evidence_refs": [
+        {
+          "kind": "immutable",
+          "media_type": "text/markdown",
+          "sha256": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+          "uri": "http://127.0.0.1:18782/proposal-v1.md",
+          "version": "1"
+        },
+        {
+          "kind": "immutable",
+          "media_type": "text/csv",
+          "sha256": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+          "uri": "http://127.0.0.1:18782/observations-v1.csv",
+          "version": "1"
+        },
+        {
+          "kind": "immutable",
+          "media_type": "text/markdown",
+          "sha256": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+          "uri": "http://127.0.0.1:18782/acceptance-v1.md",
+          "version": "1"
+        }
+      ],
+      "extensions": {},
+      "run_id": "run_565693766a442821922a9770d1ba88e1",
+      "submission_id": "sub_71c64b4afe386bb4ed123075139f9539",
+      "submitted_at": "2026-10-30T13:20:30.105Z",
+      "summary": "Independent evidence-backed checkout retry review",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  },
+  {
+    "record_type": "Decision",
+    "record": {
+      "decided_at": "2026-10-30T13:22:10.023Z",
+      "decision_id": "dec_81bae08b30dd3c94812441337bbe9f76",
+      "evidence_refs": [
+        {
+          "kind": "immutable",
+          "media_type": "application/json",
+          "sha256": "94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff",
+          "uri": "http://127.0.0.1:18782/review-94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff.json",
+          "version": "1"
+        }
+      ],
+      "outcome": "accepted",
+      "principal_id": "principal_X",
+      "reason": "独立读取 task、验收标准、原始 CSV、提案及 review.json，未以 inspection 结论代替核验。三份输入实算 SHA-256 与合同及 review 一致，review 文件实算 SHA-256 与指定产物一致。逐行汇总 baseline：attempts=2000、2xx=1955、409=18、5xx=17、timeouts=10；candidate：2300、2170、60、46、24；Decimal 按 .5 向上取整得 85 和 200 基点，candidate 46/2300=2% 不满足严格低于1%，false 与 hold 正确。四条 findings 均含 claim/evidence/implication 并引用公开数据或提案，覆盖数值预算、无幂等重试风险、409 语义未证实及 attempts 不等于 orders；没有把重复扣款风险当作已观测事实，也未声称重试导致错误率增加。后续验证限定100个合成订单、最多200次沙箱尝试，涵盖五类情形、关联证据、异常停止条件及两个五分钟代表性观察窗口，且明确故障注入不能证明生产错误率。本结论接受审查交付物质量；产品发布建议仍为 hold，不代表准许发布。仅凭这些公开文件不能追溯执行者全部历史副作用，未将其推断为已完成生产安全验证。",
+      "submission_id": "sub_71c64b4afe386bb4ed123075139f9539",
+      "task_id": "tsk_d99d9324e9e8b1130c51647667eb1066"
+    }
+  }
+]

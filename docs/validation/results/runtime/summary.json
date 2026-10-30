@@ -1,0 +1,342 @@
+{
+  "implementation_commit": "f537f936fafa95fd74be63801fe4b5ac057ce1b4",
+  "protocol_version": "bridge-m1-1",
+  "protocol_checksum": "558dc29110b0138c31a36b0f19dbb9f34677d23d5508e5c9751afc4c7cd20a13",
+  "status": "pass",
+  "go_test_cases_including_subtests": 429,
+  "vectors": [
+    {
+      "vector": "V01",
+      "status": "pass",
+      "tests": [
+        "TestV01RejectedSubmissionCanBeReworked"
+      ],
+      "evidence": "V01.jsonl.gz",
+      "entries": 65
+    },
+    {
+      "vector": "V02",
+      "status": "pass",
+      "tests": [
+        "TestV02RecoveryCannotBypassLifecycle/rejected",
+        "TestV02RecoveryCannotBypassLifecycle/accepted",
+        "TestV02RecoveryCannotBypassLifecycle/closed",
+        "TestV02RecoveryCannotBypassLifecycle"
+      ],
+      "evidence": "V02.jsonl.gz",
+      "entries": 145
+    },
+    {
+      "vector": "V03",
+      "status": "pass",
+      "tests": [
+        "TestV03SubmitReceiptSurvivesEndedLease"
+      ],
+      "evidence": "V03.jsonl.gz",
+      "entries": 39
+    },
+    {
+      "vector": "V04",
+      "status": "pass",
+      "tests": [
+        "TestV04ReceiptRequiresCurrentReadAndAuthentication"
+      ],
+      "evidence": "V04.jsonl.gz",
+      "entries": 45
+    },
+    {
+      "vector": "V05",
+      "status": "pass",
+      "tests": [
+        "TestV05FinalTransactionRechecksAfterRevoke"
+      ],
+      "evidence": "V05.jsonl.gz",
+      "entries": 32
+    },
+    {
+      "vector": "V06",
+      "status": "pass",
+      "tests": [
+        "TestV06SubmitAndExpiryHaveSingleWinner/submit_first",
+        "TestV06SubmitAndExpiryHaveSingleWinner/deadline_without_scanner",
+        "TestV06SubmitAndExpiryHaveSingleWinner/expiry_first",
+        "TestV06SubmitAndExpiryHaveSingleWinner"
+      ],
+      "evidence": "V06.jsonl.gz",
+      "entries": 86
+    },
+    {
+      "vector": "V07",
+      "status": "pass",
+      "tests": [
+        "TestV07ChildCreationChecksAllPermissionsAtomically/grant_scope",
+        "TestV07ChildCreationChecksAllPermissionsAtomically/task.create",
+        "TestV07ChildCreationChecksAllPermissionsAtomically/task.link",
+        "TestV07ChildCreationChecksAllPermissionsAtomically"
+      ],
+      "evidence": "V07.jsonl.gz",
+      "entries": 53
+    },
+    {
+      "vector": "V08",
+      "status": "pass",
+      "tests": [
+        "TestV08ReadOnlySnapshotIncludesEveryLifecycle"
+      ],
+      "evidence": "V08.jsonl.gz",
+      "entries": 109
+    },
+    {
+      "vector": "V09",
+      "status": "pass",
+      "tests": [
+        "TestV09SnapshotAndReplayDoNotLoseConcurrentSubmit"
+      ],
+      "evidence": "V09.jsonl.gz",
+      "entries": 36
+    },
+    {
+      "vector": "V10",
+      "status": "pass",
+      "tests": [
+        "TestV10CursorContinuationAndInvalidation",
+        "TestV10StorageGapRequiresReinitialization/interior",
+        "TestV10StorageGapRequiresReinitialization/tail",
+        "TestV10StorageGapRequiresReinitialization/all",
+        "TestV10StorageGapRequiresReinitialization"
+      ],
+      "evidence": "V10.jsonl.gz",
+      "entries": 109
+    },
+    {
+      "vector": "V11",
+      "status": "pass",
+      "tests": [
+        "TestV11ChildExpiryOrRejectionDoesNotChangeParent/expiry",
+        "TestV11ChildExpiryOrRejectionDoesNotChangeParent/rejected",
+        "TestV11ChildExpiryOrRejectionDoesNotChangeParent"
+      ],
+      "evidence": "V11.jsonl.gz",
+      "entries": 97
+    },
+    {
+      "vector": "V12",
+      "status": "pass",
+      "tests": [
+        "TestV12ParentExpiryPreservesIndependentChildAuthority"
+      ],
+      "evidence": "V12.jsonl.gz",
+      "entries": 68
+    },
+    {
+      "vector": "V13",
+      "status": "pass",
+      "tests": [
+        "TestV13RecoveryGateAndExpiryCAS/safe_reopen",
+        "TestV13RecoveryGateAndExpiryCAS/manual_reopen",
+        "TestV13RecoveryGateAndExpiryCAS"
+      ],
+      "evidence": "V13.jsonl.gz",
+      "entries": 72
+    },
+    {
+      "vector": "V14",
+      "status": "pass",
+      "tests": [
+        "TestV14StartupMaterializesExpiredLeaseOnce"
+      ],
+      "evidence": "V14.jsonl.gz",
+      "entries": 27
+    },
+    {
+      "vector": "V15",
+      "status": "pass",
+      "tests": [
+        "TestV15ConcurrentClaimAndIdenticalReplay/different_agents",
+        "TestV15ConcurrentClaimAndIdenticalReplay/same_key",
+        "TestV15ConcurrentClaimAndIdenticalReplay"
+      ],
+      "evidence": "V15.jsonl.gz",
+      "entries": 36
+    },
+    {
+      "vector": "V16",
+      "status": "pass",
+      "tests": [
+        "TestV16RenewCannotWinAfterCommittedRevocation",
+        "TestV16RenewOnlyExtendsCurrentLiveAssignment",
+        "TestV16CompletedAssignmentCannotRenew"
+      ],
+      "evidence": "V16.jsonl.gz",
+      "entries": 96
+    },
+    {
+      "vector": "V17",
+      "status": "pass",
+      "tests": [
+        "TestV17IdempotencyRejectsChangedIntent",
+        "TestV17SingleRejectionDoesNotResolveAnotherPendingCopy"
+      ],
+      "evidence": "V17.jsonl.gz",
+      "entries": 38
+    },
+    {
+      "vector": "V18",
+      "status": "pass",
+      "tests": [
+        "TestV18PublishedContractIsFrozen"
+      ],
+      "evidence": "V18.jsonl.gz",
+      "entries": 19
+    },
+    {
+      "vector": "V19",
+      "status": "pass",
+      "tests": [
+        "TestV19ControlTerminationAndTerminalGuards/assignment.release_claimed",
+        "TestV19ControlTerminationAndTerminalGuards/assignment.revoke_claimed",
+        "TestV19ControlTerminationAndTerminalGuards/task.cancel_claimed",
+        "TestV19ControlTerminationAndTerminalGuards/assignment.release_active",
+        "TestV19ControlTerminationAndTerminalGuards/assignment.revoke_active",
+        "TestV19ControlTerminationAndTerminalGuards/task.cancel_active",
+        "TestV19ControlTerminationAndTerminalGuards/old_execution_submitted",
+        "TestV19ControlTerminationAndTerminalGuards/old_execution_accepted",
+        "TestV19ControlTerminationAndTerminalGuards/old_execution_closed",
+        "TestV19ControlTerminationAndTerminalGuards",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/draft",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/offered",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/claimed",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/active",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/submitted",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/accepted",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/rejected",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/closed",
+        "TestV19ControlMethodsStateMatrix/assignment.revoke/cancelled",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/draft",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/offered",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/claimed",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/active",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/submitted",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/accepted",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/rejected",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/closed",
+        "TestV19ControlMethodsStateMatrix/assignment.renew/cancelled",
+        "TestV19ControlMethodsStateMatrix/task.reopen/draft",
+        "TestV19ControlMethodsStateMatrix/task.reopen/offered",
+        "TestV19ControlMethodsStateMatrix/task.reopen/claimed",
+        "TestV19ControlMethodsStateMatrix/task.reopen/active",
+        "TestV19ControlMethodsStateMatrix/task.reopen/submitted",
+        "TestV19ControlMethodsStateMatrix/task.reopen/accepted",
+        "TestV19ControlMethodsStateMatrix/task.reopen/rejected",
+        "TestV19ControlMethodsStateMatrix/task.reopen/closed",
+        "TestV19ControlMethodsStateMatrix/task.reopen/cancelled",
+        "TestV19ControlMethodsStateMatrix/task.cancel/draft",
+        "TestV19ControlMethodsStateMatrix/task.cancel/offered",
+        "TestV19ControlMethodsStateMatrix/task.cancel/claimed",
+        "TestV19ControlMethodsStateMatrix/task.cancel/active",
+        "TestV19ControlMethodsStateMatrix/task.cancel/submitted",
+        "TestV19ControlMethodsStateMatrix/task.cancel/accepted",
+        "TestV19ControlMethodsStateMatrix/task.cancel/rejected",
+        "TestV19ControlMethodsStateMatrix/task.cancel/closed",
+        "TestV19ControlMethodsStateMatrix/task.cancel/cancelled",
+        "TestV19ControlMethodsStateMatrix/task.close/draft",
+        "TestV19ControlMethodsStateMatrix/task.close/offered",
+        "TestV19ControlMethodsStateMatrix/task.close/claimed",
+        "TestV19ControlMethodsStateMatrix/task.close/active",
+        "TestV19ControlMethodsStateMatrix/task.close/submitted",
+        "TestV19ControlMethodsStateMatrix/task.close/accepted",
+        "TestV19ControlMethodsStateMatrix/task.close/rejected",
+        "TestV19ControlMethodsStateMatrix/task.close/closed",
+        "TestV19ControlMethodsStateMatrix/task.close/cancelled",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/draft",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/offered",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/claimed",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/active",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/submitted",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/accepted",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/rejected",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/closed",
+        "TestV19ControlMethodsStateMatrix/task.updateDraft/cancelled",
+        "TestV19ControlMethodsStateMatrix/task.publish/draft",
+        "TestV19ControlMethodsStateMatrix/task.publish/offered",
+        "TestV19ControlMethodsStateMatrix/task.publish/claimed",
+        "TestV19ControlMethodsStateMatrix/task.publish/active",
+        "TestV19ControlMethodsStateMatrix/task.publish/submitted",
+        "TestV19ControlMethodsStateMatrix/task.publish/accepted",
+        "TestV19ControlMethodsStateMatrix/task.publish/rejected",
+        "TestV19ControlMethodsStateMatrix/task.publish/closed",
+        "TestV19ControlMethodsStateMatrix/task.publish/cancelled",
+        "TestV19ControlMethodsStateMatrix/assignment.release/draft",
+        "TestV19ControlMethodsStateMatrix/assignment.release/offered",
+        "TestV19ControlMethodsStateMatrix/assignment.release/claimed",
+        "TestV19ControlMethodsStateMatrix/assignment.release/active",
+        "TestV19ControlMethodsStateMatrix/assignment.release/submitted",
+        "TestV19ControlMethodsStateMatrix/assignment.release/accepted",
+        "TestV19ControlMethodsStateMatrix/assignment.release/rejected",
+        "TestV19ControlMethodsStateMatrix/assignment.release/closed",
+        "TestV19ControlMethodsStateMatrix/assignment.release/cancelled",
+        "TestV19ControlMethodsStateMatrix"
+      ],
+      "evidence": "V19.jsonl.gz",
+      "entries": 2141
+    },
+    {
+      "vector": "V20",
+      "status": "pass",
+      "tests": [
+        "TestV20IdentityCannotBeReplacedByToken"
+      ],
+      "evidence": "V20.jsonl.gz",
+      "entries": 24
+    },
+    {
+      "vector": "V21",
+      "status": "pass",
+      "tests": [
+        "TestV21AcceptanceAuthorityAndConcurrentDecision"
+      ],
+      "evidence": "V21.jsonl.gz",
+      "entries": 39
+    },
+    {
+      "vector": "V22",
+      "status": "pass",
+      "tests": [
+        "TestV22CrashBeforeAndAfterCommit/before_commit",
+        "TestV22CrashBeforeAndAfterCommit/after_commit_before_response",
+        "TestV22CrashBeforeAndAfterCommit"
+      ],
+      "evidence": "V22.jsonl.gz",
+      "entries": 59
+    },
+    {
+      "vector": "V23",
+      "status": "pass",
+      "tests": [
+        "TestV23NaturalBindingExpiryUsesLeaseExpiryReason",
+        "TestV23RevokedBindingNeverResurrects"
+      ],
+      "evidence": "V23.jsonl.gz",
+      "entries": 62
+    },
+    {
+      "vector": "V24",
+      "status": "pass",
+      "tests": [
+        "TestV24NaturalAuthorizationBoundaryAndReceiptIsolation"
+      ],
+      "evidence": "V24.jsonl.gz",
+      "entries": 37
+    },
+    {
+      "vector": "V25",
+      "status": "pass",
+      "tests": [
+        "TestV25HistoricalAuditAndStaleReadAreDistinct"
+      ],
+      "evidence": "V25.jsonl.gz",
+      "entries": 67
+    }
+  ],
+  "evidence_format": "gzip-compressed UTF-8 JSONL; request/response and scheduling records; generated fixture secrets removed before writing"
+}

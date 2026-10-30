@@ -1,6 +1,6 @@
 # Black-box coverage and evidence boundaries
 
-Status: implemented tests pass in the recorded runs; this document does not declare the whole M1 milestone complete.
+Status: the final runtime suite and M1 acceptance passed at implementation commit f537f936fafa95fd74be63801fe4b5ac057ce1b4. See ../../docs/validation/results/README.md for the combined evidence.
 
 ## Public-interface coverage
 
@@ -26,7 +26,7 @@ Resource/gap additions: targeted basic tests passed; 10000-record and 32 MiB rea
 
 - This harness is not H01: independent Go/TypeScript clients, actual agent work, artifact access and actual output acceptance require separate evidence.
 - V09 tests server snapshot/replay continuity, not independent consumer checkpoint crash recovery; that belongs to consumer tests.
-- Full per-vector evidence must include protocol checksum/version, daemon/client revision, redacted request/response, commit/event identifiers, and scheduling points. Parent-owned evidence observers may supply these; this coverage note alone does not.
-- CommandResult/commit-batch 1 MiB limits and reserved maintenance capacity need distinct boundary proof; passing request-size tests does not prove them.
+- Full per-vector evidence is archived under docs/validation/results/runtime/V01.jsonl.gz through V25.jsonl.gz with protocol checksum, implementation commit, redacted request/response, commit/event identifiers, and scheduling points.
+- Exact encoded 1 MiB limits are covered in internal/application/capacity_test.go; maintenance_capacity_test.go proves atomic large-contract rejection and successful mandatory expiry with near-limit escaped content through HTTP.
 - Startup protocol-version protection is an internal integration guard, not a public black-box assertion.
 - Resource corruption tests prove refusal for the injected gaps, not arbitrary old-backup rollback detection or recovery of removed events.

@@ -1,0 +1,5 @@
+PASS: 16 frozen files; 27 method mappings; 80 local links; 558dc29110b0138c31a36b0f19dbb9f34677d23d5508e5c9751afc4c7cd20a13
+PASS: schema + 92 structural cases + 7 digest cases + 9 parser cases; 27 RPC request shapes covered.
+NOT RUN: bridge state/auth/concurrency/persistence, H01/V01–V25, independent client conformance.
+PASS: 7 canonical bytes and hashes match in ECMAScript. Full client conformance NOT RUN.
+BASELINE VERIFIED. No daemon/runtime or H01/V01–V25 acceptance is implied.

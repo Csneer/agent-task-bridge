@@ -1,0 +1,27 @@
+
+> test
+> node --test
+
+✔ snapshot pagination stages before atomic replacement; concurrent writes replay after W (184.507008ms)
+✔ failure before persistence preserves complete projection/checkpoint; restart retries (19.446236ms)
+✔ duplicate delivery does not regress projection (14.507317ms)
+✔ revoked authorization invalidates persistently and replaces view (31.998915ms)
+✔ disconnect keeps checkpoint, next invocation recovers; audit leaves checkpoint alone (26.818544ms)
+✔ 401 removes authorized view (13.590295ms)
+✔ exact parser rejects 1.0000000000000001 (0.28066ms)
+✔ exact parser rejects 9007199254740990.5 (0.090363ms)
+✔ exact parser rejects 1e-400 (0.061252ms)
+✔ exact parser rejects 9007199254740992 (0.087448ms)
+✔ exact parser rejects {"x":1,"x":2} (0.188293ms)
+✔ exact parser rejects "\ud800" (0.10051ms)
+✔ exact parser preserves valid integral decimals and rejects malformed UTF8 (0.099626ms)
+✔ sync automatically rebuilds after epoch invalidation (21.294211ms)
+✔ expired known horizon invalidates before contacting network (8.722093ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 443.417966

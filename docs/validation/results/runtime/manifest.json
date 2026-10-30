@@ -1,0 +1,192 @@
+[
+  {
+    "file": "V01.jsonl.gz",
+    "bytes": 7194,
+    "sha256": "fb617969d4316286ced441b8f9b678788192b4697530268475d93f1f00518a87"
+  },
+  {
+    "file": "V02.jsonl.gz",
+    "bytes": 8754,
+    "sha256": "cc0e601b9b64d5626ceff936111dc0e63a4244ec4bf101a9c7eae4f934a277ac"
+  },
+  {
+    "file": "V03.jsonl.gz",
+    "bytes": 5365,
+    "sha256": "142546101fb2db5e7960f17d8e09f8c2a58f663b009be1d7214fee5745cb3efb"
+  },
+  {
+    "file": "V04.jsonl.gz",
+    "bytes": 4071,
+    "sha256": "32026bd2b4f4bba902fd54b59d2cc2c9047b2706aa285dd651d44fc638576dd4"
+  },
+  {
+    "file": "V05.jsonl.gz",
+    "bytes": 4254,
+    "sha256": "afdf143d0d515272c46a4491571e81a2e312c22422152309f925516588e3a291"
+  },
+  {
+    "file": "V06.jsonl.gz",
+    "bytes": 10585,
+    "sha256": "cf08fbef80efba0c08176e7a57357fb6186f2d73f481a7b4348a4596dbb63b11"
+  },
+  {
+    "file": "V07.jsonl.gz",
+    "bytes": 5985,
+    "sha256": "12e30d31b66052227c26d1f1bc2cbb060d951ad98828bb776f4f7249fa143bc9"
+  },
+  {
+    "file": "V08.jsonl.gz",
+    "bytes": 8143,
+    "sha256": "1f23c793bed7b7fa9ce68334f3341aef913afc184b4e15e91b6e7aa4e018f495"
+  },
+  {
+    "file": "V09.jsonl.gz",
+    "bytes": 6204,
+    "sha256": "6a15fe12328cbfa7e9ac92f214e73afc6ea16067dfb28ca30f2e95e87ef67ed9"
+  },
+  {
+    "file": "V10.jsonl.gz",
+    "bytes": 11764,
+    "sha256": "a1490ff62850bdf592ce73866aa980904dcfe5b3db09ac4c5c76aedbea47b6fa"
+  },
+  {
+    "file": "V11.jsonl.gz",
+    "bytes": 5545,
+    "sha256": "33972a1bd01456478d57dacd3d9009aa99cea0d61198996f1644ac260ef4ac7f"
+  },
+  {
+    "file": "V12.jsonl.gz",
+    "bytes": 4712,
+    "sha256": "b4cc6ae6ad05927013f26044187317a8f1aa93753f7ef8e347a16b2d625a392e"
+  },
+  {
+    "file": "V13.jsonl.gz",
+    "bytes": 8551,
+    "sha256": "ccf9551466a6b627266664aeac81b7e22961ab023e57b31936549db0781f1765"
+  },
+  {
+    "file": "V14.jsonl.gz",
+    "bytes": 3743,
+    "sha256": "fc136fc8a42edf99648fa347ea892607fb427f15cf18710f6e2c0c78a3c7cc58"
+  },
+  {
+    "file": "V15.jsonl.gz",
+    "bytes": 4526,
+    "sha256": "a74faef38e779ba1d7ec2c979f54df06156a7784783131f0233713a9d39f3e7c"
+  },
+  {
+    "file": "V16.jsonl.gz",
+    "bytes": 10074,
+    "sha256": "70dff76ebae4c4db87bd6053a0ff80c912e58680e63d1c51f0d4ea9eb238dfac"
+  },
+  {
+    "file": "V17.jsonl.gz",
+    "bytes": 5169,
+    "sha256": "84eb2a81f65d7864a6a788f8f4cceaf1b9327bc56d34049388c3f919ab12848d"
+  },
+  {
+    "file": "V18.jsonl.gz",
+    "bytes": 1917,
+    "sha256": "0808f30c0ff600486e912cbb74ce91fc1dbebab67a1a56322e301b240c3f70d4"
+  },
+  {
+    "file": "V19.jsonl.gz",
+    "bytes": 100125,
+    "sha256": "bacdeae1532d8a3508ed08741e5e1e92cb2808ee756defce01b7a8648520fe8f"
+  },
+  {
+    "file": "V20.jsonl.gz",
+    "bytes": 2370,
+    "sha256": "176fc015c74de3be708259a774c2e00953d9b6f47c53b0357a45211f3df379b4"
+  },
+  {
+    "file": "V21.jsonl.gz",
+    "bytes": 4772,
+    "sha256": "798d22d5a8b37e8d2f4d9ab482ab20719b8d7da27db1297693d4fe0ef5eec2d7"
+  },
+  {
+    "file": "V22.jsonl.gz",
+    "bytes": 7598,
+    "sha256": "171d3356fc0651de5f7f55d58a980210718322c610660cf9f7d4f8a566021938"
+  },
+  {
+    "file": "V23.jsonl.gz",
+    "bytes": 5528,
+    "sha256": "5ed67e65bb89602604ea04007411047cdd9624d7858e45b1d841fde168b9d310"
+  },
+  {
+    "file": "V24.jsonl.gz",
+    "bytes": 3873,
+    "sha256": "d20b0fab0327117ac013fc85c43743c708a4864870b718623932b047445e7ce5"
+  },
+  {
+    "file": "V25.jsonl.gz",
+    "bytes": 7169,
+    "sha256": "6b50c0a3ace80f2f1fb4b77f8cf7c593906efccff9c550442029a04cadc0ba15"
+  },
+  {
+    "file": "consumer-check.txt",
+    "bytes": 99,
+    "sha256": "4bd83e2e2e7b7f648b8bac8efcb641325e364a0e031e1426fbc76e98518220e6"
+  },
+  {
+    "file": "consumer-test.txt",
+    "bytes": 1196,
+    "sha256": "e8f38707d38af9efb4ea6b38d917cd05baea1e79285a3c3eab9e3ed3e804cf88"
+  },
+  {
+    "file": "diff-check.txt",
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+    "file": "frozen-package.txt",
+    "bytes": 490,
+    "sha256": "e227731e0df67dcb64479a53abd3f54a0328a08376e368101c3f842c9ac1cdd6"
+  },
+  {
+    "file": "go-build.txt",
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+    "file": "go-test.jsonl",
+    "bytes": 375789,
+    "sha256": "f16e0b31045dbdc80c32e578130163084832777497f17864240c000f7ba07fc1"
+  },
+  {
+    "file": "go-vet.txt",
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+    "file": "implementation-commit.txt",
+    "bytes": 41,
+    "sha256": "afa1d547107270c98f269d7222c98798e42b5a3766010919cf1d2b39cc347332"
+  },
+  {
+    "file": "real-http-integration.txt",
+    "bytes": 237,
+    "sha256": "56023dd1fb5d2607aeb5ff2c5cb789b1c9d4af5083e3e4e6a02b7e48ce718939"
+  },
+  {
+    "file": "summary.json",
+    "bytes": 12388,
+    "sha256": "8ee631ffd53af0b555dea7b39c413fe543dc40a3dff3e6882adee82b13fd21f9"
+  },
+  {
+    "file": "typescript-test.txt",
+    "bytes": 6491,
+    "sha256": "999974e5fff1b469715d489e16f772a6e5b7e9fb5b6c8251ce2435599cfff4e8"
+  },
+  {
+    "file": "typescript-typecheck.txt",
+    "bytes": 61,
+    "sha256": "a3f1b220eb1238085c48036245ee3b03e0afc6322b628104c46915829c48fe4c"
+  },
+  {
+    "file": "worktree-status.txt",
+    "bytes": 28,
+    "sha256": "13e561c7df542f872eba029f24334655a3d4069518c017ddb2261b093e549f9f"
+  }
+]

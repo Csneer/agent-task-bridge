@@ -1,0 +1,5 @@
+{
+  "outcome": "accepted",
+  "artifact_sha256": "94397c4e3cd06126f06ec5f6893f6b3f05994dca047792040096439538d943ff",
+  "reason": "独立读取 task、验收标准、原始 CSV、提案及 review.json，未以 inspection 结论代替核验。三份输入实算 SHA-256 与合同及 review 一致，review 文件实算 SHA-256 与指定产物一致。逐行汇总 baseline：attempts=2000、2xx=1955、409=18、5xx=17、timeouts=10；candidate：2300、2170、60、46、24；Decimal 按 .5 向上取整得 85 和 200 基点，candidate 46/2300=2% 不满足严格低于1%，false 与 hold 正确。四条 findings 均含 claim/evidence/implication 并引用公开数据或提案，覆盖数值预算、无幂等重试风险、409 语义未证实及 attempts 不等于 orders；没有把重复扣款风险当作已观测事实，也未声称重试导致错误率增加。后续验证限定100个合成订单、最多200次沙箱尝试，涵盖五类情形、关联证据、异常停止条件及两个五分钟代表性观察窗口，且明确故障注入不能证明生产错误率。本结论接受审查交付物质量；产品发布建议仍为 hold，不代表准许发布。仅凭这些公开文件不能追溯执行者全部历史副作用，未将其推断为已完成生产安全验证。"
+}

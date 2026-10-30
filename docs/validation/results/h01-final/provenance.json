@@ -1,0 +1,45 @@
+{
+  "status": "pass",
+  "implementation_commit": "f537f936fafa95fd74be63801fe4b5ac057ce1b4",
+  "protocol_version": "bridge-m1-1",
+  "protocol_checksum": "558dc29110b0138c31a36b0f19dbb9f34677d23d5508e5c9751afc4c7cd20a13",
+  "captured_at": "2026-10-30T13:22:41.183586+00:00",
+  "client_sources": {
+    "A": "clients/go",
+    "B_and_X": "clients/typescript",
+    "R": "examples/read-consumer"
+  },
+  "binaries_sha256": {
+    "bridge": "33db6166fcd8230f9a0d97b87f9acde1a7ab2b6d444290d22967eaa7da5ac24e",
+    "bridge-client": "343b5c5bea6f5e840b8edb7efe3514d0cf899413f1f972a720f298d0f6a79a12"
+  },
+  "source_sha256": {
+    "clients/typescript/src/cli.ts": "76154c33aadf06c6254642e94d0fbecbda4ee4aee26c0f1cf4c418ed39c68eff",
+    "clients/typescript/src/client.ts": "16e0e7ab9f88d70f445089f38cfc7bc9100cd9303f276d8c5e98395ba26dd52c",
+    "clients/typescript/src/index.ts": "2c5ce3200ebd1ef95bda2775a3e7912a2e82a0d87ebc0d2c99c9f89c03969336",
+    "clients/typescript/src/journal.ts": "e1ec24be41160893f1ed322ba9fe92aa3ca8dd442d48146b6de6da032e8007df",
+    "clients/typescript/src/json.ts": "fcde289215623eac96f5bec681053c8975abcbf12e0586415ba25e461d50ac9b",
+    "clients/typescript/src/lease.ts": "01196fc303e1d0b230e62b8642919c4983206c4670a926a31a3fbd1fecd11e25",
+    "clients/typescript/src/protocol.ts": "03270a7ecaeb752bd94aefe1bdbe568b25941066493445e65e711e78d0da8220",
+    "clients/typescript/src/resources.ts": "1b13f4434dc543d414766a4f50c0e9a02ae8ea3573a246e38e0e462b18d38b7b",
+    "examples/read-consumer/src/cli.mjs": "6d2044012df72057d7959447e9804dfbd93f096e39ee76e503b25267011f9886",
+    "examples/read-consumer/src/consumer.mjs": "50d163b6501da780f7aa2cc22fa9be5cb5385e9fda786cb256f1c8a7900fb04d",
+    "examples/read-consumer/src/wire.mjs": "cdbd15abdf993b4ee11d1c4bdbf2a5d12eed57ab314ea7e069073fe4a6373598",
+    "examples/handoff/README.md": "7b826793af128731c4b48ce6b24874410ec9e3434c9691ea92d9158a7fa404c7",
+    "examples/handoff/inputs/acceptance-v1.md": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+    "examples/handoff/inputs/observations-v1.csv": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+    "examples/handoff/inputs/proposal-v1.md": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+    "examples/handoff/lib.mjs": "ece0a9bb0a13d32fa638b8e6191865f7a0ddb710134136c06b88f40250c19a34",
+    "examples/handoff/resources.mjs": "220ac19c4bbf12ed0ffb2a4c797fa100bca4dfd285a6f27247ca1ce9fd046f11",
+    "examples/handoff/run.mjs": "673de67df7bd40270c9b0cd2eeb303862e70a0987e6242e5d81d754941fc13a7",
+    "examples/handoff/test/integration.test.mjs": "d322d1bc0ff4af2866b7aadb4927c46c1231637113721aefb0da96262d60910e"
+  },
+  "parent_claims": 1,
+  "parent_expiries": 0,
+  "parent_assignment": "asg_314cb5b0df0b60492301e359491e5973",
+  "b_work": "Fresh independent Agent read only public task package and wrote review.json; independently recalculated and checked inputs",
+  "x_review": "Fresh independent verifier read only public task and delivered artifact; independently recalculated before decision",
+  "worktree_at_build": "Tracked source exactly matches implementation_commit; only untracked evidence docs caused vcs.modified=true",
+  "runtime_scope": "single authority, loopback HTTP, pre-registered, public API only",
+  "consumer": "initialized before submit, restored by new instance, repeated prior cursor deduplicated, retained history read separately"
+}
