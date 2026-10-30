@@ -1,73 +1,111 @@
 # Agent↔Task Bridge
 
-面向不同 Agent 客户端的可移植任务桥接层。Agent 通过公共协议发布任务、pull 发现并领取、报告执行、提交产物；指定主体记录验收决定，上层从快照和事件恢复统一事实。
+**让任务跨越 Agent 边界。**
 
-**v0.1.0 是 Developer Preview**，采用冻结协议 `bridge-m1-1`、HTTP/JSON-RPC 和 SQLite/WAL。首版运行边界是 Linux、单 authority、单 daemon、预注册主体、单机或受控私网。提供 Go daemon、独立 Go/TypeScript 客户端和只读消费者。Linux amd64 已执行验证；arm64 制品完成交叉编译，尚未在 arm64 主机执行验证。
+A portable bridge between agents and work.
 
-[GitHub 仓库](https://github.com/Csneer/agent-task-bridge) · [发行版](https://github.com/Csneer/agent-task-bridge/releases/tag/v0.1.0) · [MIT License](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Csneer/agent-task-bridge?include_prereleases)](https://github.com/Csneer/agent-task-bridge/releases)
+[![CI](https://github.com/Csneer/agent-task-bridge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Csneer/agent-task-bridge/actions/workflows/ci.yml)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## 安装与最小闭环
+Agent↔Task Bridge 是连接任务发布者、Agent 与上层应用的开放桥接层。它为不同客户端提供共同的工作约定，让 Agent 能够发布与接取任务、交付结果，让应用能够读取可追溯的任务状态。
 
-下面使用 Linux amd64 发行包，需要 GitHub CLI、`tar`、`sha256sum` 和 Node.js 22+。在新的下载目录中获取发行附件并校验：
+[愿景](#愿景) · [核心价值](#核心价值) · [应用场景](#可以用它搭建什么) · [发展方向](#发展方向) · [开始探索](#开始探索)
 
-```sh
-gh release download v0.1.0 --repo Csneer/agent-task-bridge --dir bridge-release
-cd bridge-release
-sha256sum --check SHA256SUMS
-tar -xzf agent-task-bridge_v0.1.0_linux_amd64.tar.gz
-cd agent-task-bridge_v0.1.0_linux_amd64
-./bin/bridge version
+## 愿景
+
+我们希望，**一项工作可以由人或 Agent 发起，被合适的 Agent 接取，并在不同工具与应用之间持续流转。**
+
+任务应该携带自己的目标、约束、输入和验收条件；换一个执行者，仍然有清楚的交接依据。执行过程、交付产物和验收决定应该留下可读取的记录，让协作能够跨越一次会话、一个客户端和一种编程语言。
+
+更长远地，这样的基础可以支持开放的 Agent 接单平台：人类发布需求，Agent 委派工作，拥有空闲能力的 Agent 提供服务，平台在其上建立匹配、信誉与付费协作。**这是我们希望支持的未来生态。** 当前项目从其中最基础的任务约定、承接授权与事实流转做起。
+
+## 为什么需要这座桥
+
+当 Agent 各自使用不同的会话、任务格式和结果表达，交接工作就需要反复回答：
+
+- **做什么？** 接收方能否拿到完整的目标、约束、输入和完成条件？
+- **谁在负责？** 当前由谁承接，授权何时失效，失联后如何继续？
+- **交付了什么？** 执行报告、正式产物和验收决定能否分别确认？
+- **现在到哪一步？** 上层应用能否在断线或重启后恢复同一组事实？
+
+Agent↔Task Bridge 把这些交接规则放进公开协议。Agent 保留自己的模型、框架和执行方式；应用保留自己的工作流与业务策略；桥负责连接双方的任务约定和状态记录。
+
+```mermaid
+flowchart LR
+    P["任务发布方<br/>人类应用 / Agent"] -->|目标与工作约定| T["Agent↔Task Bridge<br/>任务 · 承接 · 交付 · 验收"]
+    T <-->|发现、领取与交付| A["Agent 客户端 A"]
+    T <-->|发现、领取与交付| B["Agent 客户端 B"]
+    T -->|快照与事件| U["你构建的工作流、看板与平台"]
 ```
 
-在终端一初始化新的私有目录并启动。目标目录不能已经存在，其父目录必须存在；不要把运行数据放进 Git 仓库。
+## 核心价值
 
-```sh
-./bin/bridge init --dir "$HOME/bridge-demo"
-./bin/bridge --db "$HOME/bridge-demo/bridge.sqlite" --key "$HOME/bridge-demo/bridge.key"
-```
+### 交接有共同语言
 
-在终端二进入同一个解压目录，运行自包含示例，无需 npm 安装：
+目标、约束、输入引用、预期产物和验收说明组成明确的工作约定。接收方通过公开任务与获授权的资源开始工作，无需读取另一个 Agent 的私有会话。协议以 JSON Schema 和明确的行为契约描述，客户端可以独立实现。
 
-```sh
-node examples/minimal/run.mjs --dir "$HOME/bridge-demo"
-```
+### 承接有清楚边界
 
-输出应包含 `state: "accepted"`、产物摘要和六个已提交的历史动作。链路是创建 → 发布 → 发现/领取 → 开始执行 → 计算真实 SHA-256 与 UTF-8 字节数 → 提交 → Owner 独立读取并校验产物 → 验收 → Reader 读取历史。每次运行创建新的 Task；示例使用同机 `file:` 产物，不执行任务提供的任意代码。完整说明见 [最小示例](examples/minimal/README.md)。
+同一任务同时最多一个有效承接授权。Agent 主动发现、领取与续租；租约到期、主动释放或撤销后，任务按发布时确定的恢复策略处理再次领取。子任务的承接与授权也各有明确边界。
 
-初始化生成 0700 目录与 0600 文件；`admin.json` 仅含凭据摘要，原始 bearer 分离存入 `credentials.json`。默认凭据与 Agent binding 在 **30 天后到期**，需提前以新实例 ID 更新配置。按 Ctrl-C 停止，重启使用同一数据库与密钥，无需重新导入 bootstrap。权限、轮换与恢复边界见 [运维说明](docs/operations.md)。
+### 交付有可追溯依据
 
-## 客户端与源码安装
+执行进展、正式交付和验收决定分别保存。Agent 提交产物，由指定的验收主体决定是否接受，上层可以了解谁交付了什么、谁作出了什么决定。
 
-Linux 上可使用 Go 1.27+ 从发布标签安装 daemon 和 Go CLI；需要把 Go 的安装目录加入 PATH：
+### 协作可以跨越中断
 
-```sh
-go install github.com/Csneer/agent-task-bridge/cmd/bridge@v0.1.0
-go install github.com/Csneer/agent-task-bridge/clients/go/cmd/bridge-client@v0.1.0
-```
+持久化状态、幂等回执、快照和可重放事件，为断线后的查询与恢复提供依据。客户端能够找回已提交的结果，消费者能够接续处理后续事实。
 
-TypeScript SDK 通过 GitHub Release 的 npm tarball 分发，当前不承诺 npm registry 发布。在独立 Node 项目目录中：
+### 上层应用按需扩展
 
-```sh
-gh release download v0.1.0 --repo Csneer/agent-task-bridge --pattern 'csneer-agent-task-bridge-0.1.0.tgz'
-npm install ./csneer-agent-task-bridge-0.1.0.tgz
-npx bridge-client --version
-```
+通过公开接口和事件构建任务看板、审计工具或业务编排，无需读取桥的内部数据库。父子任务只记录关系，上层自行决定等待、重试、取消或汇总，让基础层能服务不同产品。
 
-参阅 [Go 客户端](clients/go/README.md)、[TypeScript SDK](clients/typescript/README.md) 和 [只读消费者](examples/read-consumer/README.md)。两个 CLI 都名为 `bridge-client`；通过本地 `npx bridge-client` 使用项目安装的 TypeScript 版本。
+## 可以用它搭建什么
 
-## 核心能力与边界
+| 场景 | 桥提供的基础 | 接入方构建的体验 |
+|---|---|---|
+| 多 Agent 任务接力 | 任务约定、显式委派、交付与验收记录 | 一个 Agent 组织工作，其他 Agent 承接明确的子目标 |
+| 团队内部工作池 | 发布、按资格发现、单一承接与租约 | 不同客户端从共同任务池中接取工作 |
+| 跨客户端任务看板 | 一致快照、事件重放与历史读取 | 展示任务进展、追踪交付、恢复应用自己的视图 |
+| 人与 Agent 的协作应用 | 验收授权、正式产物和决定记录 | 通过应用审核结果、要求重做并继续业务流程 |
 
-- Task 是工作约定的权威；同一 Task 同时最多一个有效 Assignment。Run、Submission 和验收 Decision 分别记录执行、交付与决定。
-- 原子 claim、租约续期和 fencing 限制桥内当前执行权；到期释放 Assignment 并使任务重新可领取，保留历史。桥接层不能强制停止外部旧进程或撤回副作用。
-- 写命令使用幂等键与 revision；未知结果按原键原参数恢复。事件可用 cursor 重放，消费者去重，不承诺外部 exactly-once。
-- 父子关系只记录事实，不自动赋权、接管、取消或汇总状态。验收校验授权并记录决定，结果内容由验收主体判断。
-- 大输入和产物使用外部引用。公网多租户、匿名市场、支付/信誉、算力计量、执行沙箱、push 派单与 Web UI 不属于首版。
+这些是基于桥构建应用的方式。接入现有 Agent 或产品，需要实现或适配公共协议。
 
-## 文档与验证
+## 发展方向
 
-- [运行说明](docs/runtime.md)、[运维说明](docs/operations.md)、[安全策略](SECURITY.md)。
-- [协议入口](protocol/m1/README.md)、[核心定义](docs/architecture/core.md)、[能力蓝图](docs/architecture/blueprint.md)。
-- [贡献与本地验证](CONTRIBUTING.md)、[实现任务单](docs/implementation-plan.md)、[M1 验收证据](docs/validation/results/README.md)。
-- [v0.1.0 发布说明](docs/releases/v0.1.0.md)、[变更记录](CHANGELOG.md)、[版本规则](docs/versioning.md)。
+**现在：把跨 Agent 交接做实。** 已提供参考服务、独立 Go / TypeScript 客户端，以及真实任务交接和只读消费者示例。首先证明不同客户端可以理解同一约定、接取工作、交付结果，并让上层恢复统一事实。
 
-产品版本 `v0.1.0` 与协议版本 `bridge-m1-1` 分别管理。冻结文件中的“尚未实现/发布”等文字是基线制定时的历史状态；原始证据绑定其源码提交，不代表后续每个版本自动通过。当前发行版验证以对应 GitHub Actions 运行及附件为准，不改写历史冻结摘要。该项目独立于 p-drive，运行不依赖协作工具。
+**接下来：让真实接入更容易。** 希望与社区一起完善客户端接入示例、协议符合性验证和开发工具，把更多真实协作场景反馈到协议设计中。
+
+**长期：成为开放 Agent 工作网络的基础。** 为任务平台、跨工具协作和闲置 Agent 能力共享提供可复用的桥接层。公网信任、匹配、信誉、资源计量和结算需要各自的设计与上层实现，尚未包含在当前版本中。
+
+## 当前进展
+
+**[v0.1.0 Developer Preview](https://github.com/Csneer/agent-task-bridge/releases/tag/v0.1.0) 已发布，采用 MIT 许可证。**
+
+当前包含 HTTP/JSON-RPC 协议、Go 参考服务、SQLite/WAL 持久化、独立 Go / TypeScript 客户端和事件消费者。跨客户端交接、租约竞争、幂等重试、崩溃恢复与事件接续已有[验收证据](docs/validation/results/README.md)，发布流程运行[自动验证](https://github.com/Csneer/agent-task-bridge/actions/workflows/ci.yml)。
+
+预览版面向单机或受控私网、预注册 Agent 和单一桥接服务。租约保证桥内当前授权，外部执行与副作用仍由接入方管理。运行支持和具体边界见[发布说明](docs/releases/v0.1.0.md)与[安全策略](SECURITY.md)。
+
+## 开始探索
+
+| 你想了解什么 | 从这里开始 |
+|---|---|
+| 先体验一条完整任务链路 | [快速开始](docs/quickstart.md) · [最小示例](examples/minimal/README.md) |
+| 把自己的 Agent 接进来 | [Go 客户端](clients/go/README.md) · [TypeScript SDK](clients/typescript/README.md) |
+| 理解桥的设计与协议 | [核心定义](docs/architecture/core.md) · [能力蓝图](docs/architecture/blueprint.md) · [协议入口](protocol/m1/README.md) |
+| 开发上层应用 | [只读消费者](examples/read-consumer/README.md) · [真实交接示例](examples/handoff/README.md) |
+| 运行与维护服务 | [运行说明](docs/runtime.md) · [运维说明](docs/operations.md) |
+
+产品与协议分别版本化；当前协议为 `bridge-m1-1`。冻结设计文档保留当时的状态描述，当前实现进展以发行版和验证结果为准。
+
+## 一起把它做出来
+
+欢迎带着真实协作问题参与：你的 Agent 在哪里需要交接工作？哪些任务事实应该跨工具保留？什么样的客户端接入能让这座桥更有用？
+
+- [提出场景或反馈问题](https://github.com/Csneer/agent-task-bridge/issues)：分享工作流、交接断点和预期结果。
+- [参与贡献](CONTRIBUTING.md)：完善客户端示例、互操作验证、文档或核心实现。
+- [关注后续版本](https://github.com/Csneer/agent-task-bridge/releases)：跟进协议与参考实现的进展。
+
+我们希望与开发者一起，让 Agent 的能力能够通过清楚的任务约定，成为更多人和应用可以使用的协作能力。

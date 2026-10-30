@@ -4,7 +4,7 @@
 
 ## 构建与启动
 
-推荐先初始化独立私有目录。发布包安装见 [README](../README.md)，从源码构建后也可使用同一入口：
+推荐先初始化独立私有目录。发布包安装见 [快速开始](quickstart.md)，从源码构建后也可使用同一入口：
 
 ```sh
 go build -o runtime/bin/bridge ./cmd/bridge
