@@ -1,0 +1,586 @@
+{
+  "id": "marketplace",
+  "description": "客户发布预期；平台选择模型和评分合适的 Agent；实际交付后调整预期、拒绝并重做，最终由客户验收。",
+  "application_context": {
+    "outside_core": [
+      "账号注册、等级与完成率计算",
+      "模型目录、评分筛选与候选排序",
+      "支付、结算与争议处理"
+    ],
+    "selection_input": {
+      "minimum_rating": 4.7,
+      "required_model": "analysis-model",
+      "selected_agent": "analysis-agent",
+      "observed_rating": 4.8
+    },
+    "matching_note": "选中参与者及准入结果是预先写好的宿主输入，不是模型执行了评分筛选。",
+    "human_note": "human actor 表达客户角色；此离线轨迹没有真实人工界面或登录。"
+  },
+  "steps": [
+    {
+      "id": "order_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "order_created",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "拆解一个小型预约服务需求",
+          "expected_result": "给出可实施的需求分解与关键风险。",
+          "delivery_requirements": [
+            "按功能说明依赖关系。"
+          ],
+          "extensions": {
+            "org.example.marketplace": {
+              "requested_model": "analysis-model",
+              "minimum_rating": 4.7,
+              "selected_rating": 4.8
+            }
+          }
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "customer-lin"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 1
+      }
+    },
+    {
+      "id": "unselected_claim_denied",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "unselected_claim_denied",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${order_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "unselected-agent"
+        },
+        "can_execute": false,
+        "can_read_history": true
+      },
+      "expect": {
+        "error": "NOT_ADMITTED",
+        "event_count": 1,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "marketplace-demo",
+              "task_id": "decompose-order"
+            },
+            "state": "offered",
+            "revision": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "analysis_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "analysis_claimed",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${order_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "analysis-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 2
+      }
+    },
+    {
+      "id": "analysis_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "analysis_started",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${analysis_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${analysis_claimed.task.current_assignment_id}",
+          "generation": "${analysis_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "analysis-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 3
+      }
+    },
+    {
+      "id": "analysis_progress",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "analysis_progress",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${analysis_started.task.revision}",
+        "operation": "run.report",
+        "body": {
+          "assignment_id": "${analysis_claimed.task.current_assignment_id}",
+          "generation": "${analysis_claimed.task.generation}",
+          "run_id": "${analysis_started.task.current_run_id}",
+          "message": "已识别预约、通知和取消三类流程。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "analysis-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 4
+      }
+    },
+    {
+      "id": "order_refined",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "order_refined",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${analysis_progress.task.revision}",
+        "operation": "task.revise",
+        "body": {
+          "goal": "拆解一个小型预约服务需求",
+          "expected_result": "除功能分解外，补充异常场景和各项验收建议。",
+          "delivery_requirements": [
+            "说明依赖关系。",
+            "明确重复预约及取消后的处理。"
+          ],
+          "extensions": {
+            "org.example.marketplace": {
+              "requested_model": "analysis-model",
+              "minimum_rating": 4.7,
+              "selected_rating": 4.8
+            }
+          },
+          "reason": "看到初步进展后，客户明确了更关注的异常流程。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "customer-lin"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 5,
+        "checks": [
+          {
+            "path": "task.expectation_version",
+            "equals": 2
+          },
+          {
+            "path": "task.expectations.0.expected_result",
+            "equals": "给出可实施的需求分解与关键风险。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "first_delivery",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "first_delivery",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${order_refined.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${analysis_claimed.task.current_assignment_id}",
+          "generation": "${analysis_claimed.task.generation}",
+          "run_id": "${analysis_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "交付预约、通知、取消的功能分解；尚未补充全部异常场景。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "analysis-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 6,
+        "replayed": false,
+        "event_count": 6,
+        "checks": [
+          {
+            "path": "records.2.record.basis_version",
+            "equals": 1
+          },
+          {
+            "path": "task.expectation_version",
+            "equals": 2
+          },
+          {
+            "path": "task.current_assignment_id",
+            "equals": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "worker_cannot_accept",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "worker_cannot_accept",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${first_delivery.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${first_delivery.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "analysis-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "error": "ROLE_MISMATCH",
+        "event_count": 6,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "marketplace-demo",
+              "task_id": "decompose-order"
+            },
+            "state": "submitted",
+            "revision": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "customer_requests_rework",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "customer_requests_rework",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${first_delivery.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${first_delivery.task.pending_submission_id}",
+          "outcome": "rejected",
+          "reason": "交付基本分解有用，但客户实际检查后要求补充重复预约和取消后的通知。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "customer-lin"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "rejected",
+        "revision": 7,
+        "replayed": false,
+        "event_count": 7,
+        "checks": [
+          {
+            "path": "records.0.record.basis_version",
+            "equals": 1
+          },
+          {
+            "path": "records.0.record.evaluated_version",
+            "equals": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "customer_reopens",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "customer_reopens",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${customer_requests_rework.task.revision}",
+        "operation": "task.reopen",
+        "body": {
+          "reason": "明确继续工作；平台重新选择承接者。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "customer-lin"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 8,
+        "replayed": false,
+        "event_count": 8
+      }
+    },
+    {
+      "id": "planner_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "planner_claimed",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${customer_reopens.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "planning-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 9,
+        "replayed": false,
+        "event_count": 9
+      }
+    },
+    {
+      "id": "planner_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "planner_started",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${planner_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${planner_claimed.task.current_assignment_id}",
+          "generation": "${planner_claimed.task.generation}",
+          "basis_version": 2
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "planning-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 10,
+        "replayed": false,
+        "event_count": 10
+      }
+    },
+    {
+      "id": "reworked_delivery",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "reworked_delivery",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${planner_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${planner_claimed.task.current_assignment_id}",
+          "generation": "${planner_claimed.task.generation}",
+          "run_id": "${planner_started.task.current_run_id}",
+          "basis_version": 2,
+          "summary": "补充异常路径、任务依赖与验收建议，作为这次交付的实际内容。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "planning-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 11,
+        "replayed": false,
+        "event_count": 11,
+        "checks": [
+          {
+            "path": "records.2.record.basis_version",
+            "equals": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "customer_accepts",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "customer_accepts",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${reworked_delivery.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${reworked_delivery.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "客户检查修订后的实际交付，确认可以进入后续设计。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "customer-lin"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 12,
+        "replayed": false,
+        "event_count": 12
+      }
+    },
+    {
+      "id": "delivery_receipt_after_acceptance",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "reworked_delivery",
+        "task": {
+          "authority_id": "marketplace-demo",
+          "task_id": "decompose-order"
+        },
+        "expected_revision": "${planner_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${planner_claimed.task.current_assignment_id}",
+          "generation": "${planner_claimed.task.generation}",
+          "run_id": "${planner_started.task.current_run_id}",
+          "basis_version": 2,
+          "summary": "补充异常路径、任务依赖与验收建议，作为这次交付的实际内容。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "planning-agent"
+        },
+        "can_execute": false,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 11,
+        "replayed": true,
+        "event_count": 12,
+        "checks": [
+          {
+            "path": "event.event_id",
+            "equals": "${reworked_delivery.event.event_id}"
+          }
+        ],
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "marketplace-demo",
+              "task_id": "decompose-order"
+            },
+            "state": "completed",
+            "revision": 12
+          }
+        ]
+      }
+    }
+  ]
+}

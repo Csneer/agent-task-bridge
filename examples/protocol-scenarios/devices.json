@@ -1,0 +1,521 @@
+{
+  "id": "devices",
+  "description": "个人发起任务，经可信网关让设备承接；重复上报和旧设备迟到交付不改写新承接，实际结果最终由个人验收。",
+  "application_context": {
+    "outside_core": [
+      "设备发现与网络可达性",
+      "MQTT/WebSocket 或其他传输",
+      "身份认证、加密、离线缓存和物理动作对账"
+    ],
+    "gateway": "仅作为预置的可信身份映射与消息中转；记录中的承接者是 sensor-one/sensor-two，不把网关转发等同于取得人的验收身份。",
+    "late_result": "发起者明确释放旧承接后才让另一设备领取；离线或超时本身不会自动改变任务。",
+    "data": "温湿度与时间都是预置示例文本，没有连接真实传感器。"
+  },
+  "steps": [
+    {
+      "id": "device_task_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "device_task_created",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "读取房间环境",
+          "expected_result": "交付本次温度与湿度记录。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "device-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 1
+      }
+    },
+    {
+      "id": "old_device_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "old_device_claimed",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${device_task_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-one"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 2
+      }
+    },
+    {
+      "id": "old_device_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "old_device_started",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${old_device_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${old_device_claimed.task.current_assignment_id}",
+          "generation": "${old_device_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-one"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 3
+      }
+    },
+    {
+      "id": "old_device_reported",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "old_device_reported",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${old_device_started.task.revision}",
+        "operation": "run.report",
+        "body": {
+          "assignment_id": "${old_device_claimed.task.current_assignment_id}",
+          "generation": "${old_device_claimed.task.generation}",
+          "run_id": "${old_device_started.task.current_run_id}",
+          "message": "设备报告已开始采样。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-one"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 4
+      }
+    },
+    {
+      "id": "duplicate_report",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "old_device_reported",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${old_device_started.task.revision}",
+        "operation": "run.report",
+        "body": {
+          "assignment_id": "${old_device_claimed.task.current_assignment_id}",
+          "generation": "${old_device_claimed.task.generation}",
+          "run_id": "${old_device_started.task.current_run_id}",
+          "message": "设备报告已开始采样。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-one"
+        },
+        "can_execute": false,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 4,
+        "replayed": true,
+        "event_count": 4,
+        "checks": [
+          {
+            "path": "event.event_id",
+            "equals": "${old_device_reported.event.event_id}"
+          }
+        ],
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "device-demo",
+              "task_id": "read-room-environment"
+            },
+            "state": "active",
+            "revision": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "owner_refines_record",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "owner_refines_record",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${old_device_reported.task.revision}",
+        "operation": "task.revise",
+        "body": {
+          "goal": "读取房间环境",
+          "expected_result": "交付温度、湿度和采样时间。",
+          "reason": "个人希望知道读数对应的时间。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "device-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 5
+      }
+    },
+    {
+      "id": "owner_releases_old",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "owner_releases_old",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${owner_refines_record.task.revision}",
+        "operation": "assignment.release",
+        "body": {
+          "assignment_id": "${old_device_claimed.task.current_assignment_id}",
+          "generation": "${old_device_claimed.task.generation}",
+          "reason": "个人确认转由另一设备采样；不声称旧设备物理停止。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "device-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 6,
+        "replayed": false,
+        "event_count": 6
+      }
+    },
+    {
+      "id": "new_device_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "new_device_claimed",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${owner_releases_old.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-two"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 7,
+        "replayed": false,
+        "event_count": 7
+      }
+    },
+    {
+      "id": "new_device_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "new_device_started",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${new_device_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${new_device_claimed.task.current_assignment_id}",
+          "generation": "${new_device_claimed.task.generation}",
+          "basis_version": 2
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-two"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 8,
+        "replayed": false,
+        "event_count": 8
+      }
+    },
+    {
+      "id": "old_device_late_result",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "old_device_late_result",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${new_device_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${old_device_claimed.task.current_assignment_id}",
+          "generation": "${old_device_claimed.task.generation}",
+          "run_id": "${old_device_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "旧设备迟到上报：温度 22.5、湿度 48%。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-one"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "error": "STALE_ASSIGNMENT",
+        "event_count": 8,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "device-demo",
+              "task_id": "read-room-environment"
+            },
+            "state": "active",
+            "revision": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "new_device_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "new_device_submitted",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${new_device_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${new_device_claimed.task.current_assignment_id}",
+          "generation": "${new_device_claimed.task.generation}",
+          "run_id": "${new_device_started.task.current_run_id}",
+          "basis_version": 2,
+          "summary": "示例读数：温度 22.6、湿度 47.8%、采样时间 2026-10-31T00:00:00Z。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-two"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 9,
+        "replayed": false,
+        "event_count": 9,
+        "checks": [
+          {
+            "path": "records.2.record.basis_version",
+            "equals": 2
+          },
+          {
+            "path": "task.current_assignment_id",
+            "equals": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "device_cannot_accept_itself",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "device_cannot_accept_itself",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${new_device_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${new_device_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-two"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "error": "ROLE_MISMATCH",
+        "event_count": 9,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "device-demo",
+              "task_id": "read-room-environment"
+            },
+            "state": "submitted",
+            "revision": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "owner_accepts_reading",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "owner_accepts_reading",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${new_device_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${new_device_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "个人查看实际采样记录后接受本次任务结果。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "device-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 10,
+        "replayed": false,
+        "event_count": 10
+      }
+    },
+    {
+      "id": "submit_recovered_after_acceptance",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "new_device_submitted",
+        "task": {
+          "authority_id": "device-demo",
+          "task_id": "read-room-environment"
+        },
+        "expected_revision": "${new_device_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${new_device_claimed.task.current_assignment_id}",
+          "generation": "${new_device_claimed.task.generation}",
+          "run_id": "${new_device_started.task.current_run_id}",
+          "basis_version": 2,
+          "summary": "示例读数：温度 22.6、湿度 47.8%、采样时间 2026-10-31T00:00:00Z。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "sensor-two"
+        },
+        "can_execute": false,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 9,
+        "replayed": true,
+        "event_count": 10,
+        "checks": [
+          {
+            "path": "event.event_id",
+            "equals": "${new_device_submitted.event.event_id}"
+          }
+        ],
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "device-demo",
+              "task_id": "read-room-environment"
+            },
+            "state": "completed",
+            "revision": 10
+          }
+        ]
+      }
+    }
+  ]
+}

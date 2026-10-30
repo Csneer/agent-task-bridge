@@ -43,6 +43,12 @@ jobs:
           npm ci --prefix examples/read-consumer
       - name: Build SDK before Go tests that use the real Node client
         run: npm --prefix clients/typescript run build
+      - name: Experimental human and agent task core (offline model, not service interoperability)
+        run: |
+          set -euo pipefail
+          mkdir -p runtime/validation/ci
+          .venv/bin/python tools/check-core-draft.py | tee runtime/validation/ci/core-draft.txt
+          .venv/bin/python -m unittest discover -s tests/protocol_core -p 'test_*.py' -v 2>&1 | tee runtime/validation/ci/core-draft-tests.txt
       - name: Frozen protocol, Go race/vet/build, TS, consumer, HTTP integration and minimal example
         run: bash tools/verify-runtime.sh runtime/validation/ci
       - name: Independent SDK package consumer

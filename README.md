@@ -8,15 +8,15 @@ A portable bridge between agents and work.
 [![CI](https://github.com/Csneer/agent-task-bridge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Csneer/agent-task-bridge/actions/workflows/ci.yml)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Agent↔Task Bridge 是连接任务发布者、Agent 与上层应用的开放桥接层。它为不同客户端提供共同的工作约定，让 Agent 能够发布与接取任务、交付结果，让应用能够读取可追溯的任务状态。
+Agent↔Task Bridge 面向人和 Agent 之间的任务协作，提供开放的协议与参考桥接服务。目标是让不同平台按共同规格发布与接取任务、交付结果，让应用能够读取可追溯的任务状态。
 
 [愿景](#愿景) · [核心价值](#核心价值) · [应用场景](#可以用它搭建什么) · [发展方向](#发展方向) · [开始探索](#开始探索)
 
 ## 愿景
 
-我们希望，**一项工作可以由人或 Agent 发起，被合适的 Agent 接取，并在不同工具与应用之间持续流转。**
+我们希望，**一项工作可以由人或 Agent 发起，由合适的人或 Agent 承接，并在不同工具与应用之间持续流转。**
 
-任务应该携带自己的目标、约束、输入和验收条件；换一个执行者，仍然有清楚的交接依据。执行过程、交付产物和验收决定应该留下可读取的记录，让协作能够跨越一次会话、一个客户端和一种编程语言。
+任务应该携带自己的目标、预期结果、约束和输入；换一个执行者，仍然有清楚的交接依据。预期的调整、执行过程、交付产物和验收决定应该留下可读取的记录，让协作能够跨越一次会话、一个客户端和一种编程语言。
 
 更长远地，这样的基础可以支持开放的 Agent 接单平台：人类发布需求，Agent 委派工作，拥有空闲能力的 Agent 提供服务，平台在其上建立匹配、信誉与付费协作。**这是我们希望支持的未来生态。** 当前项目从其中最基础的任务约定、承接授权与事实流转做起。
 
@@ -35,23 +35,25 @@ Agent↔Task Bridge 把这些交接规则放进公开协议。Agent 保留自己
 flowchart LR
     P["任务发布方<br/>人类应用 / Agent"] -->|目标与工作约定| T["Agent↔Task Bridge<br/>任务 · 承接 · 交付 · 验收"]
     T <-->|发现、领取与交付| A["Agent 客户端 A"]
-    T <-->|发现、领取与交付| B["Agent 客户端 B"]
+    T <-->|承接、评审与交付| B["人类参与者 / 应用客户端"]
     T -->|快照与事件| U["你构建的工作流、看板与平台"]
 ```
 
 ## 核心价值
 
+这些价值指导协议与参考实现；新协议方向和已发布 M1 的实际支持范围分别列在[当前进展](#当前进展)。
+
 ### 交接有共同语言
 
-目标、约束、输入引用、预期产物和验收说明组成明确的工作约定。接收方通过公开任务与获授权的资源开始工作，无需读取另一个 Agent 的私有会话。协议以 JSON Schema 和明确的行为契约描述，客户端可以独立实现。
+目标、预期结果、交付要求和输入引用组成清楚的交接依据。接收方通过公开任务与获授权的资源开始工作，无需读取另一个参与者的私有会话。协议以 JSON Schema 和明确的行为契约描述，客户端可以独立实现。
 
 ### 承接有清楚边界
 
-同一任务同时最多一个有效承接授权。Agent 主动发现、领取与续租；租约到期、主动释放或撤销后，任务按发布时确定的恢复策略处理再次领取。子任务的承接与授权也各有明确边界。
+同一任务同时最多一个当前承接者。人和 Agent 使用明确的承接、执行和释放记录交接责任；旧承接的迟到写入不能覆盖新结果。租约与自动回收可由具体协作 profile 提供，不是所有参与者都必须维护的短周期机制。
 
 ### 交付有可追溯依据
 
-执行进展、正式交付和验收决定分别保存。Agent 提交产物，由指定的验收主体决定是否接受，上层可以了解谁交付了什么、谁作出了什么决定。
+执行进展、正式交付和验收决定分别保存。新核心由发起方在收到实际交付后决定完成；预期和交付要求可以显式修订，保留工作依据与判断理由。评审协作者的反馈和原任务的最终验收各自留痕。
 
 ### 协作可以跨越中断
 
@@ -88,17 +90,21 @@ flowchart LR
 
 预览版面向单机或受控私网、预注册 Agent 和单一桥接服务。租约保证桥内当前授权，外部执行与副作用仍由接入方管理。运行支持和具体边界见[发布说明](docs/releases/v0.1.0.md)与[安全策略](SECURITY.md)。
 
+**新协议方向：人和 Agent 都能发起与承接任务，发起方根据实际交付决定完成。** 创建任务需要预期结果，后续要求可以显式修订并保留历史；评审、审计和授权也可以由人或 Agent 通过关联任务协作完成。任务核心与身份机制、加密、通信和上层工作流分开。
+
+这一方向以独立的 [`task-core-draft-1` 实验规格](protocol/core-draft/README.md)推进，包含四类场景的离线行为模型验证；它尚不是 v0.1.0 daemon 支持的新协议。查看[调整后的架构](docs/architecture/protocol-first.md)、[场景轨迹](examples/protocol-scenarios/README.md)和[协议路线图](docs/protocol-roadmap.md)。
+
 ## 开始探索
 
 | 你想了解什么 | 从这里开始 |
 |---|---|
 | 先体验一条完整任务链路 | [快速开始](docs/quickstart.md) · [最小示例](examples/minimal/README.md) |
 | 把自己的 Agent 接进来 | [Go 客户端](clients/go/README.md) · [TypeScript SDK](clients/typescript/README.md) |
-| 理解桥的设计与协议 | [核心定义](docs/architecture/core.md) · [能力蓝图](docs/architecture/blueprint.md) · [协议入口](protocol/m1/README.md) |
+| 理解桥的设计与协议 | [协议优先架构](docs/architecture/protocol-first.md) · [协议版本入口](protocol/README.md) · [M1 历史蓝图](docs/architecture/blueprint.md) |
 | 开发上层应用 | [只读消费者](examples/read-consumer/README.md) · [真实交接示例](examples/handoff/README.md) |
 | 运行与维护服务 | [运行说明](docs/runtime.md) · [运维说明](docs/operations.md) |
 
-产品与协议分别版本化；当前协议为 `bridge-m1-1`。冻结设计文档保留当时的状态描述，当前实现进展以发行版和验证结果为准。
+产品与协议分别版本化；当前已发布服务采用 `bridge-m1-1`，新方向采用独立的 `task-core-draft-1` 实验草案。冻结设计文档保留当时的状态描述，当前实现进展以发行版和验证结果为准。
 
 ## 一起把它做出来
 

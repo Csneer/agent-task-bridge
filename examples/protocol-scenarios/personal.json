@@ -1,0 +1,898 @@
+{
+  "id": "personal",
+  "description": "个人组织人和多个 Agent 并行处理独立任务，跨平台引用保留各自权威，汇总与最终验收由显式操作完成。",
+  "application_context": {
+    "outside_core": [
+      "个人任务界面",
+      "Agent 选择与任务拆分",
+      "并行调度、汇报汇总和上下文接续"
+    ],
+    "authority_note": "两个 contribution 使用同一个本地 task_id，但 authority_id 不同；关联不会迁移任务或创建跨服务事务。",
+    "aggregation": "summary 任务由个人显式创建；子任务完成没有自动推进父任务。",
+    "participant_note": "个人朋友是 human 承接者，研究与汇总由不同 agent 承接；参与者均为离线示例身份。"
+  },
+  "steps": [
+    {
+      "id": "trip_goal_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "trip_goal_created",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "plan-trip"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "形成一次短途出行计划",
+          "expected_result": "汇总可选择地点、约束和建议路线。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 1
+      }
+    },
+    {
+      "id": "trip_coordinator_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "trip_coordinator_claimed",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "plan-trip"
+        },
+        "expected_revision": "${trip_goal_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "personal-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 2
+      }
+    },
+    {
+      "id": "trip_coordinator_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "trip_coordinator_started",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "plan-trip"
+        },
+        "expected_revision": "${trip_coordinator_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${trip_coordinator_claimed.task.current_assignment_id}",
+          "generation": "${trip_coordinator_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "personal-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 3
+      }
+    },
+    {
+      "id": "human_contribution_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "human_contribution_created",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "确认出行偏好与现实约束",
+          "expected_result": "交付可接受时间和地点偏好。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "personal-demo",
+                "task_id": "plan-trip"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 4
+      }
+    },
+    {
+      "id": "agent_contribution_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "agent_contribution_created",
+        "task": {
+          "authority_id": "research-platform",
+          "task_id": "contribution"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "调查候选地点",
+          "expected_result": "给出两个可选地点及各自特点。",
+          "relations": [
+            {
+              "kind": "external",
+              "target": {
+                "authority_id": "personal-demo",
+                "task_id": "plan-trip"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 5
+      }
+    },
+    {
+      "id": "human_helper_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "human_helper_claimed",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${human_contribution_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "domain-friend"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 6
+      }
+    },
+    {
+      "id": "human_helper_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "human_helper_started",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${human_helper_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${human_helper_claimed.task.current_assignment_id}",
+          "generation": "${human_helper_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "domain-friend"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 7
+      }
+    },
+    {
+      "id": "research_agent_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "research_agent_claimed",
+        "task": {
+          "authority_id": "research-platform",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${agent_contribution_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "research-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 8
+      }
+    },
+    {
+      "id": "research_agent_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "research_agent_started",
+        "task": {
+          "authority_id": "research-platform",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${research_agent_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${research_agent_claimed.task.current_assignment_id}",
+          "generation": "${research_agent_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "research-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 9,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "contribution"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "human_preference_report",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "human_preference_report",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${human_helper_started.task.revision}",
+        "operation": "run.report",
+        "body": {
+          "assignment_id": "${human_helper_claimed.task.current_assignment_id}",
+          "generation": "${human_helper_claimed.task.generation}",
+          "run_id": "${human_helper_started.task.current_run_id}",
+          "message": "朋友确认周六可出行，偏好步行较少的路线。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "domain-friend"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 10,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "research-platform",
+              "task_id": "contribution"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "personal_expectation_refined",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "personal_expectation_refined",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${human_preference_report.task.revision}",
+        "operation": "task.revise",
+        "body": {
+          "goal": "确认出行偏好与现实约束",
+          "expected_result": "交付可接受时间、地点偏好和步行限制。",
+          "reason": "交流后补充希望了解的步行条件。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 11
+      }
+    },
+    {
+      "id": "research_delivered",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "research_delivered",
+        "task": {
+          "authority_id": "research-platform",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${research_agent_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${research_agent_claimed.task.current_assignment_id}",
+          "generation": "${research_agent_claimed.task.generation}",
+          "run_id": "${research_agent_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "示例地点 A 路程短，地点 B 风景更好。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "research-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 12,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "contribution"
+            },
+            "state": "active",
+            "revision": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "research_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "research_accepted",
+        "task": {
+          "authority_id": "research-platform",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${research_delivered.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${research_delivered.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "个人接受这次地点调查交付。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 13,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "contribution"
+            },
+            "state": "active",
+            "revision": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "human_delivered",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "human_delivered",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${personal_expectation_refined.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${human_helper_claimed.task.current_assignment_id}",
+          "generation": "${human_helper_claimed.task.generation}",
+          "run_id": "${human_helper_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "朋友交付：周六、地点 A 优先、步行不超过三公里。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "domain-friend"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 6,
+        "replayed": false,
+        "event_count": 14,
+        "checks": [
+          {
+            "path": "records.2.record.basis_version",
+            "equals": 1
+          },
+          {
+            "path": "task.expectation_version",
+            "equals": 2
+          }
+        ],
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "research-platform",
+              "task_id": "contribution"
+            },
+            "state": "completed",
+            "revision": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "human_work_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "human_work_accepted",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "contribution"
+        },
+        "expected_revision": "${human_delivered.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${human_delivered.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "实际交付已经回答了后来补充的问题，即使该 Run 的起始依据是版本 1。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 7,
+        "replayed": false,
+        "event_count": 15,
+        "checks": [
+          {
+            "path": "records.0.record.basis_version",
+            "equals": 1
+          },
+          {
+            "path": "records.0.record.evaluated_version",
+            "equals": 2
+          }
+        ],
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "research-platform",
+              "task_id": "contribution"
+            },
+            "state": "completed",
+            "revision": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary_created_explicitly",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "summary_created_explicitly",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "summary"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "汇总个人和 Agent 的交付",
+          "expected_result": "形成可供选择的简洁出行建议。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "personal-demo",
+                "task_id": "plan-trip"
+              }
+            },
+            {
+              "kind": "related",
+              "target": {
+                "authority_id": "personal-demo",
+                "task_id": "contribution"
+              }
+            },
+            {
+              "kind": "external",
+              "target": {
+                "authority_id": "research-platform",
+                "task_id": "contribution"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 16
+      }
+    },
+    {
+      "id": "summarizer_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "summarizer_claimed",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "summary"
+        },
+        "expected_revision": "${summary_created_explicitly.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "summary-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 17
+      }
+    },
+    {
+      "id": "summarizer_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "summarizer_started",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "summary"
+        },
+        "expected_revision": "${summarizer_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${summarizer_claimed.task.current_assignment_id}",
+          "generation": "${summarizer_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "summary-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 18
+      }
+    },
+    {
+      "id": "summary_delivered",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "summary_delivered",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "summary"
+        },
+        "expected_revision": "${summarizer_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${summarizer_claimed.task.current_assignment_id}",
+          "generation": "${summarizer_claimed.task.generation}",
+          "run_id": "${summarizer_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "建议周六选择地点 A，并控制步行距离。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "summary-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 19,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "summary_accepted",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "summary"
+        },
+        "expected_revision": "${summary_delivered.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${summary_delivered.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "个人检查汇总内容后接受；父任务仍需单独交付。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 20,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "personal-demo",
+              "task_id": "plan-trip"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "trip_goal_delivered",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "trip_goal_delivered",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "plan-trip"
+        },
+        "expected_revision": "${trip_coordinator_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${trip_coordinator_claimed.task.current_assignment_id}",
+          "generation": "${trip_coordinator_claimed.task.generation}",
+          "run_id": "${trip_coordinator_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "根据已确认的约束、调查和汇总，提交最终路线建议。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "personal-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 21
+      }
+    },
+    {
+      "id": "trip_goal_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "trip_goal_accepted",
+        "task": {
+          "authority_id": "personal-demo",
+          "task_id": "plan-trip"
+        },
+        "expected_revision": "${trip_goal_delivered.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${trip_goal_delivered.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "个人发起方收到整体建议后确认任务完成。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "personal-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 22
+      }
+    }
+  ]
+}

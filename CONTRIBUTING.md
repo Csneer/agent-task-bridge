@@ -27,6 +27,15 @@ npm --prefix clients/typescript run test:package
 
 前者运行 Go race/vet/build、TypeScript、只读消费者、真实 HTTP 集成和冻结协议检查，结果保存在指定目录。Node 必须可用，避免最小 HTTP 示例被跳过。后者在仓库外临时目录执行 npm pack/install、导入、CLI 和 TypeScript 消费者编译。真实 H01 的独立 Agent 工作与验收仍按 [场景说明](examples/handoff/README.md) 执行，不能以 transport fixture 代替。
 
+新的人/Agent 任务核心与上述 M1 分别验证。调整 [`task-core-draft-1`](protocol/core-draft/README.md) 时，另运行：
+
+```sh
+.venv/bin/python tools/check-core-draft.py
+.venv/bin/python -m unittest discover -s tests/protocol_core -p 'test_*.py' -v
+```
+
+这些检查覆盖四类场景与反例的离线状态模型，不证明新协议已有可部署服务或独立实现互操作。认证、通信和持久化的实际适配须有各自验证；不得通过关闭 M1 的鉴权来模拟新核心。
+
 只检查冻结包或复现发布制品时：
 
 ```sh

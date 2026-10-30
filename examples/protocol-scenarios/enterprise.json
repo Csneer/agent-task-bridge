@@ -1,0 +1,2006 @@
+{
+  "id": "enterprise",
+  "description": "企业应用显式串联需求分析、人工 review、规格、实施、测试、运维审批和发版验收；每个任务仍由其发起者验收。",
+  "application_context": {
+    "outside_core": [
+      "阶段依赖、发布门禁和回退规则",
+      "SDD/TDD 模板与全栈 review 规范",
+      "真实代码执行、测试、CI/CD 与发布系统"
+    ],
+    "stage_order": [
+      "需求分析",
+      "回看 review",
+      "规格与 SDD/TDD",
+      "全栈确认",
+      "实施",
+      "测试确认",
+      "运维 review/发布授权",
+      "CI/CD 交付记录",
+      "发版验收"
+    ],
+    "gates": "阶段顺序由这个轨迹的应用脚本预先选择；核心没有企业 DAG 或自动门禁。拒绝需求后先修订重做，未自动创建后续规格任务。",
+    "artifacts": "summary 均为说明性的预置交付文本，不声称真的生成了代码、运行测试或完成发版。"
+  },
+  "steps": [
+    {
+      "id": "release_goal_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_goal_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-goal"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "交付预约服务首个版本",
+          "expected_result": "提供可供产品验收的发版结果和各阶段依据。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "product-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 1
+      }
+    },
+    {
+      "id": "coordinator_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "coordinator_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-goal"
+        },
+        "expected_revision": "${release_goal_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 2
+      }
+    },
+    {
+      "id": "coordinator_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "coordinator_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-goal"
+        },
+        "expected_revision": "${coordinator_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${coordinator_claimed.task.current_assignment_id}",
+          "generation": "${coordinator_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 3
+      }
+    },
+    {
+      "id": "requirements_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "分析和拆分预约需求",
+          "expected_result": "提供主要流程、任务拆分和问题清单。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 4
+      }
+    },
+    {
+      "id": "requirements_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "requirements-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 5
+      }
+    },
+    {
+      "id": "requirements_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${requirements_claimed.task.current_assignment_id}",
+          "generation": "${requirements_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "requirements-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 6
+      }
+    },
+    {
+      "id": "requirements_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${requirements_claimed.task.current_assignment_id}",
+          "generation": "${requirements_claimed.task.generation}",
+          "run_id": "${requirements_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "需求分解初稿，列出待确认的取消规则。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "requirements-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 7,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "review_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "review_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements-review"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "人工回看需求初稿",
+          "expected_result": "给出是否还存在影响设计的遗漏及修改建议。",
+          "relations": [
+            {
+              "kind": "related",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "requirements"
+              }
+            },
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 8
+      }
+    },
+    {
+      "id": "reviewer_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "reviewer_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements-review"
+        },
+        "expected_revision": "${review_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "product-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 9
+      }
+    },
+    {
+      "id": "reviewer_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "reviewer_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements-review"
+        },
+        "expected_revision": "${reviewer_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${reviewer_claimed.task.current_assignment_id}",
+          "generation": "${reviewer_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "product-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 10
+      }
+    },
+    {
+      "id": "review_feedback",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "review_feedback",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements-review"
+        },
+        "expected_revision": "${reviewer_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${reviewer_claimed.task.current_assignment_id}",
+          "generation": "${reviewer_claimed.task.generation}",
+          "run_id": "${reviewer_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "人工意见：取消后是否退款尚不明确，建议补充后再设计。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "product-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 11,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "requirements"
+            },
+            "state": "submitted",
+            "revision": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "reviewer_cannot_accept_requirements",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "reviewer_cannot_accept_requirements",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${requirements_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "product-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "error": "ROLE_MISMATCH",
+        "event_count": 11,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "requirements"
+            },
+            "state": "submitted",
+            "revision": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "review_feedback_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "review_feedback_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements-review"
+        },
+        "expected_revision": "${review_feedback.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${review_feedback.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "评审任务已交付明确意见；这不表示需求任务已通过。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 12,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "requirements"
+            },
+            "state": "submitted",
+            "revision": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "requirements_rejected",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_rejected",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${requirements_submitted.task.pending_submission_id}",
+          "outcome": "rejected",
+          "reason": "发起方采纳人工反馈，要求补齐取消政策。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "rejected",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 13,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "requirements_revised",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_revised",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_rejected.task.revision}",
+        "operation": "task.revise",
+        "body": {
+          "goal": "分析和拆分预约需求",
+          "expected_result": "补齐取消政策及退款分支后给出需求分解。",
+          "reason": "依据人工反馈明确预期；不是覆盖原交付。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "rejected",
+        "revision": 6,
+        "replayed": false,
+        "event_count": 14
+      }
+    },
+    {
+      "id": "requirements_reopened",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_reopened",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_revised.task.revision}",
+        "operation": "task.reopen",
+        "body": {
+          "reason": "允许重新交付，企业应用暂不进入规格阶段。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 7,
+        "replayed": false,
+        "event_count": 15
+      }
+    },
+    {
+      "id": "requirements_claimed_again",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_claimed_again",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_reopened.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "requirements-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 8,
+        "replayed": false,
+        "event_count": 16
+      }
+    },
+    {
+      "id": "requirements_started_again",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_started_again",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_claimed_again.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${requirements_claimed_again.task.current_assignment_id}",
+          "generation": "${requirements_claimed_again.task.generation}",
+          "basis_version": 2
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "requirements-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 9,
+        "replayed": false,
+        "event_count": 17
+      }
+    },
+    {
+      "id": "requirements_resubmitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_resubmitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_started_again.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${requirements_claimed_again.task.current_assignment_id}",
+          "generation": "${requirements_claimed_again.task.generation}",
+          "run_id": "${requirements_started_again.task.current_run_id}",
+          "basis_version": 2,
+          "summary": "补齐取消政策、退款边界和对应任务分解。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "requirements-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 10,
+        "replayed": false,
+        "event_count": 18
+      }
+    },
+    {
+      "id": "requirements_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "requirements_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "requirements"
+        },
+        "expected_revision": "${requirements_resubmitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${requirements_resubmitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查新交付后确认可由企业应用进入规格阶段。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 11,
+        "replayed": false,
+        "event_count": 19,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "spec_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "spec_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "specifications"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "形成可实施的规格",
+          "expected_result": "输出 SDD 与 TDD 规格草案和接口约定。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            },
+            {
+              "kind": "depends_on",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "requirements"
+              }
+            }
+          ],
+          "extensions": {
+            "org.example.enterprise": {
+              "stage": "spec",
+              "methods": [
+                "SDD",
+                "TDD"
+              ]
+            }
+          }
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 20
+      }
+    },
+    {
+      "id": "spec_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "spec_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "specifications"
+        },
+        "expected_revision": "${spec_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "spec-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 21
+      }
+    },
+    {
+      "id": "spec_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "spec_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "specifications"
+        },
+        "expected_revision": "${spec_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${spec_claimed.task.current_assignment_id}",
+          "generation": "${spec_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "spec-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 22
+      }
+    },
+    {
+      "id": "spec_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "spec_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "specifications"
+        },
+        "expected_revision": "${spec_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${spec_claimed.task.current_assignment_id}",
+          "generation": "${spec_claimed.task.generation}",
+          "run_id": "${spec_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "规格草案说明接口、数据和测试意图。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "spec-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 23,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "fullstack_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "fullstack_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "fullstack-review"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "人工确认全栈规格",
+          "expected_result": "给出接口、前后端职责与测试范围的 review 结论。",
+          "relations": [
+            {
+              "kind": "related",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "specifications"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "spec-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 24
+      }
+    },
+    {
+      "id": "fullstack_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "fullstack_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "fullstack-review"
+        },
+        "expected_revision": "${fullstack_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "fullstack-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 25
+      }
+    },
+    {
+      "id": "fullstack_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "fullstack_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "fullstack-review"
+        },
+        "expected_revision": "${fullstack_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${fullstack_claimed.task.current_assignment_id}",
+          "generation": "${fullstack_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "fullstack-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 26
+      }
+    },
+    {
+      "id": "fullstack_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "fullstack_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "fullstack-review"
+        },
+        "expected_revision": "${fullstack_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${fullstack_claimed.task.current_assignment_id}",
+          "generation": "${fullstack_claimed.task.generation}",
+          "run_id": "${fullstack_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "人工 review 意见：接口与职责边界可继续实施。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "fullstack-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 27,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "specifications"
+            },
+            "state": "submitted",
+            "revision": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "fullstack_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "fullstack_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "fullstack-review"
+        },
+        "expected_revision": "${fullstack_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${fullstack_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "spec-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 28,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          },
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "specifications"
+            },
+            "state": "submitted",
+            "revision": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "spec_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "spec_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "specifications"
+        },
+        "expected_revision": "${spec_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${spec_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "结合实际规格和人工反馈，发起方允许上层推进实施。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 29,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "implementation_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "implementation_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "implementation"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "实现已确认规格",
+          "expected_result": "交付实现结果及变更说明。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            },
+            {
+              "kind": "depends_on",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "specifications"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 30
+      }
+    },
+    {
+      "id": "implementation_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "implementation_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "implementation"
+        },
+        "expected_revision": "${implementation_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "implementation-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 31
+      }
+    },
+    {
+      "id": "implementation_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "implementation_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "implementation"
+        },
+        "expected_revision": "${implementation_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${implementation_claimed.task.current_assignment_id}",
+          "generation": "${implementation_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "implementation-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 32
+      }
+    },
+    {
+      "id": "implementation_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "implementation_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "implementation"
+        },
+        "expected_revision": "${implementation_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${implementation_claimed.task.current_assignment_id}",
+          "generation": "${implementation_claimed.task.generation}",
+          "run_id": "${implementation_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "示例交付记录：实现说明和变更清单；本轨迹没有执行代码。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "implementation-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 33,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "implementation_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "implementation_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "implementation"
+        },
+        "expected_revision": "${implementation_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${implementation_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 34,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "test_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "test_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "test-confirmation"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "确认实现符合预期",
+          "expected_result": "提供测试结论与未解决问题清单。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            },
+            {
+              "kind": "depends_on",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "implementation"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 35
+      }
+    },
+    {
+      "id": "test_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "test_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "test-confirmation"
+        },
+        "expected_revision": "${test_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "test-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 36
+      }
+    },
+    {
+      "id": "test_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "test_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "test-confirmation"
+        },
+        "expected_revision": "${test_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${test_claimed.task.current_assignment_id}",
+          "generation": "${test_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "test-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 37
+      }
+    },
+    {
+      "id": "test_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "test_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "test-confirmation"
+        },
+        "expected_revision": "${test_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${test_claimed.task.current_assignment_id}",
+          "generation": "${test_claimed.task.generation}",
+          "run_id": "${test_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "示例测试记录：测试范围、结论与待关注项；本轨迹没有运行 CI。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "test-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 38,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "test_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "test_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "test-confirmation"
+        },
+        "expected_revision": "${test_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${test_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 39,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "operations_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "operations_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "operations-approval"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "人工运维审计与发布授权意见",
+          "expected_result": "审查回退、监控和发布窗口，给出是否允许继续的意见。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            },
+            {
+              "kind": "depends_on",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "test-confirmation"
+              }
+            }
+          ],
+          "extensions": {
+            "org.example.enterprise": {
+              "stage": "operations-review",
+              "gate": "release-authorization"
+            }
+          }
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 40
+      }
+    },
+    {
+      "id": "operations_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "operations_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "operations-approval"
+        },
+        "expected_revision": "${operations_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "operations-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 41
+      }
+    },
+    {
+      "id": "operations_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "operations_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "operations-approval"
+        },
+        "expected_revision": "${operations_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${operations_claimed.task.current_assignment_id}",
+          "generation": "${operations_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "operations-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 42
+      }
+    },
+    {
+      "id": "operations_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "operations_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "operations-approval"
+        },
+        "expected_revision": "${operations_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${operations_claimed.task.current_assignment_id}",
+          "generation": "${operations_claimed.task.generation}",
+          "run_id": "${operations_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "人工意见：已确认回退准备和窗口，建议允许发布。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "operations-reviewer"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 43,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "operations_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "operations_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "operations-approval"
+        },
+        "expected_revision": "${operations_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${operations_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 44,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_created",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_created",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-execution"
+        },
+        "expected_revision": 0,
+        "operation": "task.create",
+        "body": {
+          "goal": "按应用确认的门禁执行发布流程",
+          "expected_result": "提供 CI/CD 及发版结果，供最终产品验收。",
+          "relations": [
+            {
+              "kind": "parent",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "release-goal"
+              }
+            },
+            {
+              "kind": "depends_on",
+              "target": {
+                "authority_id": "enterprise-demo",
+                "task_id": "operations-approval"
+              }
+            }
+          ]
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "offered",
+        "revision": 1,
+        "replayed": false,
+        "event_count": 45
+      }
+    },
+    {
+      "id": "release_claimed",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_claimed",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-execution"
+        },
+        "expected_revision": "${release_created.task.revision}",
+        "operation": "task.claim",
+        "body": {}
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "release-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "claimed",
+        "revision": 2,
+        "replayed": false,
+        "event_count": 46
+      }
+    },
+    {
+      "id": "release_started",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_started",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-execution"
+        },
+        "expected_revision": "${release_claimed.task.revision}",
+        "operation": "run.start",
+        "body": {
+          "assignment_id": "${release_claimed.task.current_assignment_id}",
+          "generation": "${release_claimed.task.generation}",
+          "basis_version": 1
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "release-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "active",
+        "revision": 3,
+        "replayed": false,
+        "event_count": 47
+      }
+    },
+    {
+      "id": "release_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-execution"
+        },
+        "expected_revision": "${release_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${release_claimed.task.current_assignment_id}",
+          "generation": "${release_claimed.task.generation}",
+          "run_id": "${release_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "示例发布交付记录；真实流水线和发布由上层适配另行执行。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "release-agent"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 48,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_accepted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_accepted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-execution"
+        },
+        "expected_revision": "${release_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${release_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "发起方检查实际交付后确认满足当前需要。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 49,
+        "snapshots": [
+          {
+            "task": {
+              "authority_id": "enterprise-demo",
+              "task_id": "release-goal"
+            },
+            "state": "active",
+            "revision": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_goal_submitted",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "release_goal_submitted",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-goal"
+        },
+        "expected_revision": "${coordinator_started.task.revision}",
+        "operation": "run.submit",
+        "body": {
+          "assignment_id": "${coordinator_claimed.task.current_assignment_id}",
+          "generation": "${coordinator_claimed.task.generation}",
+          "run_id": "${coordinator_started.task.current_run_id}",
+          "basis_version": 1,
+          "summary": "汇总各阶段已验收的记录并提交发版验收材料。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "agent",
+          "id": "delivery-coordinator"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "submitted",
+        "revision": 4,
+        "replayed": false,
+        "event_count": 50
+      }
+    },
+    {
+      "id": "product_accepts_release",
+      "command": {
+        "protocol_version": "task-core-draft-1",
+        "command_id": "product_accepts_release",
+        "task": {
+          "authority_id": "enterprise-demo",
+          "task_id": "release-goal"
+        },
+        "expected_revision": "${release_goal_submitted.task.revision}",
+        "operation": "task.decide",
+        "body": {
+          "submission_id": "${release_goal_submitted.task.pending_submission_id}",
+          "outcome": "accepted",
+          "reason": "产品发起方收到整体交付后明确确认完成。"
+        }
+      },
+      "context": {
+        "actor": {
+          "kind": "human",
+          "id": "product-owner"
+        },
+        "can_execute": true,
+        "can_read_history": true
+      },
+      "expect": {
+        "state": "completed",
+        "revision": 5,
+        "replayed": false,
+        "event_count": 51
+      }
+    }
+  ]
+}
