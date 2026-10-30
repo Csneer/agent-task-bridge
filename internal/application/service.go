@@ -11,12 +11,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"agent-task-bridge/internal/auth"
-	"agent-task-bridge/internal/config"
-	"agent-task-bridge/internal/domain"
-	"agent-task-bridge/internal/ports"
-	"agent-task-bridge/internal/secrets"
-	"agent-task-bridge/internal/store/sqlite"
+	"github.com/Csneer/agent-task-bridge/internal/auth"
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/ports"
+	"github.com/Csneer/agent-task-bridge/internal/secrets"
+	"github.com/Csneer/agent-task-bridge/internal/store/sqlite"
 )
 
 type Config = config.Config
@@ -26,20 +26,27 @@ type Options struct {
 	Clock              func() time.Time
 	Hook               func(HookEvent) error
 	DisableMaintenance bool
+	// Observers run synchronously after transactions release their locks. They must
+	// be concurrency-safe and return promptly. Observer panics are isolated.
+	ObserveHTTP        func(HTTPObservation)
+	ObserveMaintenance func(MaintenanceObservation)
 }
 type Service struct {
-	store        ports.Store
-	authority    string
-	box, cursors *secrets.Box
-	clock        func() time.Time
-	hook         func(HookEvent) error
-	cancel       context.CancelFunc
-	wg           sync.WaitGroup
-	healthy      atomic.Bool
-	timeMu       sync.Mutex
-	lastTime     time.Time
-	snapshotsMu  sync.Mutex
-	snapshots    map[string]*snapshot
+	counters           serviceCounters
+	observeHTTP        func(HTTPObservation)
+	observeMaintenance func(MaintenanceObservation)
+	store              ports.Store
+	authority          string
+	box, cursors       *secrets.Box
+	clock              func() time.Time
+	hook               func(HookEvent) error
+	cancel             context.CancelFunc
+	wg                 sync.WaitGroup
+	healthy            atomic.Bool
+	timeMu             sync.Mutex
+	lastTime           time.Time
+	snapshotsMu        sync.Mutex
+	snapshots          map[string]*snapshot
 }
 
 func Open(path string, cfg *Config, opts Options) (*Service, error) {
@@ -58,7 +65,7 @@ func Open(path string, cfg *Config, opts Options) (*Service, error) {
 	if opts.Clock == nil {
 		opts.Clock = time.Now
 	}
-	s := &Service{store: st, box: box, cursors: cursor, clock: opts.Clock, hook: opts.Hook, snapshots: map[string]*snapshot{}}
+	s := &Service{observeHTTP: opts.ObserveHTTP, observeMaintenance: opts.ObserveMaintenance, store: st, box: box, cursors: cursor, clock: opts.Clock, hook: opts.Hook, snapshots: map[string]*snapshot{}}
 	tx, e := st.Begin(context.Background(), false)
 	if e != nil {
 		st.Close()

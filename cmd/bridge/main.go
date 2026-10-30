@@ -10,22 +10,23 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"log"
+	"log/slog"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"path/filepath"
+	"runtime/debug"
 	"syscall"
 	"time"
 
-	"agent-task-bridge/bridge"
-	"agent-task-bridge/internal/wirevalue"
+	"github.com/Csneer/agent-task-bridge/bridge"
+	"github.com/Csneer/agent-task-bridge/internal/wirevalue"
 )
 
 func main() {
 	if err := run(os.Args[1:]); err != nil {
-		log.Printf("bridge: %v", err)
+		slog.Error("bridge stopped", "error", err)
 		os.Exit(1)
 	}
 }
@@ -104,7 +105,28 @@ func listenPolicy(address, cert, key string) error {
 	return nil
 }
 
-func run(args []string) error {
+var version = "dev"
+var commit = "unknown"
+var buildDate = "unknown"
+
+func run(args []string) (err error) {
+	if len(args) > 0 && args[0] == "init" {
+		err := initialize(args[1:], os.Stdout)
+		if errors.Is(err, flag.ErrHelp) {
+			return nil
+		}
+		return err
+	}
+	if len(args) == 1 && (args[0] == "version" || args[0] == "--version") {
+		displayVersion := version
+		if displayVersion == "dev" {
+			if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" && info.Main.Version != "(devel)" {
+				displayVersion = info.Main.Version
+			}
+		}
+		fmt.Printf("bridge %s commit=%s built=%s protocol=bridge-m1-1\n", displayVersion, commit, buildDate)
+		return nil
+	}
 	fs := flag.NewFlagSet("bridge", flag.ContinueOnError)
 	database := fs.String("db", "runtime/bridge.sqlite", "persistent authority database")
 	keyPath := fs.String("key", "runtime/bridge.key", "external persistent 32-byte key (0600)")
@@ -114,12 +136,21 @@ func run(args []string) error {
 	listen := fs.String("listen", "127.0.0.1:8080", "HTTP/TLS listen address")
 	cert := fs.String("tls-cert", "", "TLS certificate file")
 	tlsKey := fs.String("tls-key", "", "TLS key file")
+	logFormat := fs.String("log-format", "text", "runtime log format: text or json")
 	if err := fs.Parse(args); err != nil {
+		if errors.Is(err, flag.ErrHelp) {
+			return nil
+		}
 		return err
 	}
 	if fs.NArg() != 0 {
 		return errors.New("unexpected positional arguments")
 	}
+	logger, err := runtimeLogger(*logFormat, os.Stderr)
+	if err != nil {
+		return err
+	}
+	slog.SetDefault(logger)
 	if err := listenPolicy(*listen, *cert, *tlsKey); err != nil {
 		return err
 	}
@@ -160,11 +191,19 @@ func run(args []string) error {
 			return errors.New("invalid configuration JSON")
 		}
 	}
-	service, err := bridge.Open(*database, cfg, bridge.Options{Key: key})
+	service, err := bridge.Open(*database, cfg, loggingOptions(logger, key))
 	if err != nil {
 		return err
 	}
-	defer service.Close()
+	defer func() {
+		if closeErr := service.Close(); closeErr != nil {
+			logger.Error("storage close failed", "error_kind", "INTERNAL_ERROR")
+			err = errors.Join(err, fmt.Errorf("close storage: %w", closeErr))
+		}
+		stats := service.Stats()
+		logger.Info("bridge stopped", "requests", stats.TotalRequests, "errors", stats.Errors,
+			"maintenance_runs", stats.MaintenanceRuns, "maintenance_failures", stats.MaintenanceFailures)
+	}()
 	if *importOnly {
 		fmt.Println("configuration imported")
 		return nil
@@ -184,7 +223,7 @@ func run(args []string) error {
 			failures <- server.Serve(listener)
 		}
 	}()
-	log.Printf("bridge ready: authority=%s address=%s", service.AuthorityID(), listener.Addr())
+	logger.Info("bridge ready", "authority_id", service.AuthorityID(), "address", listener.Addr().String())
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 	select {

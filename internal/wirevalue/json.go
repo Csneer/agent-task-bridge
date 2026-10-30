@@ -17,7 +17,7 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	protocol "agent-task-bridge/protocol/m1"
+	protocol "github.com/Csneer/agent-task-bridge/protocol/m1"
 )
 
 const MaxInteger int64 = 9007199254740991

@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"agent-task-bridge/internal/config"
-	"agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
 )
 
 const timestampLayout = "2006-01-02T15:04:05.000Z"

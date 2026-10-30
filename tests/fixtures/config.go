@@ -3,7 +3,7 @@ package fixtures
 import (
 	"time"
 
-	"agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/config"
 )
 
 func Bootstrap() (config.Config, map[string]string) {

@@ -1,8 +1,8 @@
 package blackbox
 
 import (
-	"agent-task-bridge/internal/config"
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 	"encoding/json"
 	"fmt"
 	"strings"

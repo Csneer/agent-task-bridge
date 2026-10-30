@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestEscapedLargeContractLeavesMaintenanceCapacity(t *testing.T) {

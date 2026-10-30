@@ -8,12 +8,12 @@ import (
 	"strings"
 	"time"
 
-	"agent-task-bridge/internal/auth"
-	"agent-task-bridge/internal/config"
-	"agent-task-bridge/internal/domain"
-	"agent-task-bridge/internal/ports"
-	"agent-task-bridge/internal/secrets"
-	"agent-task-bridge/internal/wirevalue"
+	"github.com/Csneer/agent-task-bridge/internal/auth"
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/ports"
+	"github.com/Csneer/agent-task-bridge/internal/secrets"
+	"github.com/Csneer/agent-task-bridge/internal/wirevalue"
 )
 
 var writeMethods = map[string]bool{"task.create": true, "task.createChild": true, "task.updateDraft": true, "task.publish": true, "task.claim": true, "assignment.renew": true, "assignment.release": true, "assignment.revoke": true, "run.start": true, "run.report": true, "run.submit": true, "task.accept": true, "task.reject": true, "task.reopen": true, "task.cancel": true, "task.close": true, "grant.issue": true, "grant.revoke": true}

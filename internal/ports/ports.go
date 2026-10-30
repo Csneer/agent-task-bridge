@@ -2,7 +2,7 @@
 package ports
 
 import (
-	"agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
 	"context"
 	"time"
 )

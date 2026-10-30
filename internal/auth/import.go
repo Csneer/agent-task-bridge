@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"time"
 
-	"agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/config"
 )
 
 var identifier = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$`)

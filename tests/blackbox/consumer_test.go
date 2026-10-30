@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestV08ReadOnlySnapshotIncludesEveryLifecycle(t *testing.T) {

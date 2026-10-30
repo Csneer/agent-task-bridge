@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestV04ReceiptRequiresCurrentReadAndAuthentication(t *testing.T) {

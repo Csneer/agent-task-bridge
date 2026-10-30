@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/bridge"
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/bridge"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 type callResult struct {

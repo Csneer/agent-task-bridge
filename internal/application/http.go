@@ -6,18 +6,39 @@ import (
 	"mime"
 	"net/http"
 	"strings"
+	"time"
 
-	"agent-task-bridge/internal/domain"
-	"agent-task-bridge/internal/wirevalue"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/wirevalue"
 )
 
-func (s *Service) Handler() http.Handler { return http.HandlerFunc(s.serveHTTP) }
+func (s *Service) Handler() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/ready" {
+			s.serveHTTP(w, r)
+			return
+		}
+		started := time.Now()
+		observed := &observedResponse{ResponseWriter: w, observation: HTTPObservation{Method: "unknown", Status: http.StatusOK}}
+		s.serveHTTP(observed, r)
+		observed.observation.Duration = time.Since(started)
+		s.counters.requests.Add(1)
+		if observed.observation.ErrorKind != "" {
+			s.counters.errors.Add(1)
+		}
+		if s.observeHTTP != nil {
+			isolateObserver(func() { s.observeHTTP(observed.observation) })
+		}
+	})
+}
 func transport(w http.ResponseWriter, status int, code string) {
+	observeError(w, code)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(domain.Object{"error": domain.Object{"code": code, "message": code}})
 }
 func rpcError(w http.ResponseWriter, id any, e error) {
+	observeError(w, errorOf(e).Data.Kind)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	_ = json.NewEncoder(w).Encode(domain.Object{"jsonrpc": "2.0", "id": id, "error": errorOf(e)})
@@ -33,6 +54,7 @@ func (s *Service) serveHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.URL.Path != "/rpc" {
+		observeError(w, "NOT_FOUND")
 		http.NotFound(w, r)
 		return
 	}
@@ -115,6 +137,9 @@ func (s *Service) serveHTTP(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		rpcError(w, nil, domain.E("INVALID_REQUEST"))
 		return
+	}
+	if observed, ok := w.(*observedResponse); ok {
+		observed.observation.Method = observedMethod(method)
 	}
 	params, ok := obj["params"].(map[string]any)
 	if !ok {

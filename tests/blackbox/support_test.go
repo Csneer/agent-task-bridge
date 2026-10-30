@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestPreparedReplayPreservesRequest(t *testing.T) {

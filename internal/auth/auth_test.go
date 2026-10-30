@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/internal/config"
-	"agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
 )
 
 var testNow = time.Date(2026, 10, 30, 0, 0, 0, 0, time.UTC)

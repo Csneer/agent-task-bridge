@@ -2,12 +2,15 @@
 // Agents use HTTP; this API is for embedding, trusted configuration, and tests.
 package bridge
 
-import "agent-task-bridge/internal/application"
-import "agent-task-bridge/internal/config"
+import "github.com/Csneer/agent-task-bridge/internal/application"
+import "github.com/Csneer/agent-task-bridge/internal/config"
 
 type Service = application.Service
 type Options = application.Options
 type HookEvent = application.HookEvent
+type Stats = application.Stats
+type HTTPObservation = application.HTTPObservation
+type MaintenanceObservation = application.MaintenanceObservation
 type Config = config.Config
 type Principal = config.Principal
 type Agent = config.Agent

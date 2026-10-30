@@ -1,7 +1,7 @@
 package blackbox
 
 import (
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 	"database/sql"
 	"testing"
 )

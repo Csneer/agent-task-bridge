@@ -6,9 +6,22 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime/debug"
 
-	client "agent-task-bridge/clients/go"
+	client "github.com/Csneer/agent-task-bridge/clients/go"
 )
+
+var version = "dev"
+var commit = "unknown"
+var buildDate = "unknown"
+
+func printVersion() {
+	v := version
+	if info, ok := debug.ReadBuildInfo(); ok && v == "dev" && info.Main.Version != "" && info.Main.Version != "(devel)" {
+		v = info.Main.Version
+	}
+	fmt.Printf("bridge-client %s (protocol bridge-m1-1; commit %s; built %s)\n", v, commit, buildDate)
+}
 
 func main() {
 	if e := run(); e != nil {
@@ -17,6 +30,14 @@ func main() {
 	}
 }
 func run() error {
+	if len(os.Args) == 2 && (os.Args[1] == "version" || os.Args[1] == "--version") {
+		printVersion()
+		return nil
+	}
+	if len(os.Args) == 2 && (os.Args[1] == "--help" || os.Args[1] == "help" || os.Args[1] == "-h") {
+		fmt.Println("usage: bridge-client call METHOD --out PRIVATE_FILE | retry UUID --out PRIVATE_FILE | version")
+		return nil
+	}
 	if len(os.Args) < 3 {
 		return fmt.Errorf("usage: bridge-client call METHOD --out PRIVATE_FILE | retry UUID --out PRIVATE_FILE")
 	}

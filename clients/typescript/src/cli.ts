@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { open, mkdir } from 'node:fs/promises';
+import { open, mkdir, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { homedir } from 'node:os';
 import { createHash } from 'node:crypto';
@@ -29,6 +29,11 @@ async function stdin(): Promise<Uint8Array> {
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
+  if (args.length === 1 && args[0] === '--version') {
+    const metadata = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8')) as { version: string };
+    process.stdout.write(`bridge-client ${metadata.version}\n`);
+    return;
+  }
   const outIndex = args.indexOf('--out');
   let output: string | undefined;
   if (outIndex >= 0) {
@@ -37,7 +42,7 @@ async function main(): Promise<void> {
   }
   const operation = args.shift();
   if (!operation || operation === '--help') {
-    process.stdout.write('bridge-client call METHOD | retry KEY | claim | start | report | submit | fetch-ref [--out NEW_FILE]\nJSON params/reference on stdin. BRIDGE_URL, BRIDGE_TOKEN, optional BRIDGE_AGENT, BRIDGE_JOURNAL.\nPrivate result files are mode 0600; stdout redacts lease credentials.\n');
+    process.stdout.write('bridge-client --version | --help | call METHOD | retry KEY | claim | start | report | submit | fetch-ref [--out NEW_FILE]\nJSON params/reference on stdin. BRIDGE_URL, BRIDGE_TOKEN, optional BRIDGE_AGENT, BRIDGE_JOURNAL.\nPrivate result files are mode 0600; stdout redacts lease credentials.\n');
     return;
   }
   if (operation === 'fetch-ref') {

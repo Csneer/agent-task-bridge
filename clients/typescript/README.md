@@ -1,4 +1,4 @@
-# Independent TypeScript client
+# Agent↔Task Bridge TypeScript SDK
 
 This client implements the public `bridge-m1-1` HTTP/JSON-RPC binding. It does not import daemon code or inspect its database. Node.js 22+ is required. Build copies the frozen public Schema and method catalog into `dist/protocol`, so the built client does not depend on the caller's working directory.
 
@@ -10,10 +10,46 @@ npm test
 
 The tests run all 92 structural fixtures, 7 request hashes and 9 exact JSON parser fixtures, plus local HTTP fault/recovery tests. They do not establish daemon conformance or a real H01 handoff.
 
+## Install the developer preview
+
+Version 0.1.0 is a developer preview for the frozen `bridge-m1-1` protocol. Download
+`csneer-agent-task-bridge-0.1.0.tgz` from the
+[GitHub release](https://github.com/Csneer/agent-task-bridge/releases), then install:
+
+```sh
+gh release download v0.1.0 --repo Csneer/agent-task-bridge --pattern 'csneer-agent-task-bridge-0.1.0.tgz'
+npm install ./csneer-agent-task-bridge-0.1.0.tgz
+npx bridge-client --version
+npx bridge-client --help
+```
+
+The tarball contains the compiled ESM library, TypeScript declarations, CLI,
+frozen Schema/method catalog and MIT license. Installation needs no source checkout
+or build tools. Registry publication is separate from GitHub release availability.
+
+To build from source, use the complete repository checkout: `protocol/m1` is a
+required build input, and packing also requires the root `LICENSE`. A detached
+`clients/typescript` source copy is not a standalone build distribution; the build
+reports this requirement explicitly. From this directory:
+
+```sh
+npm ci
+npm run typecheck
+npm test
+npm run test:package
+npm pack
+```
+
+`npm pack` builds and verifies the frozen resource digests before producing the
+tarball. `test:package` packs, installs into a temporary directory outside the
+checkout, checks the exact package contents and resource digests, imports the
+library, runs CLI help/version, and compiles a TypeScript consumer. It removes its
+temporary installation afterwards and does not publish anything.
+
 ## Library
 
 ```ts
-import { BridgeClient, FileJournal, LeaseSession, fetchImmutable } from './dist/index.js';
+import { BridgeClient, FileJournal, LeaseSession, fetchImmutable } from '@csneer/agent-task-bridge';
 
 const bridge = new BridgeClient({
   url: process.env.BRIDGE_URL!,
@@ -45,7 +81,7 @@ export BRIDGE_TOKEN='<private credential>'
 export BRIDGE_AGENT=agent_B
 export BRIDGE_JOURNAL=/private/client-B/recovery
 
-node dist/cli.js call task.discover <<'JSON'
+npx bridge-client call task.discover <<'JSON'
 {"limit":20}
 JSON
 ```
@@ -55,9 +91,9 @@ The CLI takes JSON parameters on stdin for `call METHOD`, `claim`, `start`, `rep
 Stdout always redacts `token` and `lease_token`. Use `--out NEW_FILE` for the private full response, written exclusively at mode 0600; existing files are not overwritten. Subsequent requests can take the Assignment ID/generation/token from that protected response. No credential appears in ordinary error messages. Avoid shell tracing when providing credentials.
 
 ```sh
-node dist/cli.js claim --out /private/client-B/claim.json < claim-params.json
-node dist/cli.js retry '<original UUIDv4 key>' --out /private/client-B/recovered.json
-node dist/cli.js fetch-ref --out /private/client-B/input.txt < immutable-reference.json
+npx bridge-client claim --out /private/client-B/claim.json < claim-params.json
+npx bridge-client retry '<original UUIDv4 key>' --out /private/client-B/recovered.json
+npx bridge-client fetch-ref --out /private/client-B/input.txt < immutable-reference.json
 ```
 
 Without `BRIDGE_JOURNAL`, the CLI uses a private state directory under XDG_STATE_HOME (or `~/.local/state`) keyed by endpoint and a credential fingerprint. Switching credentials changes that default directory. Runtime credentials, private results and actual resources belong outside the source tree; no test fixture stands in for an Agent's actual H01 work.

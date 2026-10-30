@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestHTTPBindingRejectsUnsupportedShapesWithoutMutation(t *testing.T) {

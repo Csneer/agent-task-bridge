@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"agent-task-bridge/tests/fixtures"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestDraftCannotEscapeCreationCapabilityEnvelope(t *testing.T) {

@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 
-	"agent-task-bridge/internal/config"
-	"agent-task-bridge/internal/domain"
-	"agent-task-bridge/internal/ports"
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/ports"
 )
 
 // A draft retains the creation envelope even if the issuer capability is later

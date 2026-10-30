@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"agent-task-bridge/internal/domain"
-	"agent-task-bridge/internal/ports"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/ports"
 )
 
 func openTestStore(t *testing.T) *Store {

@@ -1,21 +1,25 @@
 {
-  "name": "@agent-task-bridge/client",
+  "name": "@csneer/agent-task-bridge",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "engines": {
     "node": ">=22"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
   "bin": {
     "bridge-client": "./dist/cli.js"
   },
   "scripts": {
-    "build": "tsc && node scripts/copy-protocol.mjs",
+    "build": "node scripts/copy-protocol.mjs && tsc",
     "typecheck": "tsc --noEmit",
-    "test": "npm run build && node --test test/*.test.mjs"
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepack": "npm run build && node scripts/copy-license.mjs",
+    "test:package": "node scripts/test-package.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0"
@@ -23,5 +27,24 @@
   "devDependencies": {
     "@types/node": "22.19.11",
     "typescript": "5.9.3"
-  }
+  },
+  "description": "Agent\u2194Task Bridge TypeScript SDK and CLI (developer preview)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Csneer/agent-task-bridge.git",
+    "directory": "clients/typescript"
+  },
+  "homepage": "https://github.com/Csneer/agent-task-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/Csneer/agent-task-bridge/issues"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts",
+    "dist/protocol/schema.json",
+    "dist/protocol/methods.json",
+    "LICENSE"
+  ],
+  "types": "./dist/index.d.ts"
 }

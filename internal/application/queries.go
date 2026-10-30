@@ -7,10 +7,10 @@ import (
 	"sort"
 	"time"
 
-	"agent-task-bridge/internal/auth"
-	"agent-task-bridge/internal/domain"
-	"agent-task-bridge/internal/ports"
-	protocol "agent-task-bridge/protocol/m1"
+	"github.com/Csneer/agent-task-bridge/internal/auth"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
+	"github.com/Csneer/agent-task-bridge/internal/ports"
+	protocol "github.com/Csneer/agent-task-bridge/protocol/m1"
 )
 
 type scope struct {

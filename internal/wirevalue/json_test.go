@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	protocol "agent-task-bridge/protocol/m1"
+	protocol "github.com/Csneer/agent-task-bridge/protocol/m1"
 )
 
 type fixtures struct {

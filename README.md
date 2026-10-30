@@ -1,41 +1,73 @@
 # Agent↔Task Bridge
 
-面向不同 Agent 客户端的可移植任务桥接层：发布工作约定，pull 发现并领取唯一当前承接权，报告执行、提交产物、记录验收，并向上层提供可恢复的统一事实。
+面向不同 Agent 客户端的可移植任务桥接层。Agent 通过公共协议发布任务、pull 发现并领取、报告执行、提交产物；指定主体记录验收决定，上层从快照和事件恢复统一事实。
 
-当前已实现 **M1 Go 参考 daemon、独立 Go/TypeScript 客户端和只读消费者**，遵循冻结协议 `bridge-m1-1`。最终完整回归、真实双 Agent 交接和独立代码/架构审查均已通过，证据见[验收报告](docs/validation/results/README.md)。实现使用 SQLite/WAL、HTTP/JSON-RPC，限定单 authority、单机/私网和预注册主体。
+**v0.1.0 是 Developer Preview**，采用冻结协议 `bridge-m1-1`、HTTP/JSON-RPC 和 SQLite/WAL。首版运行边界是 Linux、单 authority、单 daemon、预注册主体、单机或受控私网。提供 Go daemon、独立 Go/TypeScript 客户端和只读消费者。Linux amd64 已执行验证；arm64 制品完成交叉编译，尚未在 arm64 主机执行验证。
 
-## 从这里开始
+[GitHub 仓库](https://github.com/Csneer/agent-task-bridge) · [发行版](https://github.com/Csneer/agent-task-bridge/releases/tag/v0.1.0) · [MIT License](LICENSE)
 
-- [运行说明](docs/runtime.md)：构建、启动、配置、秘密管理和完整验证命令。
-- [协议入口](protocol/m1/README.md)：状态/事务、授权、wire、Schema 与固定样例。
-- [核心定义](docs/architecture/core.md) 与 [能力蓝图](docs/architecture/blueprint.md)：目标、边界和架构职责。
-- [实现任务单](docs/implementation-plan.md)：依赖、模块责任、验收证据和阶段出口。
-- [黑盒向量](docs/validation/vectors.md)：H01 跨客户端真实交接和 V01–V25 反例。
-- [冻结记录](docs/validation/freeze-review.md) 与 [版本规则](docs/versioning.md)：本次证据、基线完整性和后续变更流程。
+## 安装与最小闭环
 
-## 本地验证
-
-静态检查需要 Python 3.10+、Node.js 22+；Python 只用于协议验证工具，不决定参考服务语言。从仓库根执行，工具不依赖 p-drive 服务、Codex、RTK、旧仓库或网络资源：
+下面使用 Linux amd64 发行包，需要 GitHub CLI、`tar`、`sha256sum` 和 Node.js 22+。在新的下载目录中获取发行附件并校验：
 
 ```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-contract.txt
-.venv/bin/python tools/verify-package.py
+gh release download v0.1.0 --repo Csneer/agent-task-bridge --dir bridge-release
+cd bridge-release
+sha256sum --check SHA256SUMS
+tar -xzf agent-task-bridge_v0.1.0_linux_amd64.tar.gz
+cd agent-task-bridge_v0.1.0_linux_amd64
+./bin/bridge version
 ```
 
-依赖安装需要包源或已有本地 wheel；安装完成后验证可离线运行。使用 RTK 的工作环境在上述命令前加 `rtk proxy`。检查器会验证冻结文件摘要、相对链接、方法映射、JSON Schema 样例、精确 JSON 解析和 Python/ECMAScript 摘要一致性。需要单独定位时运行：
+在终端一初始化新的私有目录并启动。目标目录不能已经存在，其父目录必须存在；不要把运行数据放进 Git 仓库。
 
 ```sh
-.venv/bin/python protocol/m1/check-contract.py
-node protocol/m1/check-hashes.mjs
+./bin/bridge init --dir "$HOME/bridge-demo"
+./bin/bridge --db "$HOME/bridge-demo/bridge.sqlite" --key "$HOME/bridge-demo/bridge.key"
 ```
 
-若 Linux 发行版的 Python 缺少 ensurepip，可安装该解释器对应的 venv 包；已有 uv 的环境也可用 `uv venv .venv`、`uv pip install --python .venv/bin/python -r requirements-contract.txt` 建立同样的隔离依赖。验证器只依赖解释器和锁定的 Python 包，不要求 uv 本身。
+在终端二进入同一个解压目录，运行自包含示例，无需 npm 安装：
 
-静态通过不代表 lease/CAS/授权、SQLite 崩溃恢复或 H01 已通过；运行测试状态另列在任务单及冻结记录中。
+```sh
+node examples/minimal/run.mjs --dir "$HOME/bridge-demo"
+```
 
-## 项目边界
+输出应包含 `state: "accepted"`、产物摘要和六个已提交的历史动作。链路是创建 → 发布 → 发现/领取 → 开始执行 → 计算真实 SHA-256 与 UTF-8 字节数 → 提交 → Owner 独立读取并校验产物 → 验收 → Reader 读取历史。每次运行创建新的 Task；示例使用同机 `file:` 产物，不执行任务提供的任意代码。完整说明见 [最小示例](examples/minimal/README.md)。
 
-Task 是桥内工作约定的权威。同一 Task 同时最多一个有效 Assignment；这保证桥内授权排他，不保证外部旧进程或副作用停止。父子关系只记录事实，不授予权限、不汇总状态。账号市场、支付、信誉、执行沙箱、通用工作流与 Web UI 均后置。
+初始化生成 0700 目录与 0600 文件；`admin.json` 仅含凭据摘要，原始 bearer 分离存入 `credentials.json`。默认凭据与 Agent binding 在 **30 天后到期**，需提前以新实例 ID 更新配置。按 Ctrl-C 停止，重启使用同一数据库与密钥，无需重新导入 bootstrap。权限、轮换与恢复边界见 [运维说明](docs/operations.md)。
 
-该项目独立于 p-drive。规划来源保留于原工作区，13 个迁移文件的原始摘要见 [迁移清单](docs/provenance/migration.json)。当前本地仓库未配置发布远端；daemon 与客户端源码均在本仓库。分发许可证和公共发布计划尚未选择。
+## 客户端与源码安装
+
+Linux 上可使用 Go 1.27+ 从发布标签安装 daemon 和 Go CLI；需要把 Go 的安装目录加入 PATH：
+
+```sh
+go install github.com/Csneer/agent-task-bridge/cmd/bridge@v0.1.0
+go install github.com/Csneer/agent-task-bridge/clients/go/cmd/bridge-client@v0.1.0
+```
+
+TypeScript SDK 通过 GitHub Release 的 npm tarball 分发，当前不承诺 npm registry 发布。在独立 Node 项目目录中：
+
+```sh
+gh release download v0.1.0 --repo Csneer/agent-task-bridge --pattern 'csneer-agent-task-bridge-0.1.0.tgz'
+npm install ./csneer-agent-task-bridge-0.1.0.tgz
+npx bridge-client --version
+```
+
+参阅 [Go 客户端](clients/go/README.md)、[TypeScript SDK](clients/typescript/README.md) 和 [只读消费者](examples/read-consumer/README.md)。两个 CLI 都名为 `bridge-client`；通过本地 `npx bridge-client` 使用项目安装的 TypeScript 版本。
+
+## 核心能力与边界
+
+- Task 是工作约定的权威；同一 Task 同时最多一个有效 Assignment。Run、Submission 和验收 Decision 分别记录执行、交付与决定。
+- 原子 claim、租约续期和 fencing 限制桥内当前执行权；到期释放 Assignment 并使任务重新可领取，保留历史。桥接层不能强制停止外部旧进程或撤回副作用。
+- 写命令使用幂等键与 revision；未知结果按原键原参数恢复。事件可用 cursor 重放，消费者去重，不承诺外部 exactly-once。
+- 父子关系只记录事实，不自动赋权、接管、取消或汇总状态。验收校验授权并记录决定，结果内容由验收主体判断。
+- 大输入和产物使用外部引用。公网多租户、匿名市场、支付/信誉、算力计量、执行沙箱、push 派单与 Web UI 不属于首版。
+
+## 文档与验证
+
+- [运行说明](docs/runtime.md)、[运维说明](docs/operations.md)、[安全策略](SECURITY.md)。
+- [协议入口](protocol/m1/README.md)、[核心定义](docs/architecture/core.md)、[能力蓝图](docs/architecture/blueprint.md)。
+- [贡献与本地验证](CONTRIBUTING.md)、[实现任务单](docs/implementation-plan.md)、[M1 验收证据](docs/validation/results/README.md)。
+- [v0.1.0 发布说明](docs/releases/v0.1.0.md)、[变更记录](CHANGELOG.md)、[版本规则](docs/versioning.md)。
+
+产品版本 `v0.1.0` 与协议版本 `bridge-m1-1` 分别管理。冻结文件中的“尚未实现/发布”等文字是基线制定时的历史状态；原始证据绑定其源码提交，不代表后续每个版本自动通过。当前发行版验证以对应 GitHub Actions 运行及附件为准，不改写历史冻结摘要。该项目独立于 p-drive，运行不依赖协作工具。

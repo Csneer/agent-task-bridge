@@ -1,13 +1,29 @@
 package application
 
 import (
-	"agent-task-bridge/internal/auth"
-	"agent-task-bridge/internal/domain"
 	"context"
 	"time"
+
+	"github.com/Csneer/agent-task-bridge/internal/auth"
+	"github.com/Csneer/agent-task-bridge/internal/domain"
 )
 
-func (s *Service) Maintain(ctx context.Context) error {
+func (s *Service) Maintain(ctx context.Context) (err error) {
+	started := time.Now()
+	// Registered before rollback so observers never run inside a transaction.
+	defer func() {
+		observation := MaintenanceObservation{Duration: time.Since(started)}
+		if err != nil {
+			observation.ErrorKind = observationErrorKind(errorOf(err).Data.Kind)
+		}
+		s.counters.maintenance.Add(1)
+		if err != nil {
+			s.counters.maintenanceFailures.Add(1)
+		}
+		if s.observeMaintenance != nil {
+			isolateObserver(func() { s.observeMaintenance(observation) })
+		}
+	}()
 	tx, e := s.store.Begin(ctx, true)
 	if e != nil {
 		return e

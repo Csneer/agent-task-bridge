@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	protocol "agent-task-bridge/protocol/m1"
+	protocol "github.com/Csneer/agent-task-bridge/protocol/m1"
 	"github.com/santhosh-tekuri/jsonschema/v6"
 )
 
