@@ -1,0 +1,27 @@
+{
+  "name": "@agent-task-bridge/client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "bin": {
+    "bridge-client": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc && node scripts/copy-protocol.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.11",
+    "typescript": "5.9.3"
+  }
+}

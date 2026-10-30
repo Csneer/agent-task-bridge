@@ -2,10 +2,11 @@
 
 面向不同 Agent 客户端的可移植任务桥接层：发布工作约定，pull 发现并领取唯一当前承接权，报告执行、提交产物、记录验收，并向上层提供可恢复的统一事实。
 
-当前交付为 **M1 协议实施基线 `bridge-m1-1`**。它不是已运行的服务，真实双客户端交接与故障验收仍待实现后执行。参考服务计划使用 Go、SQLite/WAL、HTTP/JSON-RPC，首版限定单 authority、单机/私网和预注册主体。
+当前已实现 **M1 Go 参考 daemon、独立 Go/TypeScript 客户端和只读消费者**，遵循冻结协议 `bridge-m1-1`。首轮真实双 Agent 交接已通过，正在执行最终审查与完整回归。实现使用 SQLite/WAL、HTTP/JSON-RPC，限定单 authority、单机/私网和预注册主体。
 
 ## 从这里开始
 
+- [运行说明](docs/runtime.md)：构建、启动、配置、秘密管理和完整验证命令。
 - [协议入口](protocol/m1/README.md)：状态/事务、授权、wire、Schema 与固定样例。
 - [核心定义](docs/architecture/core.md) 与 [能力蓝图](docs/architecture/blueprint.md)：目标、边界和架构职责。
 - [实现任务单](docs/implementation-plan.md)：依赖、模块责任、验收证据和阶段出口。
@@ -37,4 +38,4 @@ node protocol/m1/check-hashes.mjs
 
 Task 是桥内工作约定的权威。同一 Task 同时最多一个有效 Assignment；这保证桥内授权排他，不保证外部旧进程或副作用停止。父子关系只记录事实，不授予权限、不汇总状态。账号市场、支付、信誉、执行沙箱、通用工作流与 Web UI 均后置。
 
-该项目独立于 p-drive。规划来源保留于原工作区，13 个迁移文件的原始摘要见 [迁移清单](docs/provenance/migration.json)。当前本地仓库未配置发布远端；本阶段没有 daemon 或客户端源码。分发许可证和公共发布计划尚未选择。
+该项目独立于 p-drive。规划来源保留于原工作区，13 个迁移文件的原始摘要见 [迁移清单](docs/provenance/migration.json)。当前本地仓库未配置发布远端；daemon 与客户端源码均在本仓库。分发许可证和公共发布计划尚未选择。

@@ -1,0 +1,1 @@
+{"name":"bridge-read-consumer","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"test":"node --test","check":"node --check src/wire.mjs && node --check src/consumer.mjs && node --check src/cli.mjs"},"dependencies":{"ajv":"8.20.0","ajv-formats":"3.0.1","lossless-json":"4.3.3"}}

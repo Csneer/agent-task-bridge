@@ -1,0 +1,5 @@
+window,attempts,http_2xx,http_409,http_5xx,client_timeouts
+baseline_1,1000,975,10,10,5
+baseline_2,1000,980,8,7,5
+candidate_1,1100,1040,25,22,13
+candidate_2,1200,1130,35,24,11
