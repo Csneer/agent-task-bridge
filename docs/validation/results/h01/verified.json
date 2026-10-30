@@ -1,0 +1,14 @@
+{
+  "status": "pass",
+  "protocol": "bridge-m1-1",
+  "parent": "tsk_aa2159cac3206f6370bd313411b7d3be",
+  "child": "tsk_f4bc3d5c460817becc6600eb62ea6bc4",
+  "submission": "sub_dc48b050db5788067f91d858a7f4e696",
+  "decision": "dec_a87de6655b102fc80f75a260fc7b1e59",
+  "record_count": 30,
+  "history_batches": 67,
+  "repeated_cursor_deduplicated": true,
+  "resource_gets": 13,
+  "parent_state": "active",
+  "child_state": "accepted"
+}

@@ -1,0 +1,55 @@
+{
+  "input_sha256": {
+    "proposal-v1.md": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+    "observations-v1.csv": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+    "acceptance-v1.md": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde"
+  },
+  "totals": {
+    "baseline": {
+      "attempts": 2000,
+      "http_2xx": 1955,
+      "http_409": 18,
+      "http_5xx": 17,
+      "client_timeouts": 10,
+      "error_basis_points": 85
+    },
+    "candidate": {
+      "attempts": 2300,
+      "http_2xx": 2170,
+      "http_409": 60,
+      "http_5xx": 46,
+      "client_timeouts": 24,
+      "error_basis_points": 200
+    }
+  },
+  "candidate_within_budget": false,
+  "recommendation": "hold",
+  "findings": [
+    {
+      "claim": "The observed candidate exceeds the strict 1% upstream 5xx budget; the numerical rollout claim is false.",
+      "evidence": "candidate_1 and candidate_2 total 2300 attempts and 46 HTTP 5xx: 2.00% (200 basis points). baseline_1 and baseline_2 total 2000 attempts and 17 HTTP 5xx: 0.85% (85 basis points). Even pooling all four windows yields 63/4300 = approximately 1.465%, not fewer than 1%.",
+      "implication": "Hold rollout. The candidate observed rate is 115 basis points above baseline and 100 basis points above the 1% threshold. These short windows establish the reported rates, but do not by themselves prove retries caused the increase."
+    },
+    {
+      "claim": "Retrying failed charge requests without idempotency protection introduces an unmeasured duplicate-charge risk.",
+      "evidence": "proposal-v1.md proposes retrying every failed upstream charge request once without adding an idempotency key and asserts that retries cannot cause double charging because the original request failed. candidate_1 and candidate_2 include 24 client_timeouts and 46 HTTP 5xx, but the CSV contains no charge records or commit outcomes.",
+      "implication": "An error or timeout does not establish that an upstream charge was never committed. Duplicate charges are a plausible risk, not an observed result here. Establish the upstream idempotency and ambiguous-outcome reconciliation contract before retrying charges."
+    },
+    {
+      "claim": "The blanket classification of HTTP 409 as transient is unsupported.",
+      "evidence": "The proposal calls 409 a transient error. baseline_1 and baseline_2 report 18 conflicts and candidate_1 and candidate_2 report 60 conflicts; no upstream error-code or retry contract is supplied.",
+      "implication": "Counts cannot determine retryability. Obtain the upstream meaning and safe handling of each conflict subtype; do not automatically retry every 409."
+    },
+    {
+      "claim": "Attempt-level outcomes do not establish order-level success or charging correctness.",
+      "evidence": "proposal-v1.md explicitly states the table describes actual upstream attempts, not distinct orders. The baseline has 1955 HTTP 2xx out of 2000 attempts and the candidate has 2170 HTTP 2xx out of 2300 attempts. Neither distinct order IDs nor retry linkage nor settled charges appear in observations-v1.csv.",
+      "implication": "The larger number of successful attempts cannot demonstrate improved customer-visible success, unique successful orders, or absence of duplicate charging. Collect linked per-order and per-attempt outcomes before making those claims."
+    }
+  ],
+  "next_validation": {
+    "scope": "Before any rollout, review the documented upstream retry, 409 subtype, idempotency-key retention and reconciliation contracts. Conduct the following proposed experiment only in a payment sandbox; this review executes no payment operations.",
+    "experiment": "After contract review, compare the current policy with a revised policy that reuses one idempotency key per logical charge and retries only documented retryable failures at most once. Use 200 synthetic orders per policy: 40 normal responses, 40 pre-commit 5xx failures, 40 committed charges followed by a lost response/client timeout, 40 documented retryable conflict cases, and 40 nonretryable conflict cases. If no retryable conflict subtype is documented, use those 40 cases to verify conflicts are not retried. Use matched fixtures and reconcile every order after the sandbox settlement window.",
+    "collect": "Record synthetic order ID, logical charge ID, attempt ID, retry parent, idempotency key, upstream status/error subtype, elapsed time, upstream transaction ID, terminal order outcome and reconciled charge count. Report attempts and unique orders separately, exact 5xx/attempts, order success rate, latency and any duplicate settled charges.",
+    "decision": "Require zero duplicate settled charges, no unresolved outcomes, and conformance to documented retryability. Injected failures test correctness and must not be used as a production error-budget estimate. Separately collect a bounded representative sandbox run of 10000 orders per policy without injected failures, reporting exact attempt denominators and 5xx rates with uncertainty; require candidate 5xx/attempts strictly below 1% and assess order-level outcomes against baseline. Passing sandbox checks supports further review, not a guarantee of production safety."
+  }
+}

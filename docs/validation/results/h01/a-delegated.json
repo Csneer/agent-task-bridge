@@ -1,0 +1,7 @@
+{
+  "parent": "tsk_aa2159cac3206f6370bd313411b7d3be",
+  "parent_run": "run_77b499c5218d53ecd43eebc08103f1c7",
+  "child": "tsk_f4bc3d5c460817becc6600eb62ea6bc4",
+  "relation": "rel_8ac5d7da44d39a52919f4c11ac2c8ea6",
+  "client": "independent Go client"
+}

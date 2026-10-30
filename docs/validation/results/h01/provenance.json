@@ -1,0 +1,25 @@
+{
+  "protocol": "bridge-m1-1",
+  "status": "pass",
+  "captured_at": "2026-10-30T13:10:48.057928+00:00",
+  "client_sources": {
+    "A": "clients/go + clients/go/cmd/bridge-client",
+    "B_and_X": "clients/typescript",
+    "R": "examples/read-consumer"
+  },
+  "scenario": "examples/handoff/run.mjs",
+  "parent_assignment_id": "asg_432df6311dde0d147b99e8517e2faf6d",
+  "parent_claim_count": 1,
+  "parent_expiry_count": 0,
+  "normal_restart": {
+    "observed": "Host discarded tool process sessions between agent turns; restarted existing DB/key without reimport; parent remained active at revision 35, original lease renewal succeeded before X acceptance.",
+    "database_internals_read": false,
+    "new_parent_claim": false
+  },
+  "limitations": [
+    "Node supervision cannot run while its process/event loop is stopped; this evidence verifies authority-side fencing and original-lease continuation.",
+    "H01 executed during local working-tree development; subsequent watchdog/journal hardening was separately regression tested.",
+    "The standalone automated integration fixture validates transport behavior and is not the independent authored B review.",
+    "Authorization-negative actor is B rather than A; it has parent read/claim but lacks Owner/Issuer creation/link/grant capability."
+  ]
+}

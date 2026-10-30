@@ -1,0 +1,12 @@
+{
+  "task_id": "tsk_f4bc3d5c460817becc6600eb62ea6bc4",
+  "submission_id": "sub_dc48b050db5788067f91d858a7f4e696",
+  "artifact": {
+    "kind": "immutable",
+    "uri": "http://127.0.0.1:18782/review-676f830ec4788eb92f82feb67b96fe6ea382f2776e944548beea00d8f7ea95d3.json",
+    "media_type": "application/json",
+    "version": "1",
+    "sha256": "676f830ec4788eb92f82feb67b96fe6ea382f2776e944548beea00d8f7ea95d3"
+  },
+  "run_id": "run_7a87ea709f5e809eb1d67c8ebf36d2a1"
+}

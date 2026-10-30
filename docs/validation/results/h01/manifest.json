@@ -1,0 +1,19 @@
+{
+  "README.md": "daf9ebfa312ece80890700634ed22366423f2b226b4909fc7246f4082740d7c6",
+  "a-delegated.json": "d719671102903685a781be832bc2f830e2aa65f414901d4710c849b31dcfe6f3",
+  "acceptance-v1.md": "ec2b984ece503c8ea26539dd4baaf9b84388582ff24a3dfb3bc69b12834cdfde",
+  "authorization-checked.json": "525f84aba6d2eeffbe243821797ee18ecb3bd1923974cd799ea046ce2e239197",
+  "b-opened.json": "6ebedd7f8d1abcdb0a55d43e2a2aaa99dfb81b787df72f2b9d0076bb57619e63",
+  "b-submitted.json": "e16077940249eb551653e40130364bb6b05cb2e8c5ae1b0ac1ae4f6ba9b67135",
+  "observations-v1.csv": "0439c81a664ea06b7d228348fecb30057b9d09970d438bd5299550210f636d94",
+  "proposal-v1.md": "64579d3168f2f39ace8d0b991150d54c577a61df992aa06ef18853f88016b798",
+  "provenance.json": "ce396d52e2b745adcac642dd95559cb36bfbc8a51f6c492bfffde06bf705e1da",
+  "public-audit.json": "cd9e3843ae0138b521e18a1c1f97a571d8d5260b8e4d6c3b1abcf3bcbbac54a8",
+  "public-records.json": "4feaa7cd5fef6f675cb8e388e6b2859ca87d869566f0729bcf71e3085db864fc",
+  "resource-access.json": "742752a5e23a955026459466db75c66fc3d4f353e590861ac8da8a0ae634ddf8",
+  "review.json": "676f830ec4788eb92f82feb67b96fe6ea382f2776e944548beea00d8f7ea95d3",
+  "reviewer-decision.json": "9548b3ed82996c91aed8c6bfa3c6388d90114b85a82bcc1bee0b3e842bd436b2",
+  "verified.json": "1983b6f9175e2d29ee2c170ad6ca60bc18909f900d0fce89901a4c44405bac2a",
+  "x-decided.json": "f2f1e1bce0789b79895a5928ee2519e0578cabd9849234f8fac834e3317d1012",
+  "x-inspection.json": "2921337f011b527a6377c8b30442da1b222cdd43db98326477f821875387ba5b"
+}
