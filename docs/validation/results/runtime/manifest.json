@@ -126,8 +126,8 @@
   },
   {
     "file": "consumer-check.txt",
-    "bytes": 99,
-    "sha256": "4bd83e2e2e7b7f648b8bac8efcb641325e364a0e031e1426fbc76e98518220e6"
+    "bytes": 98,
+    "sha256": "92f765b943dbe783900f57e4efd457c44471a1bf4348001ae34a21adc48cdcb9"
   },
   {
     "file": "consumer-test.txt",
@@ -181,8 +181,8 @@
   },
   {
     "file": "typescript-typecheck.txt",
-    "bytes": 61,
-    "sha256": "a3f1b220eb1238085c48036245ee3b03e0afc6322b628104c46915829c48fe4c"
+    "bytes": 60,
+    "sha256": "ef8ae6c0bc313e884242f20bab5a27db6a99b5a327ec1a7a85631f9d37b96b92"
   },
   {
     "file": "worktree-status.txt",
