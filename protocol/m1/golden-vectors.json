@@ -1,0 +1,2887 @@
+{
+  "status": "static conformance inputs; not bridge runtime tests",
+  "schema_cases": [
+    {
+      "id": "G01_Task",
+      "definition": "Task",
+      "valid": true,
+      "value": {
+        "task_id": "task_T",
+        "state": "offered",
+        "revision": 2,
+        "generation": 0,
+        "content_version": 1,
+        "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+        "contract": {
+          "profile": "delivery-acceptance-v1",
+          "owner_principal_id": "principal_O",
+          "goal": "审阅固定版本的技术说明",
+          "constraints": [
+            "只产生候选审阅产物"
+          ],
+          "input_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "expected_output": "审阅说明及证据引用",
+          "acceptance_refs": [],
+          "context_refs": [],
+          "eligible_agent_ids": [
+            "agent_B"
+          ],
+          "acceptance_principal_id": "principal_X",
+          "recovery_policy": "safe_reopen",
+          "allow_rework": true,
+          "lease_policy": {
+            "min_seconds": 5,
+            "max_seconds": 60
+          },
+          "extensions": {
+            "org.example.review": {
+              "language": "zh"
+            }
+          }
+        },
+        "current_assignment_id": null,
+        "pending_submission_id": null,
+        "recovery_gate": "claimable",
+        "created_at": "2026-10-30T00:00:00.000Z",
+        "updated_at": "2026-10-30T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "G01_Assignment",
+      "definition": "Assignment",
+      "valid": true,
+      "value": {
+        "assignment_id": "assignment_B",
+        "task_id": "task_T",
+        "principal_id": "principal_B",
+        "agent_id": "agent_B",
+        "claim_grant_id": "grant_B",
+        "state": "completed",
+        "generation": 1,
+        "lease_expires_at": "2026-10-30T00:00:30.000Z",
+        "created_at": "2026-10-30T00:00:00.000Z",
+        "ended_at": "2026-10-30T00:00:10.000Z",
+        "end_reason": "submitted",
+        "effective_at": null,
+        "binding_id": "binding_B_1"
+      }
+    },
+    {
+      "id": "G01_Run",
+      "definition": "Run",
+      "valid": true,
+      "value": {
+        "run_id": "run_B",
+        "task_id": "task_T",
+        "assignment_id": "assignment_B",
+        "state": "submitted",
+        "started_at": "2026-10-30T00:00:00.000Z",
+        "ended_at": "2026-10-30T00:00:10.000Z",
+        "end_reason": "submitted"
+      }
+    },
+    {
+      "id": "G01_Report",
+      "definition": "Report",
+      "valid": true,
+      "value": {
+        "report_id": "report_B",
+        "task_id": "task_T",
+        "run_id": "run_B",
+        "assignment_id": "assignment_B",
+        "message": "已读取输入",
+        "evidence_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "extensions": {},
+        "reported_at": "2026-10-30T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "G01_Submission",
+      "definition": "Submission",
+      "valid": true,
+      "value": {
+        "submission_id": "submission_B",
+        "task_id": "task_T",
+        "run_id": "run_B",
+        "assignment_id": "assignment_B",
+        "content_version": 1,
+        "summary": "完成审阅",
+        "artifact_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "evidence_refs": [],
+        "extensions": {},
+        "submitted_at": "2026-10-30T00:00:10.000Z"
+      }
+    },
+    {
+      "id": "G01_Decision",
+      "definition": "Decision",
+      "valid": true,
+      "value": {
+        "decision_id": "decision_X",
+        "task_id": "task_T",
+        "submission_id": "submission_B",
+        "outcome": "accepted",
+        "principal_id": "principal_X",
+        "reason": "满足本任务验收要求",
+        "evidence_refs": [],
+        "decided_at": "2026-10-30T00:00:20.000Z"
+      }
+    },
+    {
+      "id": "G01_Relation",
+      "definition": "Relation",
+      "valid": true,
+      "value": {
+        "relation_id": "relation_PC",
+        "task_id": "task_T",
+        "kind": "parent_child",
+        "parent_task_id": "task_P",
+        "created_at": "2026-10-30T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "G01_Grant",
+      "definition": "Grant",
+      "valid": true,
+      "value": {
+        "grant_id": "grant_B",
+        "task_id": "task_T",
+        "owner_principal_id": "principal_O",
+        "subject_principal_id": "principal_B",
+        "agent_id": "agent_B",
+        "actions": [
+          "task.read",
+          "task.claim"
+        ],
+        "not_before": "2026-10-30T00:00:00.000Z",
+        "expires_at": "2026-10-30T01:00:00.000Z",
+        "issued_by_principal_id": "principal_O",
+        "revoked_at": null
+      }
+    },
+    {
+      "id": "G01_Contract",
+      "definition": "Contract",
+      "valid": true,
+      "value": {
+        "profile": "delivery-acceptance-v1",
+        "owner_principal_id": "principal_O",
+        "goal": "审阅固定版本的技术说明",
+        "constraints": [
+          "只产生候选审阅产物"
+        ],
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "expected_output": "审阅说明及证据引用",
+        "acceptance_refs": [],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "acceptance_principal_id": "principal_X",
+        "recovery_policy": "safe_reopen",
+        "allow_rework": true,
+        "lease_policy": {
+          "min_seconds": 5,
+          "max_seconds": 60
+        },
+        "extensions": {
+          "org.example.review": {
+            "language": "zh"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.create",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.create",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "contract": {
+            "profile": "delivery-acceptance-v1",
+            "owner_principal_id": "principal_O",
+            "goal": "审阅固定版本的技术说明",
+            "constraints": [
+              "只产生候选审阅产物"
+            ],
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "uri": "https://example.invalid/artifacts/review-v1.txt",
+                "media_type": "text/plain",
+                "version": "1",
+                "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+              }
+            ],
+            "expected_output": "审阅说明及证据引用",
+            "acceptance_refs": [],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "acceptance_principal_id": "principal_X",
+            "recovery_policy": "safe_reopen",
+            "allow_rework": true,
+            "lease_policy": {
+              "min_seconds": 5,
+              "max_seconds": 60
+            },
+            "extensions": {
+              "org.example.review": {
+                "language": "zh"
+              }
+            }
+          },
+          "initial_grants": [
+            {
+              "subject_principal_id": "principal_B",
+              "agent_id": "agent_B",
+              "actions": [
+                "task.read",
+                "task.claim"
+              ],
+              "not_before": "2026-10-30T00:00:00.000Z",
+              "expires_at": "2026-10-30T01:00:00.000Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.createChild",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.createChild",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "parent_task_id": "task_P",
+          "contract": {
+            "profile": "delivery-acceptance-v1",
+            "owner_principal_id": "principal_O",
+            "goal": "审阅固定版本的技术说明",
+            "constraints": [
+              "只产生候选审阅产物"
+            ],
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "uri": "https://example.invalid/artifacts/review-v1.txt",
+                "media_type": "text/plain",
+                "version": "1",
+                "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+              }
+            ],
+            "expected_output": "审阅说明及证据引用",
+            "acceptance_refs": [],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "acceptance_principal_id": "principal_X",
+            "recovery_policy": "safe_reopen",
+            "allow_rework": true,
+            "lease_policy": {
+              "min_seconds": 5,
+              "max_seconds": 60
+            },
+            "extensions": {
+              "org.example.review": {
+                "language": "zh"
+              }
+            }
+          },
+          "initial_grants": [
+            {
+              "subject_principal_id": "principal_B",
+              "agent_id": "agent_B",
+              "actions": [
+                "task.read",
+                "task.claim"
+              ],
+              "not_before": "2026-10-30T00:00:00.000Z",
+              "expires_at": "2026-10-30T01:00:00.000Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.updateDraft",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.updateDraft",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "contract": {
+            "profile": "delivery-acceptance-v1",
+            "owner_principal_id": "principal_O",
+            "goal": "审阅固定版本的技术说明",
+            "constraints": [
+              "只产生候选审阅产物"
+            ],
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "uri": "https://example.invalid/artifacts/review-v1.txt",
+                "media_type": "text/plain",
+                "version": "1",
+                "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+              }
+            ],
+            "expected_output": "审阅说明及证据引用",
+            "acceptance_refs": [],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "acceptance_principal_id": "principal_X",
+            "recovery_policy": "safe_reopen",
+            "allow_rework": true,
+            "lease_policy": {
+              "min_seconds": 5,
+              "max_seconds": 60
+            },
+            "extensions": {
+              "org.example.review": {
+                "language": "zh"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.publish",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.publish",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.claim",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.claim",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "claim_grant_id": "grant_B",
+          "lease_seconds": 30
+        }
+      }
+    },
+    {
+      "id": "G01_Request_assignment.renew",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "assignment.renew",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "lease_seconds": 30
+        }
+      }
+    },
+    {
+      "id": "G01_Request_assignment.release",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "assignment.release",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "reason": "显式操作"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_assignment.revoke",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "assignment.revoke",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "assignment_id": "assignment_B",
+          "reason": "显式操作"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_run.start",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.start",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Request_run.report",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.report",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "run_id": "run_B",
+          "message": "工作进展",
+          "evidence_refs": [],
+          "extensions": {}
+        }
+      }
+    },
+    {
+      "id": "G01_Request_run.submit",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.submit",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "run_id": "run_B",
+          "content_version": 1,
+          "summary": "完成审阅",
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "evidence_refs": [],
+          "extensions": {}
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.accept",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.accept",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "submission_id": "submission_B",
+          "reason": "显式操作",
+          "evidence_refs": []
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.reject",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.reject",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "submission_id": "submission_B",
+          "reason": "显式操作",
+          "evidence_refs": []
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.reopen",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.reopen",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "reason": "显式操作"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.cancel",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.cancel",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "reason": "显式操作"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.close",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.close",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "reason": "显式操作"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_grant.issue",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "grant.issue",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "subject_principal_id": "principal_B",
+          "agent_id": "agent_B",
+          "actions": [
+            "task.read",
+            "task.claim"
+          ],
+          "not_before": "2026-10-30T00:00:00.000Z",
+          "expires_at": "2026-10-30T01:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_grant.revoke",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "grant.revoke",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "grant_id": "grant_B",
+          "reason": "显式操作"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_bridge.capabilities",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "bridge.capabilities",
+        "params": {}
+      }
+    },
+    {
+      "id": "G01_Request_task.get",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.get",
+        "params": {
+          "authority_id": "authority_demo",
+          "task_id": "task_T"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_record.get",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "record.get",
+        "params": {
+          "authority_id": "authority_demo",
+          "task_id": "task_T",
+          "record_type": "Submission",
+          "record_id": "submission_B"
+        }
+      }
+    },
+    {
+      "id": "G01_Request_task.discover",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.discover",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "G01_Request_snapshot.open",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "snapshot.open",
+        "params": {
+          "authority_id": "authority_demo",
+          "scope": {}
+        }
+      }
+    },
+    {
+      "id": "G01_Request_snapshot.page",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "snapshot.page",
+        "params": {
+          "authority_id": "authority_demo",
+          "snapshot_id": "snapshot_R",
+          "page_cursor": "page_cursor_opaque_01",
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "G01_Request_events.read",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "events.read",
+        "params": {
+          "authority_id": "authority_demo",
+          "cursor": "replay_cursor_opaque_01",
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "G01_Request_receipt.get",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "receipt.get",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    },
+    {
+      "id": "G01_CommitBatch",
+      "definition": "CommitBatch",
+      "valid": true,
+      "value": {
+        "commit_id": "commit_demo",
+        "committed_at": "2026-10-30T00:00:10.000Z",
+        "actor": {
+          "kind": "principal",
+          "principal_id": "principal_B",
+          "agent_id": "agent_B",
+          "authorization_ids": [
+            "grant_B"
+          ]
+        },
+        "events": [
+          {
+            "event_id": "event_0",
+            "type": "submission.created",
+            "task_id": "task_T",
+            "task_revision": 5,
+            "record_type": "Submission",
+            "record": {
+              "submission_id": "submission_B",
+              "task_id": "task_T",
+              "run_id": "run_B",
+              "assignment_id": "assignment_B",
+              "content_version": 1,
+              "summary": "完成审阅",
+              "artifact_refs": [
+                {
+                  "kind": "immutable",
+                  "uri": "https://example.invalid/artifacts/review-v1.txt",
+                  "media_type": "text/plain",
+                  "version": "1",
+                  "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                }
+              ],
+              "evidence_refs": [],
+              "extensions": {},
+              "submitted_at": "2026-10-30T00:00:10.000Z"
+            }
+          },
+          {
+            "event_id": "event_1",
+            "type": "run.submitted",
+            "task_id": "task_T",
+            "task_revision": 5,
+            "record_type": "Run",
+            "record": {
+              "run_id": "run_B",
+              "task_id": "task_T",
+              "assignment_id": "assignment_B",
+              "state": "submitted",
+              "started_at": "2026-10-30T00:00:00.000Z",
+              "ended_at": "2026-10-30T00:00:10.000Z",
+              "end_reason": "submitted"
+            }
+          },
+          {
+            "event_id": "event_2",
+            "type": "assignment.completed",
+            "task_id": "task_T",
+            "task_revision": 5,
+            "record_type": "Assignment",
+            "record": {
+              "assignment_id": "assignment_B",
+              "task_id": "task_T",
+              "principal_id": "principal_B",
+              "agent_id": "agent_B",
+              "claim_grant_id": "grant_B",
+              "state": "completed",
+              "generation": 1,
+              "lease_expires_at": "2026-10-30T00:00:30.000Z",
+              "created_at": "2026-10-30T00:00:00.000Z",
+              "ended_at": "2026-10-30T00:00:10.000Z",
+              "end_reason": "submitted",
+              "effective_at": null,
+              "binding_id": "binding_B_1"
+            }
+          },
+          {
+            "event_id": "event_3",
+            "type": "task.submitted",
+            "task_id": "task_T",
+            "task_revision": 5,
+            "record_type": "Task",
+            "record": {
+              "task_id": "task_T",
+              "state": "submitted",
+              "revision": 5,
+              "generation": 1,
+              "content_version": 1,
+              "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+              "contract": {
+                "profile": "delivery-acceptance-v1",
+                "owner_principal_id": "principal_O",
+                "goal": "审阅固定版本的技术说明",
+                "constraints": [
+                  "只产生候选审阅产物"
+                ],
+                "input_refs": [
+                  {
+                    "kind": "immutable",
+                    "uri": "https://example.invalid/artifacts/review-v1.txt",
+                    "media_type": "text/plain",
+                    "version": "1",
+                    "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                  }
+                ],
+                "expected_output": "审阅说明及证据引用",
+                "acceptance_refs": [],
+                "context_refs": [],
+                "eligible_agent_ids": [
+                  "agent_B"
+                ],
+                "acceptance_principal_id": "principal_X",
+                "recovery_policy": "safe_reopen",
+                "allow_rework": true,
+                "lease_policy": {
+                  "min_seconds": 5,
+                  "max_seconds": 60
+                },
+                "extensions": {
+                  "org.example.review": {
+                    "language": "zh"
+                  }
+                }
+              },
+              "current_assignment_id": null,
+              "pending_submission_id": "submission_B",
+              "recovery_gate": "claimable",
+              "created_at": "2026-10-30T00:00:00.000Z",
+              "updated_at": "2026-10-30T00:00:00.000Z"
+            }
+          }
+        ],
+        "audit": {
+          "action": "run.submit",
+          "request_id": "rpc_1",
+          "reason": null
+        }
+      }
+    },
+    {
+      "id": "G01_Result_CommandResult",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "task": {
+              "task_id": "task_T",
+              "state": "submitted",
+              "revision": 5,
+              "generation": 1,
+              "content_version": 1,
+              "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+              "contract": {
+                "profile": "delivery-acceptance-v1",
+                "owner_principal_id": "principal_O",
+                "goal": "审阅固定版本的技术说明",
+                "constraints": [
+                  "只产生候选审阅产物"
+                ],
+                "input_refs": [
+                  {
+                    "kind": "immutable",
+                    "uri": "https://example.invalid/artifacts/review-v1.txt",
+                    "media_type": "text/plain",
+                    "version": "1",
+                    "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                  }
+                ],
+                "expected_output": "审阅说明及证据引用",
+                "acceptance_refs": [],
+                "context_refs": [],
+                "eligible_agent_ids": [
+                  "agent_B"
+                ],
+                "acceptance_principal_id": "principal_X",
+                "recovery_policy": "safe_reopen",
+                "allow_rework": true,
+                "lease_policy": {
+                  "min_seconds": 5,
+                  "max_seconds": 60
+                },
+                "extensions": {
+                  "org.example.review": {
+                    "language": "zh"
+                  }
+                }
+              },
+              "current_assignment_id": null,
+              "pending_submission_id": "submission_B",
+              "recovery_gate": "claimable",
+              "created_at": "2026-10-30T00:00:00.000Z",
+              "updated_at": "2026-10-30T00:00:00.000Z"
+            },
+            "records": [
+              {
+                "record_type": "Submission",
+                "record": {
+                  "submission_id": "submission_B",
+                  "task_id": "task_T",
+                  "run_id": "run_B",
+                  "assignment_id": "assignment_B",
+                  "content_version": 1,
+                  "summary": "完成审阅",
+                  "artifact_refs": [
+                    {
+                      "kind": "immutable",
+                      "uri": "https://example.invalid/artifacts/review-v1.txt",
+                      "media_type": "text/plain",
+                      "version": "1",
+                      "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                    }
+                  ],
+                  "evidence_refs": [],
+                  "extensions": {},
+                  "submitted_at": "2026-10-30T00:00:10.000Z"
+                }
+              },
+              {
+                "record_type": "Run",
+                "record": {
+                  "run_id": "run_B",
+                  "task_id": "task_T",
+                  "assignment_id": "assignment_B",
+                  "state": "submitted",
+                  "started_at": "2026-10-30T00:00:00.000Z",
+                  "ended_at": "2026-10-30T00:00:10.000Z",
+                  "end_reason": "submitted"
+                }
+              },
+              {
+                "record_type": "Assignment",
+                "record": {
+                  "assignment_id": "assignment_B",
+                  "task_id": "task_T",
+                  "principal_id": "principal_B",
+                  "agent_id": "agent_B",
+                  "claim_grant_id": "grant_B",
+                  "state": "completed",
+                  "generation": 1,
+                  "lease_expires_at": "2026-10-30T00:00:30.000Z",
+                  "created_at": "2026-10-30T00:00:00.000Z",
+                  "ended_at": "2026-10-30T00:00:10.000Z",
+                  "end_reason": "submitted",
+                  "effective_at": null,
+                  "binding_id": "binding_B_1"
+                }
+              }
+            ],
+            "commit_id": "commit_demo"
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_Task",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "task_id": "task_T",
+            "state": "offered",
+            "revision": 2,
+            "generation": 0,
+            "content_version": 1,
+            "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+            "contract": {
+              "profile": "delivery-acceptance-v1",
+              "owner_principal_id": "principal_O",
+              "goal": "审阅固定版本的技术说明",
+              "constraints": [
+                "只产生候选审阅产物"
+              ],
+              "input_refs": [
+                {
+                  "kind": "immutable",
+                  "uri": "https://example.invalid/artifacts/review-v1.txt",
+                  "media_type": "text/plain",
+                  "version": "1",
+                  "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                }
+              ],
+              "expected_output": "审阅说明及证据引用",
+              "acceptance_refs": [],
+              "context_refs": [],
+              "eligible_agent_ids": [
+                "agent_B"
+              ],
+              "acceptance_principal_id": "principal_X",
+              "recovery_policy": "safe_reopen",
+              "allow_rework": true,
+              "lease_policy": {
+                "min_seconds": 5,
+                "max_seconds": 60
+              },
+              "extensions": {
+                "org.example.review": {
+                  "language": "zh"
+                }
+              }
+            },
+            "current_assignment_id": null,
+            "pending_submission_id": null,
+            "recovery_gate": "claimable",
+            "created_at": "2026-10-30T00:00:00.000Z",
+            "updated_at": "2026-10-30T00:00:00.000Z"
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_Record",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "record_type": "Decision",
+            "record": {
+              "decision_id": "decision_X",
+              "task_id": "task_T",
+              "submission_id": "submission_B",
+              "outcome": "accepted",
+              "principal_id": "principal_X",
+              "reason": "满足本任务验收要求",
+              "evidence_refs": [],
+              "decided_at": "2026-10-30T00:00:20.000Z"
+            }
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_Capabilities",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "authority_id": "authority_demo",
+            "protocol_version": "bridge-m1-1",
+            "methods": [
+              "task.create",
+              "task.createChild",
+              "task.updateDraft",
+              "task.publish",
+              "task.claim",
+              "assignment.renew",
+              "assignment.release",
+              "assignment.revoke",
+              "run.start",
+              "run.report",
+              "run.submit",
+              "task.accept",
+              "task.reject",
+              "task.reopen",
+              "task.cancel",
+              "task.close",
+              "grant.issue",
+              "grant.revoke",
+              "bridge.capabilities",
+              "task.get",
+              "record.get",
+              "task.discover",
+              "snapshot.open",
+              "snapshot.page",
+              "events.read",
+              "receipt.get",
+              "events.open"
+            ],
+            "limits": {
+              "max_request_bytes": 262144,
+              "max_command_result_bytes": 1048576,
+              "max_commit_batch_bytes": 1048576,
+              "max_initial_grants": 16,
+              "max_page_limit": 100,
+              "snapshot_ttl_seconds": 300,
+              "max_snapshot_records": 10000,
+              "max_snapshot_bytes": 33554432,
+              "max_snapshots_per_principal": 2,
+              "max_snapshots_per_authority": 16,
+              "min_lease_seconds": 5,
+              "max_lease_seconds": 300,
+              "maintenance_interval_ms": 1000,
+              "maintenance_test_bound_ms": 5000
+            }
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_DiscoverResult",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "tasks": [
+              {
+                "task_id": "task_T",
+                "state": "offered",
+                "revision": 2,
+                "generation": 0,
+                "content_version": 1,
+                "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+                "contract": {
+                  "profile": "delivery-acceptance-v1",
+                  "owner_principal_id": "principal_O",
+                  "goal": "审阅固定版本的技术说明",
+                  "constraints": [
+                    "只产生候选审阅产物"
+                  ],
+                  "input_refs": [
+                    {
+                      "kind": "immutable",
+                      "uri": "https://example.invalid/artifacts/review-v1.txt",
+                      "media_type": "text/plain",
+                      "version": "1",
+                      "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                    }
+                  ],
+                  "expected_output": "审阅说明及证据引用",
+                  "acceptance_refs": [],
+                  "context_refs": [],
+                  "eligible_agent_ids": [
+                    "agent_B"
+                  ],
+                  "acceptance_principal_id": "principal_X",
+                  "recovery_policy": "safe_reopen",
+                  "allow_rework": true,
+                  "lease_policy": {
+                    "min_seconds": 5,
+                    "max_seconds": 60
+                  },
+                  "extensions": {
+                    "org.example.review": {
+                      "language": "zh"
+                    }
+                  }
+                },
+                "current_assignment_id": null,
+                "pending_submission_id": null,
+                "recovery_gate": "claimable",
+                "created_at": "2026-10-30T00:00:00.000Z",
+                "updated_at": "2026-10-30T00:00:00.000Z"
+              }
+            ],
+            "next_after_task_id": null
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_SnapshotOpenResult",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "snapshot_id": "snapshot_R",
+            "watermark": "watermark_opaque_01",
+            "replay_cursor": "replay_cursor_opaque_01",
+            "page_cursor": "page_cursor_opaque_01",
+            "expires_at": "2026-10-30T00:05:00.000Z",
+            "auth_valid_until": "2026-10-30T01:00:00.000Z"
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_SnapshotPageResult",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "records": [
+              {
+                "record_type": "Task",
+                "record": {
+                  "task_id": "task_T",
+                  "state": "offered",
+                  "revision": 2,
+                  "generation": 0,
+                  "content_version": 1,
+                  "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+                  "contract": {
+                    "profile": "delivery-acceptance-v1",
+                    "owner_principal_id": "principal_O",
+                    "goal": "审阅固定版本的技术说明",
+                    "constraints": [
+                      "只产生候选审阅产物"
+                    ],
+                    "input_refs": [
+                      {
+                        "kind": "immutable",
+                        "uri": "https://example.invalid/artifacts/review-v1.txt",
+                        "media_type": "text/plain",
+                        "version": "1",
+                        "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                      }
+                    ],
+                    "expected_output": "审阅说明及证据引用",
+                    "acceptance_refs": [],
+                    "context_refs": [],
+                    "eligible_agent_ids": [
+                      "agent_B"
+                    ],
+                    "acceptance_principal_id": "principal_X",
+                    "recovery_policy": "safe_reopen",
+                    "allow_rework": true,
+                    "lease_policy": {
+                      "min_seconds": 5,
+                      "max_seconds": 60
+                    },
+                    "extensions": {
+                      "org.example.review": {
+                        "language": "zh"
+                      }
+                    }
+                  },
+                  "current_assignment_id": null,
+                  "pending_submission_id": null,
+                  "recovery_gate": "claimable",
+                  "created_at": "2026-10-30T00:00:00.000Z",
+                  "updated_at": "2026-10-30T00:00:00.000Z"
+                }
+              },
+              {
+                "record_type": "Assignment",
+                "record": {
+                  "assignment_id": "assignment_B",
+                  "task_id": "task_T",
+                  "principal_id": "principal_B",
+                  "agent_id": "agent_B",
+                  "claim_grant_id": "grant_B",
+                  "state": "completed",
+                  "generation": 1,
+                  "lease_expires_at": "2026-10-30T00:00:30.000Z",
+                  "created_at": "2026-10-30T00:00:00.000Z",
+                  "ended_at": "2026-10-30T00:00:10.000Z",
+                  "end_reason": "submitted",
+                  "effective_at": null,
+                  "binding_id": "binding_B_1"
+                }
+              },
+              {
+                "record_type": "Run",
+                "record": {
+                  "run_id": "run_B",
+                  "task_id": "task_T",
+                  "assignment_id": "assignment_B",
+                  "state": "submitted",
+                  "started_at": "2026-10-30T00:00:00.000Z",
+                  "ended_at": "2026-10-30T00:00:10.000Z",
+                  "end_reason": "submitted"
+                }
+              },
+              {
+                "record_type": "Report",
+                "record": {
+                  "report_id": "report_B",
+                  "task_id": "task_T",
+                  "run_id": "run_B",
+                  "assignment_id": "assignment_B",
+                  "message": "已读取输入",
+                  "evidence_refs": [
+                    {
+                      "kind": "immutable",
+                      "uri": "https://example.invalid/artifacts/review-v1.txt",
+                      "media_type": "text/plain",
+                      "version": "1",
+                      "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                    }
+                  ],
+                  "extensions": {},
+                  "reported_at": "2026-10-30T00:00:00.000Z"
+                }
+              },
+              {
+                "record_type": "Submission",
+                "record": {
+                  "submission_id": "submission_B",
+                  "task_id": "task_T",
+                  "run_id": "run_B",
+                  "assignment_id": "assignment_B",
+                  "content_version": 1,
+                  "summary": "完成审阅",
+                  "artifact_refs": [
+                    {
+                      "kind": "immutable",
+                      "uri": "https://example.invalid/artifacts/review-v1.txt",
+                      "media_type": "text/plain",
+                      "version": "1",
+                      "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                    }
+                  ],
+                  "evidence_refs": [],
+                  "extensions": {},
+                  "submitted_at": "2026-10-30T00:00:10.000Z"
+                }
+              },
+              {
+                "record_type": "Decision",
+                "record": {
+                  "decision_id": "decision_X",
+                  "task_id": "task_T",
+                  "submission_id": "submission_B",
+                  "outcome": "accepted",
+                  "principal_id": "principal_X",
+                  "reason": "满足本任务验收要求",
+                  "evidence_refs": [],
+                  "decided_at": "2026-10-30T00:00:20.000Z"
+                }
+              },
+              {
+                "record_type": "Relation",
+                "record": {
+                  "relation_id": "relation_PC",
+                  "task_id": "task_T",
+                  "kind": "parent_child",
+                  "parent_task_id": "task_P",
+                  "created_at": "2026-10-30T00:00:00.000Z"
+                }
+              },
+              {
+                "record_type": "Grant",
+                "record": {
+                  "grant_id": "grant_B",
+                  "task_id": "task_T",
+                  "owner_principal_id": "principal_O",
+                  "subject_principal_id": "principal_B",
+                  "agent_id": "agent_B",
+                  "actions": [
+                    "task.read",
+                    "task.claim"
+                  ],
+                  "not_before": "2026-10-30T00:00:00.000Z",
+                  "expires_at": "2026-10-30T01:00:00.000Z",
+                  "issued_by_principal_id": "principal_O",
+                  "revoked_at": null
+                }
+              }
+            ],
+            "next_page_cursor": null,
+            "complete": true
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Result_ReplayResult",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "batches": [
+              {
+                "commit_id": "commit_demo",
+                "committed_at": "2026-10-30T00:00:10.000Z",
+                "actor": {
+                  "kind": "principal",
+                  "principal_id": "principal_B",
+                  "agent_id": "agent_B",
+                  "authorization_ids": [
+                    "grant_B"
+                  ]
+                },
+                "events": [
+                  {
+                    "event_id": "event_0",
+                    "type": "submission.created",
+                    "task_id": "task_T",
+                    "task_revision": 5,
+                    "record_type": "Submission",
+                    "record": {
+                      "submission_id": "submission_B",
+                      "task_id": "task_T",
+                      "run_id": "run_B",
+                      "assignment_id": "assignment_B",
+                      "content_version": 1,
+                      "summary": "完成审阅",
+                      "artifact_refs": [
+                        {
+                          "kind": "immutable",
+                          "uri": "https://example.invalid/artifacts/review-v1.txt",
+                          "media_type": "text/plain",
+                          "version": "1",
+                          "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                        }
+                      ],
+                      "evidence_refs": [],
+                      "extensions": {},
+                      "submitted_at": "2026-10-30T00:00:10.000Z"
+                    }
+                  },
+                  {
+                    "event_id": "event_1",
+                    "type": "run.submitted",
+                    "task_id": "task_T",
+                    "task_revision": 5,
+                    "record_type": "Run",
+                    "record": {
+                      "run_id": "run_B",
+                      "task_id": "task_T",
+                      "assignment_id": "assignment_B",
+                      "state": "submitted",
+                      "started_at": "2026-10-30T00:00:00.000Z",
+                      "ended_at": "2026-10-30T00:00:10.000Z",
+                      "end_reason": "submitted"
+                    }
+                  },
+                  {
+                    "event_id": "event_2",
+                    "type": "assignment.completed",
+                    "task_id": "task_T",
+                    "task_revision": 5,
+                    "record_type": "Assignment",
+                    "record": {
+                      "assignment_id": "assignment_B",
+                      "task_id": "task_T",
+                      "principal_id": "principal_B",
+                      "agent_id": "agent_B",
+                      "claim_grant_id": "grant_B",
+                      "state": "completed",
+                      "generation": 1,
+                      "lease_expires_at": "2026-10-30T00:00:30.000Z",
+                      "created_at": "2026-10-30T00:00:00.000Z",
+                      "ended_at": "2026-10-30T00:00:10.000Z",
+                      "end_reason": "submitted",
+                      "effective_at": null,
+                      "binding_id": "binding_B_1"
+                    }
+                  },
+                  {
+                    "event_id": "event_3",
+                    "type": "task.submitted",
+                    "task_id": "task_T",
+                    "task_revision": 5,
+                    "record_type": "Task",
+                    "record": {
+                      "task_id": "task_T",
+                      "state": "submitted",
+                      "revision": 5,
+                      "generation": 1,
+                      "content_version": 1,
+                      "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+                      "contract": {
+                        "profile": "delivery-acceptance-v1",
+                        "owner_principal_id": "principal_O",
+                        "goal": "审阅固定版本的技术说明",
+                        "constraints": [
+                          "只产生候选审阅产物"
+                        ],
+                        "input_refs": [
+                          {
+                            "kind": "immutable",
+                            "uri": "https://example.invalid/artifacts/review-v1.txt",
+                            "media_type": "text/plain",
+                            "version": "1",
+                            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+                          }
+                        ],
+                        "expected_output": "审阅说明及证据引用",
+                        "acceptance_refs": [],
+                        "context_refs": [],
+                        "eligible_agent_ids": [
+                          "agent_B"
+                        ],
+                        "acceptance_principal_id": "principal_X",
+                        "recovery_policy": "safe_reopen",
+                        "allow_rework": true,
+                        "lease_policy": {
+                          "min_seconds": 5,
+                          "max_seconds": 60
+                        },
+                        "extensions": {
+                          "org.example.review": {
+                            "language": "zh"
+                          }
+                        }
+                      },
+                      "current_assignment_id": null,
+                      "pending_submission_id": "submission_B",
+                      "recovery_gate": "claimable",
+                      "created_at": "2026-10-30T00:00:00.000Z",
+                      "updated_at": "2026-10-30T00:00:00.000Z"
+                    }
+                  }
+                ],
+                "audit": {
+                  "action": "run.submit",
+                  "request_id": "rpc_1",
+                  "reason": null
+                }
+              }
+            ],
+            "next_cursor": "replay_cursor_opaque_02",
+            "at_head": true
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_PARSE_ERROR",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32700,
+          "message": "PARSE_ERROR",
+          "data": {
+            "kind": "PARSE_ERROR",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_INVALID_REQUEST",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32600,
+          "message": "INVALID_REQUEST",
+          "data": {
+            "kind": "INVALID_REQUEST",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_METHOD_NOT_FOUND",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32601,
+          "message": "METHOD_NOT_FOUND",
+          "data": {
+            "kind": "METHOD_NOT_FOUND",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_INVALID_PARAMS",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32602,
+          "message": "INVALID_PARAMS",
+          "data": {
+            "kind": "INVALID_PARAMS",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_INTERNAL_ERROR",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32603,
+          "message": "INTERNAL_ERROR",
+          "data": {
+            "kind": "INTERNAL_ERROR",
+            "retry": "same_request"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_FORBIDDEN",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32001,
+          "message": "FORBIDDEN",
+          "data": {
+            "kind": "FORBIDDEN",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_NOT_FOUND",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32002,
+          "message": "NOT_FOUND",
+          "data": {
+            "kind": "NOT_FOUND",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_STALE_REVISION",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32003,
+          "message": "STALE_REVISION",
+          "data": {
+            "kind": "STALE_REVISION",
+            "retry": "read_state"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_LEASE_FENCED",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32004,
+          "message": "LEASE_FENCED",
+          "data": {
+            "kind": "LEASE_FENCED",
+            "retry": "read_state"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_INVALID_STATE",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32005,
+          "message": "INVALID_STATE",
+          "data": {
+            "kind": "INVALID_STATE",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_GATE_CLOSED",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32006,
+          "message": "GATE_CLOSED",
+          "data": {
+            "kind": "GATE_CLOSED",
+            "retry": "read_state"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_POLICY_DENIED",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32007,
+          "message": "POLICY_DENIED",
+          "data": {
+            "kind": "POLICY_DENIED",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_IDEMPOTENCY_CONFLICT",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32008,
+          "message": "IDEMPOTENCY_CONFLICT",
+          "data": {
+            "kind": "IDEMPOTENCY_CONFLICT",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_REINITIALIZE_REQUIRED",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32009,
+          "message": "REINITIALIZE_REQUIRED",
+          "data": {
+            "kind": "REINITIALIZE_REQUIRED",
+            "retry": "reinitialize"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_INVALID_CURSOR",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32010,
+          "message": "INVALID_CURSOR",
+          "data": {
+            "kind": "INVALID_CURSOR",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_RECEIPT_NOT_FOUND",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32011,
+          "message": "RECEIPT_NOT_FOUND",
+          "data": {
+            "kind": "RECEIPT_NOT_FOUND",
+            "retry": "same_request"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_RECEIPT_UNAVAILABLE",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32012,
+          "message": "RECEIPT_UNAVAILABLE",
+          "data": {
+            "kind": "RECEIPT_UNAVAILABLE",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_AUTHORITY_MISMATCH",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32013,
+          "message": "AUTHORITY_MISMATCH",
+          "data": {
+            "kind": "AUTHORITY_MISMATCH",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_RESOURCE_LIMIT",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32014,
+          "message": "RESOURCE_LIMIT",
+          "data": {
+            "kind": "RESOURCE_LIMIT",
+            "retry": "none"
+          }
+        }
+      }
+    },
+    {
+      "id": "G01_Error_UNAVAILABLE",
+      "definition": "ErrorResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "error": {
+          "code": -32015,
+          "message": "UNAVAILABLE",
+          "data": {
+            "kind": "UNAVAILABLE",
+            "retry": "same_request"
+          }
+        }
+      }
+    },
+    {
+      "id": "G02_rework",
+      "definition": "Decision",
+      "valid": false,
+      "value": {
+        "decision_id": "decision_X",
+        "task_id": "task_T",
+        "submission_id": "submission_B",
+        "outcome": "rework",
+        "principal_id": "principal_X",
+        "reason": "满足本任务验收要求",
+        "evidence_refs": [],
+        "decided_at": "2026-10-30T00:00:20.000Z"
+      }
+    },
+    {
+      "id": "G02_task_expired",
+      "definition": "Task",
+      "valid": false,
+      "value": {
+        "task_id": "task_T",
+        "state": "expired",
+        "revision": 2,
+        "generation": 0,
+        "content_version": 1,
+        "contract_digest": "e9151e78f52e1c96736d7598792475d1077302da402ebab4c3bae26fdd6e45c7",
+        "contract": {
+          "profile": "delivery-acceptance-v1",
+          "owner_principal_id": "principal_O",
+          "goal": "审阅固定版本的技术说明",
+          "constraints": [
+            "只产生候选审阅产物"
+          ],
+          "input_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "expected_output": "审阅说明及证据引用",
+          "acceptance_refs": [],
+          "context_refs": [],
+          "eligible_agent_ids": [
+            "agent_B"
+          ],
+          "acceptance_principal_id": "principal_X",
+          "recovery_policy": "safe_reopen",
+          "allow_rework": true,
+          "lease_policy": {
+            "min_seconds": 5,
+            "max_seconds": 60
+          },
+          "extensions": {
+            "org.example.review": {
+              "language": "zh"
+            }
+          }
+        },
+        "current_assignment_id": null,
+        "pending_submission_id": null,
+        "recovery_gate": "claimable",
+        "created_at": "2026-10-30T00:00:00.000Z",
+        "updated_at": "2026-10-30T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "G02_missing_run",
+      "definition": "Submission",
+      "valid": false,
+      "value": {
+        "submission_id": "submission_B",
+        "task_id": "task_T",
+        "assignment_id": "assignment_B",
+        "content_version": 1,
+        "summary": "完成审阅",
+        "artifact_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "evidence_refs": [],
+        "extensions": {},
+        "submitted_at": "2026-10-30T00:00:10.000Z"
+      }
+    },
+    {
+      "id": "G03_unknown_core",
+      "definition": "Contract",
+      "valid": false,
+      "value": {
+        "profile": "delivery-acceptance-v1",
+        "owner_principal_id": "principal_O",
+        "goal": "审阅固定版本的技术说明",
+        "constraints": [
+          "只产生候选审阅产物"
+        ],
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "expected_output": "审阅说明及证据引用",
+        "acceptance_refs": [],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "acceptance_principal_id": "principal_X",
+        "recovery_policy": "safe_reopen",
+        "allow_rework": true,
+        "lease_policy": {
+          "min_seconds": 5,
+          "max_seconds": 60
+        },
+        "extensions": {
+          "org.example.review": {
+            "language": "zh"
+          }
+        },
+        "prompt": "hidden"
+      }
+    },
+    {
+      "id": "G03_no_namespace",
+      "definition": "Contract",
+      "valid": false,
+      "value": {
+        "profile": "delivery-acceptance-v1",
+        "owner_principal_id": "principal_O",
+        "goal": "审阅固定版本的技术说明",
+        "constraints": [
+          "只产生候选审阅产物"
+        ],
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "expected_output": "审阅说明及证据引用",
+        "acceptance_refs": [],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "acceptance_principal_id": "principal_X",
+        "recovery_policy": "safe_reopen",
+        "allow_rework": true,
+        "lease_policy": {
+          "min_seconds": 5,
+          "max_seconds": 60
+        },
+        "extensions": {
+          "prompt": "hidden"
+        }
+      }
+    },
+    {
+      "id": "G03_unknown_namespace",
+      "definition": "Contract",
+      "valid": true,
+      "value": {
+        "profile": "delivery-acceptance-v1",
+        "owner_principal_id": "principal_O",
+        "goal": "审阅固定版本的技术说明",
+        "constraints": [
+          "只产生候选审阅产物"
+        ],
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "expected_output": "审阅说明及证据引用",
+        "acceptance_refs": [],
+        "context_refs": [],
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "acceptance_principal_id": "principal_X",
+        "recovery_policy": "safe_reopen",
+        "allow_rework": true,
+        "lease_policy": {
+          "min_seconds": 5,
+          "max_seconds": 60
+        },
+        "extensions": {
+          "org.other.new": {
+            "data": [
+              1,
+              null,
+              "保留"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "G03_explicit_null",
+      "definition": "Contract",
+      "valid": false,
+      "value": {
+        "profile": "delivery-acceptance-v1",
+        "owner_principal_id": "principal_O",
+        "goal": "审阅固定版本的技术说明",
+        "constraints": [
+          "只产生候选审阅产物"
+        ],
+        "input_refs": [
+          {
+            "kind": "immutable",
+            "uri": "https://example.invalid/artifacts/review-v1.txt",
+            "media_type": "text/plain",
+            "version": "1",
+            "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+          }
+        ],
+        "expected_output": "审阅说明及证据引用",
+        "acceptance_refs": [],
+        "context_refs": null,
+        "eligible_agent_ids": [
+          "agent_B"
+        ],
+        "acceptance_principal_id": "principal_X",
+        "recovery_policy": "safe_reopen",
+        "allow_rework": true,
+        "lease_policy": {
+          "min_seconds": 5,
+          "max_seconds": 60
+        },
+        "extensions": {
+          "org.example.review": {
+            "language": "zh"
+          }
+        }
+      }
+    },
+    {
+      "id": "G03_nullable_agent",
+      "definition": "GrantInput",
+      "valid": true,
+      "value": {
+        "subject_principal_id": "principal_B",
+        "agent_id": null,
+        "actions": [
+          "task.read",
+          "task.claim"
+        ],
+        "not_before": "2026-10-30T00:00:00.000Z",
+        "expires_at": "2026-10-30T01:00:00.000Z"
+      }
+    },
+    {
+      "id": "G04_before",
+      "definition": "Timestamp",
+      "valid": true,
+      "value": "2026-10-30T00:00:29.999Z"
+    },
+    {
+      "id": "G04_equal",
+      "definition": "Timestamp",
+      "valid": true,
+      "value": "2026-10-30T00:00:30.000Z"
+    },
+    {
+      "id": "G04_after",
+      "definition": "Timestamp",
+      "valid": true,
+      "value": "2026-10-30T00:00:30.001Z"
+    },
+    {
+      "id": "G04_invalid_time_0",
+      "definition": "Timestamp",
+      "valid": false,
+      "value": "2026-10-30T00:00:30Z"
+    },
+    {
+      "id": "G04_invalid_time_1",
+      "definition": "Timestamp",
+      "valid": false,
+      "value": "2026-10-30T08:00:30.000+08:00"
+    },
+    {
+      "id": "G04_invalid_time_2",
+      "definition": "Timestamp",
+      "valid": false,
+      "value": "2026-02-30T00:00:00.000Z"
+    },
+    {
+      "id": "G04_large_integer",
+      "definition": "Revision",
+      "valid": false,
+      "value": 9007199254740992
+    },
+    {
+      "id": "G04_fraction",
+      "definition": "JsonValue",
+      "valid": false,
+      "value": 0.5
+    },
+    {
+      "id": "G06_mutable_normative",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "immutable",
+        "uri": "https://example.invalid/latest",
+        "media_type": "text/plain"
+      }
+    },
+    {
+      "id": "G06_dynamic_input",
+      "definition": "InputRef",
+      "valid": true,
+      "value": {
+        "kind": "dynamic",
+        "uri": "https://example.invalid/current",
+        "media_type": "text/plain",
+        "read_at": "at run.start"
+      }
+    },
+    {
+      "id": "G06_dynamic_acceptance",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "dynamic",
+        "uri": "https://example.invalid/current",
+        "media_type": "text/plain",
+        "read_at": "at acceptance"
+      }
+    },
+    {
+      "id": "G01_Request_events.open",
+      "definition": "Request",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "events.open",
+        "params": {
+          "authority_id": "authority_demo",
+          "scope": {}
+        }
+      }
+    },
+    {
+      "id": "G01_Result_EventOpenResult",
+      "definition": "SuccessResponse",
+      "valid": true,
+      "value": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "result": {
+          "data": {
+            "cursor": "replay_cursor_origin_01",
+            "auth_valid_until": "2026-10-30T01:00:00.000Z"
+          },
+          "meta": {
+            "authority_id": "authority_demo",
+            "replayed": false
+          }
+        }
+      }
+    },
+    {
+      "id": "G06_invalid_uri",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "immutable",
+        "uri": "not a uri",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "G06_uri_rejected_0",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "immutable",
+        "uri": "https://example.invalid/%zz",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "G06_uri_rejected_1",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "immutable",
+        "uri": "https://example.invalid/审阅",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "G06_uri_rejected_2",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "immutable",
+        "uri": "urn:bad[path",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "G06_uri_rejected_3",
+      "definition": "ImmutableRef",
+      "valid": false,
+      "value": {
+        "kind": "immutable",
+        "uri": "https://user:secret@example.invalid/a",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "G06_IPvFuture_v",
+      "definition": "ImmutableRef",
+      "valid": true,
+      "value": {
+        "kind": "immutable",
+        "uri": "https://[v1.a]/",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "G06_IPvFuture_V",
+      "definition": "ImmutableRef",
+      "valid": true,
+      "value": {
+        "kind": "immutable",
+        "uri": "https://[V1.a]/",
+        "media_type": "text/plain",
+        "version": "1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "hash_cases": [
+    {
+      "id": "G05_base",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.submit",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "run_id": "run_B",
+          "content_version": 1,
+          "summary": "完成审阅",
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "evidence_refs": [],
+          "extensions": {}
+        }
+      },
+      "canonical": "{\"method\":\"run.submit\",\"params\":{\"artifact_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"as_agent_id\":\"agent_B\",\"authority_id\":\"authority_demo\",\"content_version\":1,\"evidence_refs\":[],\"expected_revision\":4,\"extensions\":{},\"lease\":{\"assignment_id\":\"assignment_B\",\"generation\":1,\"token\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"},\"run_id\":\"run_B\",\"summary\":\"完成审阅\",\"task_id\":\"task_T\"},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "544780939f0874dd4c8dfa69ec60338ea7df9133512afcdc382e9602f974943d"
+    },
+    {
+      "id": "G05_key_order_and_rpc_id",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "another_rpc_id",
+        "method": "run.submit",
+        "params": {
+          "extensions": {},
+          "evidence_refs": [],
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "summary": "完成审阅",
+          "content_version": 1,
+          "run_id": "run_B",
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "expected_revision": 4,
+          "task_id": "task_T",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "as_agent_id": "agent_B",
+          "authority_id": "authority_demo"
+        }
+      },
+      "canonical": "{\"method\":\"run.submit\",\"params\":{\"artifact_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"as_agent_id\":\"agent_B\",\"authority_id\":\"authority_demo\",\"content_version\":1,\"evidence_refs\":[],\"expected_revision\":4,\"extensions\":{},\"lease\":{\"assignment_id\":\"assignment_B\",\"generation\":1,\"token\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"},\"run_id\":\"run_B\",\"summary\":\"完成审阅\",\"task_id\":\"task_T\"},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "544780939f0874dd4c8dfa69ec60338ea7df9133512afcdc382e9602f974943d"
+    },
+    {
+      "id": "G05_revision_changed",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.submit",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 5,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "run_id": "run_B",
+          "content_version": 1,
+          "summary": "完成审阅",
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "evidence_refs": [],
+          "extensions": {}
+        }
+      },
+      "canonical": "{\"method\":\"run.submit\",\"params\":{\"artifact_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"as_agent_id\":\"agent_B\",\"authority_id\":\"authority_demo\",\"content_version\":1,\"evidence_refs\":[],\"expected_revision\":5,\"extensions\":{},\"lease\":{\"assignment_id\":\"assignment_B\",\"generation\":1,\"token\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"},\"run_id\":\"run_B\",\"summary\":\"完成审阅\",\"task_id\":\"task_T\"},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "9bb731e43219480134c679acac3479e354228fa2ab485fb3db9dd42969154c37"
+    },
+    {
+      "id": "G05_array_order_A",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.create",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "contract": {
+            "profile": "delivery-acceptance-v1",
+            "owner_principal_id": "principal_O",
+            "goal": "审阅固定版本的技术说明",
+            "constraints": [
+              "first",
+              "second"
+            ],
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "uri": "https://example.invalid/artifacts/review-v1.txt",
+                "media_type": "text/plain",
+                "version": "1",
+                "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+              }
+            ],
+            "expected_output": "审阅说明及证据引用",
+            "acceptance_refs": [],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "acceptance_principal_id": "principal_X",
+            "recovery_policy": "safe_reopen",
+            "allow_rework": true,
+            "lease_policy": {
+              "min_seconds": 5,
+              "max_seconds": 60
+            },
+            "extensions": {
+              "org.example.review": {
+                "language": "zh"
+              }
+            }
+          },
+          "initial_grants": [
+            {
+              "subject_principal_id": "principal_B",
+              "agent_id": "agent_B",
+              "actions": [
+                "task.read",
+                "task.claim"
+              ],
+              "not_before": "2026-10-30T00:00:00.000Z",
+              "expires_at": "2026-10-30T01:00:00.000Z"
+            }
+          ]
+        }
+      },
+      "canonical": "{\"method\":\"task.create\",\"params\":{\"authority_id\":\"authority_demo\",\"contract\":{\"acceptance_principal_id\":\"principal_X\",\"acceptance_refs\":[],\"allow_rework\":true,\"constraints\":[\"first\",\"second\"],\"context_refs\":[],\"eligible_agent_ids\":[\"agent_B\"],\"expected_output\":\"审阅说明及证据引用\",\"extensions\":{\"org.example.review\":{\"language\":\"zh\"}},\"goal\":\"审阅固定版本的技术说明\",\"input_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"lease_policy\":{\"max_seconds\":60,\"min_seconds\":5},\"owner_principal_id\":\"principal_O\",\"profile\":\"delivery-acceptance-v1\",\"recovery_policy\":\"safe_reopen\"},\"initial_grants\":[{\"actions\":[\"task.read\",\"task.claim\"],\"agent_id\":\"agent_B\",\"expires_at\":\"2026-10-30T01:00:00.000Z\",\"not_before\":\"2026-10-30T00:00:00.000Z\",\"subject_principal_id\":\"principal_B\"}]},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "5819533bece72e1bc5c11c06dc24f75427189d59421c71dcabfa5990d87959a0"
+    },
+    {
+      "id": "G05_array_order_B",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "task.create",
+        "params": {
+          "authority_id": "authority_demo",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "contract": {
+            "profile": "delivery-acceptance-v1",
+            "owner_principal_id": "principal_O",
+            "goal": "审阅固定版本的技术说明",
+            "constraints": [
+              "second",
+              "first"
+            ],
+            "input_refs": [
+              {
+                "kind": "immutable",
+                "uri": "https://example.invalid/artifacts/review-v1.txt",
+                "media_type": "text/plain",
+                "version": "1",
+                "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+              }
+            ],
+            "expected_output": "审阅说明及证据引用",
+            "acceptance_refs": [],
+            "context_refs": [],
+            "eligible_agent_ids": [
+              "agent_B"
+            ],
+            "acceptance_principal_id": "principal_X",
+            "recovery_policy": "safe_reopen",
+            "allow_rework": true,
+            "lease_policy": {
+              "min_seconds": 5,
+              "max_seconds": 60
+            },
+            "extensions": {
+              "org.example.review": {
+                "language": "zh"
+              }
+            }
+          },
+          "initial_grants": [
+            {
+              "subject_principal_id": "principal_B",
+              "agent_id": "agent_B",
+              "actions": [
+                "task.read",
+                "task.claim"
+              ],
+              "not_before": "2026-10-30T00:00:00.000Z",
+              "expires_at": "2026-10-30T01:00:00.000Z"
+            }
+          ]
+        }
+      },
+      "canonical": "{\"method\":\"task.create\",\"params\":{\"authority_id\":\"authority_demo\",\"contract\":{\"acceptance_principal_id\":\"principal_X\",\"acceptance_refs\":[],\"allow_rework\":true,\"constraints\":[\"second\",\"first\"],\"context_refs\":[],\"eligible_agent_ids\":[\"agent_B\"],\"expected_output\":\"审阅说明及证据引用\",\"extensions\":{\"org.example.review\":{\"language\":\"zh\"}},\"goal\":\"审阅固定版本的技术说明\",\"input_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"lease_policy\":{\"max_seconds\":60,\"min_seconds\":5},\"owner_principal_id\":\"principal_O\",\"profile\":\"delivery-acceptance-v1\",\"recovery_policy\":\"safe_reopen\"},\"initial_grants\":[{\"actions\":[\"task.read\",\"task.claim\"],\"agent_id\":\"agent_B\",\"expires_at\":\"2026-10-30T01:00:00.000Z\",\"not_before\":\"2026-10-30T00:00:00.000Z\",\"subject_principal_id\":\"principal_B\"}]},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "ab6717199d8bbbcd1b4cfb14185d7cad380109551f0d51913fef930e18034cf5"
+    },
+    {
+      "id": "G05_extension_null",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.submit",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "run_id": "run_B",
+          "content_version": 1,
+          "summary": "完成审阅",
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "evidence_refs": [],
+          "extensions": {
+            "org.example.null": null
+          }
+        }
+      },
+      "canonical": "{\"method\":\"run.submit\",\"params\":{\"artifact_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"as_agent_id\":\"agent_B\",\"authority_id\":\"authority_demo\",\"content_version\":1,\"evidence_refs\":[],\"expected_revision\":4,\"extensions\":{\"org.example.null\":null},\"lease\":{\"assignment_id\":\"assignment_B\",\"generation\":1,\"token\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"},\"run_id\":\"run_B\",\"summary\":\"完成审阅\",\"task_id\":\"task_T\"},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "ee8223bb26a75f37b02b096649a8b9086efe065221336687b17fa01c5f5f46ee"
+    },
+    {
+      "id": "G05_utf16_key_sort",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "rpc_1",
+        "method": "run.submit",
+        "params": {
+          "authority_id": "authority_demo",
+          "as_agent_id": "agent_B",
+          "idempotency_key": "00000000-0000-4000-8000-000000000001",
+          "task_id": "task_T",
+          "expected_revision": 4,
+          "lease": {
+            "assignment_id": "assignment_B",
+            "generation": 1,
+            "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "run_id": "run_B",
+          "content_version": 1,
+          "summary": "完成审阅",
+          "artifact_refs": [
+            {
+              "kind": "immutable",
+              "uri": "https://example.invalid/artifacts/review-v1.txt",
+              "media_type": "text/plain",
+              "version": "1",
+              "sha256": "fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48"
+            }
+          ],
+          "evidence_refs": [],
+          "extensions": {
+            "org.example.unicode": {
+              "😀": 1,
+              "": 2
+            }
+          }
+        }
+      },
+      "canonical": "{\"method\":\"run.submit\",\"params\":{\"artifact_refs\":[{\"kind\":\"immutable\",\"media_type\":\"text/plain\",\"sha256\":\"fb7d7c730c610c02b930fdf66229a83ec3fc8c1559ec1827453d12f2afdb2c48\",\"uri\":\"https://example.invalid/artifacts/review-v1.txt\",\"version\":\"1\"}],\"as_agent_id\":\"agent_B\",\"authority_id\":\"authority_demo\",\"content_version\":1,\"evidence_refs\":[],\"expected_revision\":4,\"extensions\":{\"org.example.unicode\":{\"😀\":1,\"\":2}},\"lease\":{\"assignment_id\":\"assignment_B\",\"generation\":1,\"token\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"},\"run_id\":\"run_B\",\"summary\":\"完成审阅\",\"task_id\":\"task_T\"},\"protocol_version\":\"bridge-m1-1\"}",
+      "sha256": "dbc5e4a1d4ac1e717fcfa07d27c8ab46cf9f4c03dff6fb15d531160179eb941f"
+    }
+  ],
+  "parser_cases": [
+    {
+      "id": "G05_duplicate_key",
+      "json": "{\"x\":1,\"x\":2}",
+      "valid": false
+    },
+    {
+      "id": "G05_lone_surrogate",
+      "json": "\"\\ud800\"",
+      "valid": false
+    },
+    {
+      "id": "G05_unsafe_integer",
+      "json": "9007199254740992",
+      "valid": false
+    },
+    {
+      "id": "G05_fractional_number",
+      "json": "0.5",
+      "valid": false
+    },
+    {
+      "id": "G05_negative_zero",
+      "json": "-0",
+      "valid": true,
+      "canonical": "0"
+    },
+    {
+      "id": "G05_exponent_integer",
+      "json": "1e0",
+      "valid": true,
+      "canonical": "1"
+    },
+    {
+      "id": "G05_exact_number_0",
+      "json": "1.0000000000000001",
+      "valid": false
+    },
+    {
+      "id": "G05_exact_number_1",
+      "json": "9007199254740990.5",
+      "valid": false
+    },
+    {
+      "id": "G05_exact_number_2",
+      "json": "1e-400",
+      "valid": false
+    }
+  ],
+  "runtime_plan": "../../docs/validation/vectors.md",
+  "method_names": [
+    "task.create",
+    "task.createChild",
+    "task.updateDraft",
+    "task.publish",
+    "task.claim",
+    "assignment.renew",
+    "assignment.release",
+    "assignment.revoke",
+    "run.start",
+    "run.report",
+    "run.submit",
+    "task.accept",
+    "task.reject",
+    "task.reopen",
+    "task.cancel",
+    "task.close",
+    "grant.issue",
+    "grant.revoke",
+    "bridge.capabilities",
+    "task.get",
+    "record.get",
+    "task.discover",
+    "snapshot.open",
+    "snapshot.page",
+    "events.read",
+    "receipt.get",
+    "events.open"
+  ]
+}

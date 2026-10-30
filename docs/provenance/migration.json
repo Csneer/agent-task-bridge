@@ -1,0 +1,72 @@
+{
+  "source_project": "p-drive",
+  "source_root": ".omx",
+  "destination_project": "agent-task-bridge",
+  "entries": [
+    {
+      "source": "specs/agent-bridge-core-v1.md",
+      "source_sha256": "973a44f823be6d6bd93bea010376b14d7e1214e8c7bb55e2e4fcee2e7b901834",
+      "destination": "docs/architecture/core.md"
+    },
+    {
+      "source": "specs/agent-bridge-v1-blueprint.md",
+      "source_sha256": "8ea51ad0cae50243520dca2e93d91d000e7d8b99e2d68d5e3a264c9fc79458e7",
+      "destination": "docs/architecture/blueprint.md"
+    },
+    {
+      "source": "specs/agent-bridge-m1-protocol.md",
+      "source_sha256": "9dc13a18a64fbc6787bec1d86a652beaebc0beced5dd3cba3928c6374ba66a7e",
+      "destination": "protocol/m1/README.md"
+    },
+    {
+      "source": "specs/agent-bridge-m1-state-contract.md",
+      "source_sha256": "99d071c5504a6d8489df3ba02349392cdee30e5292ec2a295dd0b37cdace1170",
+      "destination": "protocol/m1/state.md"
+    },
+    {
+      "source": "specs/agent-bridge-m1-auth-contract.md",
+      "source_sha256": "3b51fe6ad9575ec42414f214284e7e02fdb0c84eaade1fa587dcb86fa5bb1443",
+      "destination": "protocol/m1/auth.md"
+    },
+    {
+      "source": "specs/agent-bridge-m1-wire-contract.md",
+      "source_sha256": "4bc2dbec7898edc0afb4827d08c1795518719d6d05e6c9e7c218eed5e0c8fe3a",
+      "destination": "protocol/m1/wire.md"
+    },
+    {
+      "source": "specs/agent-bridge-m1/schema.json",
+      "source_sha256": "6ce694c62c0cdcc53e00b2d067864d8c01a276b31c0d42cc21f45ed235e1a28d",
+      "destination": "protocol/m1/schema.json"
+    },
+    {
+      "source": "specs/agent-bridge-m1/golden-vectors.json",
+      "source_sha256": "150acf252cdd97956abb2c9f665183705eb871ea92cee472c08a0dd9f8a97089",
+      "destination": "protocol/m1/golden-vectors.json"
+    },
+    {
+      "source": "specs/agent-bridge-m1/check-contract.py",
+      "source_sha256": "99e2b64a1ce1efd8c6e65551ec7b59e104b0f42aa53af767beaaacfe99210720",
+      "destination": "protocol/m1/check-contract.py"
+    },
+    {
+      "source": "specs/agent-bridge-m1/check-hashes.mjs",
+      "source_sha256": "5987aab0f62bf88dced33517275ab99f8500eed7775e9c76d1b78b5f181033b5",
+      "destination": "protocol/m1/check-hashes.mjs"
+    },
+    {
+      "source": "plans/agent-bridge-m1-acceptance-v1.md",
+      "source_sha256": "46df0eaebadc8fecf1d75759579d70b765e7b0c2e31eabc41ebd449d5972e27e",
+      "destination": "docs/validation/acceptance.md"
+    },
+    {
+      "source": "plans/agent-bridge-m1-contract-vectors.md",
+      "source_sha256": "1fd48d2795746cbc9893e6cc708f7cf1901dd7baad798d3c82c1fcc791abcbe7",
+      "destination": "docs/validation/vectors.md"
+    },
+    {
+      "source": "plans/agent-bridge-m1-protocol-review.md",
+      "source_sha256": "276cf836e325fdc19537623e02cff829c4b84d5dbfed88f1a47c879f4037edb4",
+      "destination": "docs/validation/design-review.md"
+    }
+  ]
+}

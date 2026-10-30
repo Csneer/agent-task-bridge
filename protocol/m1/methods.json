@@ -1,0 +1,248 @@
+{
+  "protocol_version": "bridge-m1-1",
+  "methods": [
+    {
+      "method": "assignment.release",
+      "kind": "write",
+      "params": "#/$defs/Params_assignment_release",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": true
+    },
+    {
+      "method": "assignment.renew",
+      "kind": "write",
+      "params": "#/$defs/Params_assignment_renew",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": true
+    },
+    {
+      "method": "assignment.revoke",
+      "kind": "write",
+      "params": "#/$defs/Params_assignment_revoke",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "bridge.capabilities",
+      "kind": "read",
+      "params": "#/$defs/Params_bridge_capabilities",
+      "result_data": "#/$defs/Capabilities",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "events.open",
+      "kind": "read",
+      "params": "#/$defs/Params_events_open",
+      "result_data": "#/$defs/EventOpenResult",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "events.read",
+      "kind": "read",
+      "params": "#/$defs/Params_events_read",
+      "result_data": "#/$defs/ReplayResult",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "grant.issue",
+      "kind": "write",
+      "params": "#/$defs/Params_grant_issue",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "grant.revoke",
+      "kind": "write",
+      "params": "#/$defs/Params_grant_revoke",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "receipt.get",
+      "kind": "read",
+      "params": "#/$defs/Params_receipt_get",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "record.get",
+      "kind": "read",
+      "params": "#/$defs/Params_record_get",
+      "result_data": "#/$defs/Record",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "run.report",
+      "kind": "write",
+      "params": "#/$defs/Params_run_report",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": true
+    },
+    {
+      "method": "run.start",
+      "kind": "write",
+      "params": "#/$defs/Params_run_start",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": true
+    },
+    {
+      "method": "run.submit",
+      "kind": "write",
+      "params": "#/$defs/Params_run_submit",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": true
+    },
+    {
+      "method": "snapshot.open",
+      "kind": "read",
+      "params": "#/$defs/Params_snapshot_open",
+      "result_data": "#/$defs/SnapshotOpenResult",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "snapshot.page",
+      "kind": "read",
+      "params": "#/$defs/Params_snapshot_page",
+      "result_data": "#/$defs/SnapshotPageResult",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "task.accept",
+      "kind": "write",
+      "params": "#/$defs/Params_task_accept",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.cancel",
+      "kind": "write",
+      "params": "#/$defs/Params_task_cancel",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.claim",
+      "kind": "write",
+      "params": "#/$defs/Params_task_claim",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.close",
+      "kind": "write",
+      "params": "#/$defs/Params_task_close",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.create",
+      "kind": "write",
+      "params": "#/$defs/Params_task_create",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "task.createChild",
+      "kind": "write",
+      "params": "#/$defs/Params_task_createChild",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "task.discover",
+      "kind": "read",
+      "params": "#/$defs/Params_task_discover",
+      "result_data": "#/$defs/DiscoverResult",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "task.get",
+      "kind": "read",
+      "params": "#/$defs/Params_task_get",
+      "result_data": "#/$defs/Task",
+      "idempotency_required": false,
+      "task_cas_required": false,
+      "lease_required": false
+    },
+    {
+      "method": "task.publish",
+      "kind": "write",
+      "params": "#/$defs/Params_task_publish",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.reject",
+      "kind": "write",
+      "params": "#/$defs/Params_task_reject",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.reopen",
+      "kind": "write",
+      "params": "#/$defs/Params_task_reopen",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    },
+    {
+      "method": "task.updateDraft",
+      "kind": "write",
+      "params": "#/$defs/Params_task_updateDraft",
+      "result_data": "#/$defs/CommandResult",
+      "idempotency_required": true,
+      "task_cas_required": true,
+      "lease_required": false
+    }
+  ]
+}

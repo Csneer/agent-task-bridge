@@ -1,0 +1,89 @@
+{
+  "manifest_version": 1,
+  "protocol_version": "bridge-m1-1",
+  "profile": "delivery-acceptance-v1",
+  "status": "frozen-implementation-baseline",
+  "files": [
+    {
+      "path": "docs/architecture/blueprint.md",
+      "bytes": 30362,
+      "sha256": "ee1b821f10cb6badadaff8de436c179c04b6ef3ba9c88fdb6a9ce4248409483e"
+    },
+    {
+      "path": "docs/architecture/core.md",
+      "bytes": 17053,
+      "sha256": "3e8a8bd9a6f1a0a3317467015e6c17ecbb370a785e1ee7309c369a574ec5e976"
+    },
+    {
+      "path": "docs/validation/acceptance.md",
+      "bytes": 12924,
+      "sha256": "e59e45e241c6c09f839021e7d6d7df1500bce736b68d90d7390b708630d6d5b3"
+    },
+    {
+      "path": "docs/validation/vectors.md",
+      "bytes": 24907,
+      "sha256": "d714f0efb151675239fc8718c892867338bdc43d55ecc20f41cfe6a9d44f8ede"
+    },
+    {
+      "path": "docs/versioning.md",
+      "bytes": 2782,
+      "sha256": "7ad86cad9a3956dbc7a1f3a938d3e4b3957b2a8e8b7758f3767a4919b79a7c25"
+    },
+    {
+      "path": "protocol/m1/README.md",
+      "bytes": 6252,
+      "sha256": "d864cc80c44e992f88b32465fd5965f4c6d43f99a24e2225d4bf85ccdaf434e2"
+    },
+    {
+      "path": "protocol/m1/auth.md",
+      "bytes": 16630,
+      "sha256": "8cef0f1952ec1f83fe1d42d7ad59b2a316b842ddb2bd55e1caafeac228a34e15"
+    },
+    {
+      "path": "protocol/m1/check-contract.py",
+      "bytes": 6477,
+      "sha256": "0b599d1e4b8a6ed103f98e333d5c502c569e4053726d21fc5285dd2db435375b"
+    },
+    {
+      "path": "protocol/m1/check-hashes.mjs",
+      "bytes": 1371,
+      "sha256": "82f6a391b350867029ac2ba8b7b737f11d458d63ec977d576a88092c7ce8d505"
+    },
+    {
+      "path": "protocol/m1/golden-vectors.json",
+      "bytes": 92648,
+      "sha256": "4b434238819ccd27a12cf13d595c8a09825baa393b8f470879ba3735f54ee83f"
+    },
+    {
+      "path": "protocol/m1/methods.json",
+      "bytes": 7094,
+      "sha256": "8e65da1f78a9c7b29cafe6129e90cde0cc42a90085be4b90295f49b4caab3dc8"
+    },
+    {
+      "path": "protocol/m1/schema.json",
+      "bytes": 103523,
+      "sha256": "9ef11823385fa121a99789fe6dda51f40e12ffa03edd266ed6aaf1db9c5a29fd"
+    },
+    {
+      "path": "protocol/m1/state.md",
+      "bytes": 21702,
+      "sha256": "f3c4664e4a6da2d62ab090626b8e0f8662ee179b26befe4352fc443688861186"
+    },
+    {
+      "path": "protocol/m1/wire.md",
+      "bytes": 20951,
+      "sha256": "bd2ed959a18d6e58e4b1a49994b9895ff52738e236e3136778c8e9e7c049ea85"
+    },
+    {
+      "path": "requirements-contract.txt",
+      "bytes": 206,
+      "sha256": "5b53ea87b219830ec88c974fd029b2190595f97b8351b50b46d92bd2b6722233"
+    },
+    {
+      "path": "tools/verify-package.py",
+      "bytes": 5112,
+      "sha256": "302234f059474b417cc8935632f466d210df010d98d6023cd96a606121884fe1"
+    }
+  ],
+  "content_digest": "558dc29110b0138c31a36b0f19dbb9f34677d23d5508e5c9751afc4c7cd20a13"
+}
