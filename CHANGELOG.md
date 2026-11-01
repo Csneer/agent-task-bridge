@@ -1,6 +1,12 @@
 # Changelog
 
-产品版本与协议版本分别管理；协议基线仍为 `bridge-m1-1`。
+产品版本与协议版本分别管理；已发布参考服务的协议基线仍为 `bridge-m1-1`，新方向为独立的 `task-core-draft-1` 实验草案。
+
+## Unreleased
+
+- 增加 `task-core-draft-1`、人/Agent 共同参与的分层架构、四类场景轨迹和离线行为模型验证。
+- 同步 Task Ledger Demo v0.1.0 的独立采用、HTTP binding、真实客户端与发行验证进展，补充[采用记录及分层反馈](docs/adoption/task-ledger.md)。
+- 在协议与应用仓库之间建立明确入口，更新 README、协议入口和路线图。此轮采用文档同步不修改核心语义、Schema、M1 冻结文件或已有 v0.1.0 发行附件。
 
 ## v0.1.0 — 2026-10-30
 

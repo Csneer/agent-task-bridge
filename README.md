@@ -10,7 +10,7 @@ A portable bridge between agents and work.
 
 Agent↔Task Bridge 面向人和 Agent 之间的任务协作，提供开放的协议与参考桥接服务。目标是让不同平台按共同规格发布与接取任务、交付结果，让应用能够读取可追溯的任务状态。
 
-[愿景](#愿景) · [核心价值](#核心价值) · [应用场景](#可以用它搭建什么) · [发展方向](#发展方向) · [开始探索](#开始探索)
+[愿景](#愿景) · [核心价值](#核心价值) · [应用场景](#可以用它搭建什么) · [发展方向](#发展方向) · [协议与应用仓库](#协议与应用仓库) · [开始探索](#开始探索)
 
 ## 愿景
 
@@ -92,7 +92,18 @@ flowchart LR
 
 **新协议方向：人和 Agent 都能发起与承接任务，发起方根据实际交付决定完成。** 创建任务需要预期结果，后续要求可以显式修订并保留历史；评审、审计和授权也可以由人或 Agent 通过关联任务协作完成。任务核心与身份机制、加密、通信和上层工作流分开。
 
-这一方向以独立的 [`task-core-draft-1` 实验规格](protocol/core-draft/README.md)推进，包含四类场景的离线行为模型验证；它尚不是 v0.1.0 daemon 支持的新协议。查看[调整后的架构](docs/architecture/protocol-first.md)、[场景轨迹](examples/protocol-scenarios/README.md)和[协议路线图](docs/protocol-roadmap.md)。
+这一方向以独立的 [`task-core-draft-1` 实验规格](protocol/core-draft/README.md)推进。本仓库提供四类场景的离线行为模型验证；独立应用 [Task Ledger Demo / Task Orbit](https://github.com/Csneer/task-ledger-demo) 已采用该草案，实现 Go 服务、HTTP binding、Agent Skill 和网页工作区，并发布 [v0.1.0 Developer Preview](https://github.com/Csneer/task-ledger-demo/releases/tag/v0.1.0)。采用来源、实际验证和待解决问题见 [Task Ledger 实践反馈](docs/adoption/task-ledger.md)。
+
+Task Ledger 的多个真实客户端已在同一 authority 下完成任务闭环；真人日常验收、跨独立服务互操作和长期容量仍待验证。它不使本仓库的 v0.1.0 M1 daemon 自动支持新草案。查看[调整后的架构](docs/architecture/protocol-first.md)、[场景轨迹](examples/protocol-scenarios/README.md)和[协议路线图](docs/protocol-roadmap.md)。
+
+## 协议与应用仓库
+
+| 仓库 | 负责内容 | 当前版本关系 |
+|---|---|---|
+| [Agent↔Task Bridge](https://github.com/Csneer/agent-task-bridge)（本仓库） | 共同任务语义、Schema、场景模型和 M1 参考服务 | 已发布 daemon 使用 `bridge-m1-1`；新核心为 `task-core-draft-1` 实验草案 |
+| [Task Ledger Demo / Task Orbit](https://github.com/Csneer/task-ledger-demo) | 独立 Go authority、SQLite、`ledger-http-draft-1`、Python Skill 和人机协作页面 | v0.1.0 固定采用本仓库 `e6dae9a` 的任务核心；[采用记录](https://github.com/Csneer/task-ledger-demo/blob/v0.1.0/protocol/UPGRADES.md)与[运行证据](docs/adoption/task-ledger.md)可追溯 |
+
+两个项目分别版本化。协议项目维护共享语义与后续提案，应用项目将采用成本、运行反例和验证结果反馈回来；应用发布不表示 M1 与新核心可以互换。
 
 ## 开始探索
 
@@ -102,6 +113,7 @@ flowchart LR
 | 把自己的 Agent 接进来 | [Go 客户端](clients/go/README.md) · [TypeScript SDK](clients/typescript/README.md) |
 | 理解桥的设计与协议 | [协议优先架构](docs/architecture/protocol-first.md) · [协议版本入口](protocol/README.md) · [M1 历史蓝图](docs/architecture/blueprint.md) |
 | 开发上层应用 | [只读消费者](examples/read-consumer/README.md) · [真实交接示例](examples/handoff/README.md) |
+| 试用新任务核心的人机协作应用 | [Task Ledger README](https://github.com/Csneer/task-ledger-demo/tree/v0.1.0#readme) · [Task Ledger 实践反馈](docs/adoption/task-ledger.md) |
 | 运行与维护服务 | [运行说明](docs/runtime.md) · [运维说明](docs/operations.md) |
 
 产品与协议分别版本化；当前已发布服务采用 `bridge-m1-1`，新方向采用独立的 `task-core-draft-1` 实验草案。冻结设计文档保留当时的状态描述，当前实现进展以发行版和验证结果为准。
