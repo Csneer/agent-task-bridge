@@ -10,7 +10,15 @@ A portable bridge between agents and work.
 
 Agent↔Task Bridge 面向人和 Agent 之间的任务协作，提供开放的协议与参考桥接服务。目标是让不同平台按共同规格发布与接取任务、交付结果，让应用能够读取可追溯的任务状态。
 
-[愿景](#愿景) · [核心价值](#核心价值) · [应用场景](#可以用它搭建什么) · [发展方向](#发展方向) · [协议与应用仓库](#协议与应用仓库) · [开始探索](#开始探索)
+[在线演示](https://task.pokison.cn/) · [愿景](#愿景) · [核心价值](#核心价值) · [应用场景](#可以用它搭建什么) · [发展方向](#发展方向) · [协议与应用仓库](#协议与应用仓库) · [开始探索](#开始探索)
+
+## 在线演示：Task Ledger / Task Orbit
+
+打开 **[task.pokison.cn](https://task.pokison.cn/)**，免登录浏览合成演示任务、任务链与交付历史，也可以提交公开文字任务。游客任务由站点代发，维护者决定是否承接与验收；提交不会自动启动 Agent。
+
+[![Task Orbit 在线演示：人与 Agent 协作的任务链视图](docs/images/task-orbit-demo.png)](https://task.pokison.cn/)
+
+演示站来自独立应用 [Task Ledger Demo](https://github.com/Csneer/task-ledger-demo)，采用本仓库的 `task-core-draft-1` 实验草案。它不是已发布 M1 daemon（`bridge-m1-1`）的界面或兼容客户端；协议采用关系与验证范围见 [Task Ledger 实践反馈](docs/adoption/task-ledger.md)。
 
 ## 愿景
 
@@ -113,7 +121,7 @@ Task Ledger 的多个真实客户端已在同一 authority 下完成任务闭环
 | 把自己的 Agent 接进来 | [Go 客户端](clients/go/README.md) · [TypeScript SDK](clients/typescript/README.md) |
 | 理解桥的设计与协议 | [协议优先架构](docs/architecture/protocol-first.md) · [协议版本入口](protocol/README.md) · [M1 历史蓝图](docs/architecture/blueprint.md) |
 | 开发上层应用 | [只读消费者](examples/read-consumer/README.md) · [真实交接示例](examples/handoff/README.md) |
-| 试用新任务核心的人机协作应用 | [Task Ledger README](https://github.com/Csneer/task-ledger-demo/tree/v0.1.0#readme) · [Task Ledger 实践反馈](docs/adoption/task-ledger.md) |
+| 试用新任务核心的人机协作应用 | [在线演示](https://task.pokison.cn/) · [Task Ledger README](https://github.com/Csneer/task-ledger-demo/tree/v0.1.0#readme) · [Task Ledger 实践反馈](docs/adoption/task-ledger.md) |
 | 运行与维护服务 | [运行说明](docs/runtime.md) · [运维说明](docs/operations.md) |
 
 产品与协议分别版本化；当前已发布服务采用 `bridge-m1-1`，新方向采用独立的 `task-core-draft-1` 实验草案。冻结设计文档保留当时的状态描述，当前实现进展以发行版和验证结果为准。
