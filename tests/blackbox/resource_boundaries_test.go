@@ -1,13 +1,14 @@
 package blackbox
 
 import (
-	"github.com/Csneer/agent-task-bridge/internal/config"
-	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 	"encoding/json"
 	"fmt"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/Csneer/agent-task-bridge/internal/config"
+	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
 
 func TestPagingLimits(t *testing.T) {
@@ -144,6 +145,10 @@ func TestSnapshotTenThousandRecords(t *testing.T) {
 
 func TestSnapshotThirtyTwoMiB(t *testing.T) {
 	h := newHarness(t)
+	// This checks byte capacity, not latency. A page contains up to 100 large
+	// records; race instrumentation on a shared runner can exceed the ordinary
+	// small-request budget while encoding or decoding a valid response.
+	h.timeout = time.Minute
 	payload := []any{}
 	for i := 0; i < 30; i++ {
 		payload = append(payload, strings.Repeat("x", 8192))

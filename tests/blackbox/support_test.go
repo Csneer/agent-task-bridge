@@ -4,15 +4,51 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"sync"
 	"testing"
+	"testing/iotest"
 	"time"
 
 	"github.com/Csneer/agent-task-bridge/tests/fixtures"
 )
+
+type responseTransport struct{ body io.Reader }
+
+func (r responseTransport) RoundTrip(*http.Request) (*http.Response, error) {
+	return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(r.body)}, nil
+}
+
+func TestResponseTermination(t *testing.T) {
+	const envelope = `{"jsonrpc":"2.0","id":"request_1","result":{"data":{},"meta":{"replayed":false}}}`
+	for _, tc := range []struct {
+		name     string
+		tail     io.Reader
+		want     error
+		trailing bool
+	}{
+		{name: "complete", tail: strings.NewReader("\n")},
+		{name: "second value", tail: strings.NewReader("\n{}"), trailing: true},
+		{name: "deadline after envelope", tail: iotest.ErrReader(context.DeadlineExceeded), want: context.DeadlineExceeded},
+		{name: "truncated transport", tail: iotest.ErrReader(io.ErrUnexpectedEOF), want: io.ErrUnexpectedEOF},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			c := &Client{URL: "http://example.test", HTTP: &http.Client{Transport: responseTransport{body: io.MultiReader(strings.NewReader(envelope), tc.tail)}}}
+			_, err := c.Call(context.Background(), "bridge.capabilities", map[string]any{})
+			if tc.trailing {
+				if err == nil || err.Error() != "response contains trailing JSON" {
+					t.Fatalf("want trailing JSON rejection, got %v", err)
+				}
+			} else if !errors.Is(err, tc.want) {
+				t.Fatalf("want %v, got %v", tc.want, err)
+			}
+		})
+	}
+}
 
 func TestPreparedReplayPreservesRequest(t *testing.T) {
 	var bodies [][]byte

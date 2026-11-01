@@ -110,8 +110,10 @@ func (c *Client) Do(ctx context.Context, p Prepared) (result Response, callErr e
 	if err = decoder.Decode(&envelope); err != nil {
 		return result, fmt.Errorf("decode HTTP %d response: %w", res.StatusCode, err)
 	}
-	if decoder.Decode(new(any)) != io.EOF {
+	if err = decoder.Decode(new(any)); err == nil {
 		return result, fmt.Errorf("response contains trailing JSON")
+	} else if err != io.EOF {
+		return result, fmt.Errorf("finish HTTP %d response: %w", res.StatusCode, err)
 	}
 	result.ID = envelope.ID
 	result.Data = envelope.Result.Data

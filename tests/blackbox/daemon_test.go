@@ -27,12 +27,13 @@ type harness struct {
 	mu         sync.RWMutex
 	hook       func(bridge.HookEvent) error
 	evidenceMu sync.Mutex
+	timeout    time.Duration
 }
 
 func newHarness(t *testing.T) *harness {
 	t.Helper()
 	cfg, tokens := fixtures.Bootstrap()
-	h := &harness{t: t, cfg: cfg, tokens: tokens, path: filepath.Join(t.TempDir(), "bridge.sqlite"), key: make([]byte, 32), clock: NewClock(fixtures.StartTime)}
+	h := &harness{t: t, cfg: cfg, tokens: tokens, path: filepath.Join(t.TempDir(), "bridge.sqlite"), key: make([]byte, 32), clock: NewClock(fixtures.StartTime), timeout: 10 * time.Second}
 	if _, err := rand.Read(h.key); err != nil {
 		t.Fatal(err)
 	}
@@ -114,7 +115,7 @@ func (h *harness) client(principal string) *Client {
 }
 func (h *harness) call(principal, method string, p map[string]any) Response {
 	h.t.Helper()
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), h.timeout)
 	defer cancel()
 	r, err := h.client(principal).Call(ctx, method, p)
 	if err != nil {
